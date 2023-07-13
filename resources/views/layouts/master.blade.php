@@ -14,32 +14,8 @@
     <link href="{{ asset('assets/css/ltr/all.min.css') }}" id="stylesheet" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
-    @can('admin read')
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-            integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-
-        <style>
-            #map {
-                height: 400px;
-            }
-        </style>
-    @endcan
-
-    @can('ptl read')
-        <style>
-            #spinner {
-                display: none;
-            }
-        </style>
-        <style>
-            .datepicker {
-                z-index: 2000 !important
-            }
-        </style>
-    @endcan
-
+    <link href="{{ asset('assets/css/sweet_alert/sweetalert.css') }}" rel="stylesheet">
     <!-- Theme JS files -->
-
     <script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
     <!-- Core JS files -->
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
