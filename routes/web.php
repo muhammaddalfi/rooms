@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/rooms',[RoomsController::class,'home'])->name('rooms.dashboard');
     Route::get('/rooms/fetch', [RoomsController::class, 'rooms']);
     Route::post('/rooms/store', [RoomsController::class, 'store']);
+    Route::get('/rooms/edit/{id}', [RoomsController::class,'edit']);
+    Route::post('/rooms/update/{id}', [RoomsController::class,'update']);
     Route::delete('/rooms/delete/{id}', [RoomsController::class, 'destroy']);
 });
 

@@ -65,7 +65,7 @@ class RoomsController extends Controller
             $path = 'files/';
             $images_room = $request->file('images_room');
             $format_name_images_room = time().'.'.$images_room->extension();
-            $images_room->storeAs($path, $format_name_images_room,'public');;
+            $images_room->storeAs($path, $format_name_images_room,'public');
 
             $ajax = new Room();
             $ajax->name = $request->input('name_room');
@@ -77,6 +77,84 @@ class RoomsController extends Controller
                 'status' => 200,
                 'message' => 'Data saved successfully',
             ]);
+        }
+    }
+
+    public function edit($id)
+    {
+        //
+        $room = Room::find($id);
+        if ($room) {
+            return response()->json([
+                'status' => 200,
+                'room' => $room,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Rooms not found',
+            ]);
+        }
+    }
+
+    public function update(Request $request, string $id)
+    {
+           $rule = [
+            'edit_name_room' => 'required',
+            'edit_capacity_room' => 'required',
+            'edit_facility_room' => 'required'
+        ];
+
+        $message = [
+            'edit_name_room.required' => 'This field is required',
+            'edit_capacity_room.required' => 'This field is required',
+            'edit_facility_room.required' => 'This field is required'
+        ];
+
+        $validator = Validator::make($request->all(), $rule, $message);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+
+            $ajax = Room::find($id);
+
+            if($ajax)
+            {
+
+                $ajax->name = $request->input('edit_name_room');
+                $ajax->capacity = $request->input('edit_capacity_room');
+                $ajax->facility = $request->input('edit_facility_room');
+
+                if($request->hasFile('edit_images_room'))
+                {
+                    $path = 'storage/files/'.$ajax->images;
+                    if(File::exists($path))
+                    {
+                        File::delete($path);
+                    }
+                    $images_room = $request->file('edit_images_room');
+                    $format_name_images_room = time().'.'.$images_room->extension();
+                    $images_room->move('storage/files/', $format_name_images_room);
+                    $ajax->images = $format_name_images_room;
+                }
+
+                $ajax->update();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data updateds successfully',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Data not found',
+                ]);
+            }
         }
     }
 

@@ -44,6 +44,7 @@
                                 <label class="form-label">Images</label>
                                 <input type="file" id="images_room" name="images_room" class="form-control"
                                     accept="image/*">
+                                <span id="error_images" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

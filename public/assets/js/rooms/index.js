@@ -1,15 +1,5 @@
 $(document).ready(function(){
 
-    const swalInit = swal.mixin({
-                buttonsStyling: false,
-                customClass: {
-                    confirmButton: 'btn btn-primary',
-                    cancelButton: 'btn btn-light',
-                    denyButton: 'btn btn-light',
-                    input: 'form-control'
-                }
-            });
-
     var table = $('.datatable-responsive').DataTable({
         processing:true,
         serverSide:true,
@@ -56,10 +46,10 @@ $(document).ready(function(){
             success: function(response){
                 if(response.status == 400)
                 {
-                    // console.log(response.errors.name_room);
                     $('#error_name').html(response.errors.name_room);
                     $('#error_capacity').html(response.errors.capacity_room);
                     $('#error_facility').html(response.errors.facility_room);
+                    $('#error_images').html(response.errors.images_room);
                   
                 }else{
                     
@@ -79,57 +69,60 @@ $(document).ready(function(){
     })
 
     //  //edit button
-    // $(document).on('click','.edit', function(e){
-    //     e.preventDefault();
-    //     var id = $(this).data('id');
-    //     $('#modal_edit_cyberkey').modal('show');
-    //     $.ajax({
-    //         type:"GET",
-    //         url:"/cyberkey/edit/" + id,
-    //         success: function(response){
-    //             if(response.status == 404){
-    //                 console.log("Data not found");
-    //             }else{
-    //                 $('#id_serial_number').val(response.cyber.id);
-    //                 $('#edit_serial_number').val(response.cyber.serial_number);
-    //             }
-    //         }
-    //     })
-    // })
+    $(document).on('click','.edit', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        $('#modal_edit_rooms').modal('show');
+        $.ajax({
+            type:"GET",
+            url:"/rooms/edit/" + id,
+            success: function(response){
+                if(response.status == 404){
+                    console.log("Data not found");
+                }else{
+                    $('#id_rooms').val(response.room.id);
+                    $('#edit_name_room').val(response.room.name);
+                    $('#edit_capacity_room').val(response.room.capacity);
+                    $('#edit_facility_room').val(response.room.facility);
+                     $('#view_images').attr("src", "storage/files/" + response.room.images);
+                }
+            }
+        })
+    })
 
-    // $(document).on('click', '.update', function(e){
-    //     e.preventDefault();
-    //     var id = $('#id_serial_number').val();
-    //     var data = {
-    //         'edit_serial_number': $('#edit_serial_number').val()
-    //     }
+    var form_edit = $('#EditRooms')[0];
+    $(document).on('submit', '#EditRooms', function(e){
+        e.preventDefault();
+        var id = $('#id_rooms').val();
+        let editdata =  new FormData(form_edit);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
+        $.ajax({
+            type:"POST",
+            url:"/rooms/update/"+ id,
+            data: editdata,
+            dataType:"json",
+            processData: false,
+            contentType: false,
+            success: function(response){
 
-    //     $.ajax({
-    //         type:"PUT",
-    //         url:"/cyberkey/update/"+ id,
-    //         data: data,
-    //         dataType:"json",
-    //         success: function(response){
-                
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Data Berhasil Diubah',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //               })
+                  Swal.fire({
+                    title: 'Success!',
+                    text: 'Data has been changed',
+                    icon: 'success'
+                    });
                   
-    //             table.draw();
-    //               $('#modal_edit_cyberkey').modal('hide');
-    //         }
-    //     })
+                  table.draw();
+                  $('#modal_edit_rooms').modal('hide');
+                  $("#EditRooms")[0].reset();
+            }
+        })
 
-    // });
+    });
 
 
     //delete

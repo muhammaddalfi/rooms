@@ -27,6 +27,7 @@
         <!-- /basic responsive configuration -->
     </div>
     @include('rooms.modals.create')
+    @include('rooms.modals.edit')
 @endsection
 @push('js_page')
     <script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
