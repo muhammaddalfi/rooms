@@ -32,7 +32,7 @@ class KegiatanController extends Controller
                 return $formatDate;
             })
             ->addColumn('gambar', function($daily){
-                $images = asset("images/$daily->gambar");
+                $images = asset("storage/files/$daily->gambar");
                 return '<img src="'.$images.'" style="height: 100px; width: 150px;"/>';
             })
             
@@ -76,10 +76,16 @@ class KegiatanController extends Controller
             ]);
         } else {
 
+            $path = 'files/';
             $gambar = $request->file('gambar');
+
             $format_name_images = time().'.'.$gambar->extension();
-            $path = 'images/'.$format_name_images;
-            Image::make($gambar->getRealPath())->resize(150, 150)->save($path);
+            $resize = Image::make($gambar);
+            $resize->fit(150)->save($gambar);
+
+            $gambar->storeAs($path, $format_name_images,'public');
+
+            // Image::make($gambar)->resize(150,150)->save(storage_path('app/' .$format_name_images));
 
             
             $ajax = new Daily();
