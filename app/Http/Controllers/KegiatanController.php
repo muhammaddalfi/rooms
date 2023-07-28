@@ -80,8 +80,8 @@ class KegiatanController extends Controller
             $gambar = $request->file('gambar');
 
             $format_name_images = time().'.'.$gambar->extension();
-            $resize = Image::make($gambar);
-            $resize->fit(600)->save($gambar);
+            // $resize = Image::make($gambar);
+            // $resize->fit(600)->save($gambar);
 
             $gambar->storeAs($path, $format_name_images,'public');
 
