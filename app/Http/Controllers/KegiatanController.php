@@ -55,7 +55,7 @@ class KegiatanController extends Controller
             'kategori' => 'required',
             'olt' => 'required',
             'kegiatan' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ];
 
         $message = [
