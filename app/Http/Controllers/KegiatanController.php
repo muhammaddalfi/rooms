@@ -78,7 +78,7 @@ class KegiatanController extends Controller
 
             $gambar = $request->file('gambar');
             $format_name_images = time().'.'.$gambar->extension();
-            $path = 'images/'.$format_name_images;
+            $path = public_path('images/').$format_name_images;
             Image::make($gambar->getRealPath())->resize(450,450)->save($path);
 
             
