@@ -53,6 +53,7 @@ $(document).ready(function(){
                   
                 }else{
                    console.log(response); 
+                   $('#spinner').css("display","none");
                     table.draw();
                     Swal.fire({
                     title: 'Success!',

@@ -35,6 +35,11 @@
             height: 180px;
         }
     </style>
+    <style>
+        #spinner {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
