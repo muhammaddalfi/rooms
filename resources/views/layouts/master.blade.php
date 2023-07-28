@@ -16,7 +16,16 @@
     <!-- /global stylesheets -->
 
 
-
+    <style>
+        #map {
+            height: 180px;
+        }
+    </style>
+    <style>
+        #spinner {
+            display: none;
+        }
+    </style>
 
     <link href="{{ asset('assets/js/vendor/leaflet/css/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/sweet_alert/sweetalert.css') }}" rel="stylesheet">
@@ -30,16 +39,7 @@
     <!-- /theme JS files -->
 
 
-    <style>
-        #map {
-            height: 180px;
-        }
-    </style>
-    <style>
-        #spinner {
-            display: none;
-        }
-    </style>
+
 </head>
 
 <body>
