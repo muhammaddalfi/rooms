@@ -45,8 +45,8 @@
                                 <div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
                                     <img src="../../../assets/images/logo_icon.svg" class="h-48px" alt="">
                                 </div>
-                                <h5 class="mb-0">Login to your account</h5>
-                                <span class="d-block text-muted">Rooms Meeting Management</span>
+                                <h5 class="mb-0">Monster Jabar</h5>
+                                <span class="d-block text-muted">Monitoring Sales Untuk Cluster</span>
                             </div>
 
                             <div class="mb-3">

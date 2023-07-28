@@ -1,41 +1,35 @@
-<div id="modal_edit_rooms" class="modal fade" tabindex="-1">
+<div id="modal_edit_daily" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Edit Rooms</h5>
+                <h5 class="modal-title">Form Ubah Dokumentasi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form id="EditRooms" method="POST" enctype="multipart/form-data">
+            <form id="editDaily" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" id="id_rooms">
+                <input type="hidden" id="id_daily">
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label class="form-label">Room Name</label>
-                                <input type="text"class="form-control" required id="edit_name_room"
-                                    name="edit_name_room">
-                                <span id="error_name" class="text-danger"></span>
+                                <label class="form-label">Kategori Dinas</label>
+                                <select class="form-control edit_kategori" name="edit_kategori" id="edit_kategori"
+                                    data-minimum-results-for-search="Infinity" data-fouc>
+                                    <option value="Ya">SPPD</option>
+                                    <option value="Tidak">Tidak SPPD</option>
+                                </select>
                             </div>
 
                             <div class="col-sm-6">
-                                <label class="form-label">Capacity</label>
-                                <input class="form-control" type="number" required name="edit_capacity_room"
-                                    id="edit_capacity_room">
-                                <span id="error_capacity" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label class="form-label">Facility</label>
-                                <input type="text" class="form-control" required id="edit_facility_room"
-                                    name="edit_facility_room">
-                                <span id="error_facility" class="text-danger"></span>
-                                <div class="form-text">Ex: <code>Wifi, Projector, TV</code></div>
+                                <label class="form-label">Nama OLT</label>
+                                <select class="form-control edit_olt" name="edit_olt" id="edit_olt">
+                                    <option value=""></option>
+                                    @foreach ($olt as $item)
+                                        <option value="{{ $item->nama_olt }}"> {{ $item->nama_olt }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -43,14 +37,34 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label class="form-label">Images</label>
-                                <input type="file" id="edit_images_room" name="edit_images_room" class="form-control"
+                                <label class="form-label">Jenis Kegiatan</label>
+                                <select class="form-control edit_kegiatan" name="edit_kegiatan" id="edit_kegiatan"
+                                    data-fouc>
+                                    <option value=""></option>
+                                    @foreach ($kegiatan as $item)
+                                        <option value="{{ $item->jenis_kegiatan }}"> {{ $item->jenis_kegiatan }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Gambar</label>
+                                <input type="file" id="edit_gambar" name="edit_gambar" class="form-control"
                                     accept="image/*">
                                 <span id="error_images" class="text-danger"></span>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Catatan</label>
+                                <textarea rows="3" id="edit_catatan" name="edit_catatan" cols="3" class="form-control"></textarea>
+                            </div>
 
                             <div class="col-sm-6">
-                                <img class="card-img img-fluid" id="view_images" style="height: 100px; width: 150px;">
+                                <img class="card-img img-fluid" id="view_images" style="height: 150px; width: 300px;">
                             </div>
                         </div>
                     </div>

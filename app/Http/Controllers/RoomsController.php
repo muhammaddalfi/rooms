@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kegiatan;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -13,6 +14,7 @@ class RoomsController extends Controller
     //
     public function home()
     {
+
         return view('rooms.index');
     }
 

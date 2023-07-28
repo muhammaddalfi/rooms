@@ -46,21 +46,27 @@
                         <i class="ph-dots-three sidebar-resize-show"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="ph-calendar"></i>
-                            <span>Reservations</span>
+                        <a href="{{ route('daily.dashboard') }}" class="nav-link">
+                            <i class="ph-camera"></i>
+                            <span>Dokumentasi</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('rooms.dashboard') }}" class="nav-link">
-                            <i class="ph-door"></i>
-                            <span>Rooms</span>
+                        <a href="{{ route('olt.dashboard') }}" class="nav-link">
+                            <i class="ph-broadcast"></i>
+                            <span>OLT</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('activity.dashboard') }}" class="nav-link">
+                            <i class="ph-activity"></i>
+                            <span>Jenis Kegiatan</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link">
                             <i class="ph-user"></i>
-                            <span>Users</span>
+                            <span>Pengguna</span>
                         </a>
                     </li>
 

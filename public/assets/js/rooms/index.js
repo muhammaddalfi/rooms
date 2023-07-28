@@ -4,15 +4,15 @@ $(document).ready(function(){
         processing:true,
         serverSide:true,
         responsive: true,
-        ajax: '/rooms/fetch',
+        ajax: '/dailys/fetch',
         autoWidth: false,
         
         columns:[
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false },
-            {data:'name'},
-            {data:'capacity'},
-            {data:'facility'},
-            {data:'images'},
+            {data:'created_at'},
+            {data:'nama_olt'},
+            {data:'jenis_kegiatan'},
+            {data:'gambar'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -28,16 +28,94 @@ $(document).ready(function(){
     //add rooms
     $(document).on('click','.add_rooms', function(e){
         e.preventDefault();
-        $('#modal_rooms').modal('show');
-        
+        $('#modal_daily').modal('show');   
+
     })
 
-    var data = $('#rooms')[0];
+    
+    $('.kategori').select2({
+        dropdownParent: $('#modal_daily'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+    
+    $('.olt').select2({
+        dropdownParent: $('#modal_daily'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+
+    $('.kegiatan').select2({
+        dropdownParent: $('#modal_daily'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+
+    $('.edit_kategori').select2({
+        dropdownParent: $('#modal_edit_daily'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+    
+    $('.edit_olt').select2({
+        dropdownParent: $('#modal_edit_daily'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+
+    $('.edit_kegiatan').select2({
+        dropdownParent: $('#modal_edit_daily'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+
+    $(document).on('click','.view', function(e){
+        e.preventDefault();
+        var id_kegiatan = $(this).data('id');
+        $('#modal_view').modal('show');
+
+        console.log(id_kegiatan);
+        $.ajax({
+            type:"GET",
+            url:"/dailys/show/" + id_kegiatan,
+            success: function(response){
+                if(response.status == 404){
+                    console.log('Data Not Found');
+                }else{
+
+                    console.log(response.daily);
+                    let tanggal = moment(response.daily.created_at).format('DD-MM-YYYY h:mm');
+
+                    $('#id_kegiatan').val(response.daily.id);
+                    $('#view_tanggal').html(tanggal);
+                    $('#view_nama_olt').html(response.daily.nama_olt);
+                    $('#view_jenis_kegiatan').html(response.daily.jenis_kegiatan);
+                    $('#view_catatan').html(response.daily.catatan);
+
+            
+                    if(response.daily.kategori_dinas == 'Ya'){
+                       $('#view_kategori_dinas').html('SPPD');
+                    }else if(response.daily.kategori_dinas == 'Tidak'){
+                       $('#view_kategori_dinas').html('Tidak SPPD');
+                    }
+
+                   $('#gambar_bukti').attr("src", "storage/files/" + response.daily.gambar);
+                   $('#gambar_bukti_link').attr("href", "storage/files/" + response.daily.gambar);
+
+                }
+            }
+        })
+       
+    })
+
+
+    var daily = $('#form-daily')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form  = new FormData(data);
+        var form  = new FormData(daily);
+        // console.log(data);
         $.ajax({
-            url: '/rooms/store',
+            url: '/dailys/store',
             method:'POST',
             data: form,
             processData: false,
@@ -46,13 +124,14 @@ $(document).ready(function(){
             success: function(response){
                 if(response.status == 400)
                 {
-                    $('#error_name').html(response.errors.name_room);
-                    $('#error_capacity').html(response.errors.capacity_room);
-                    $('#error_facility').html(response.errors.facility_room);
-                    $('#error_images').html(response.errors.images_room);
+                    console.log(response);
+                    // $('#error_name').html(response.errors.name_room);
+                    // $('#error_capacity').html(response.errors.capacity_room);
+                    // $('#error_facility').html(response.errors.facility_room);
+                    // $('#error_images').html(response.errors.images_room);
                   
                 }else{
-                    
+                   console.log(response); 
                     table.draw();
                     Swal.fire({
                     title: 'Success!',
@@ -60,8 +139,8 @@ $(document).ready(function(){
                     icon: 'success'
                     });
 
-                    $('#modal_rooms').modal('hide');
-                    $("#rooms")[0].reset();
+                    $('#modal_daily').modal('hide');
+                    $("#form-daily")[0].reset();
                 }
             }
         })
@@ -72,28 +151,29 @@ $(document).ready(function(){
     $(document).on('click','.edit', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal_edit_rooms').modal('show');
+        $('#modal_edit_daily').modal('show');
         $.ajax({
             type:"GET",
-            url:"/rooms/edit/" + id,
+            url:"/dailys/edit/" + id,
             success: function(response){
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
-                    $('#id_rooms').val(response.room.id);
-                    $('#edit_name_room').val(response.room.name);
-                    $('#edit_capacity_room').val(response.room.capacity);
-                    $('#edit_facility_room').val(response.room.facility);
-                     $('#view_images').attr("src", "storage/files/" + response.room.images);
+                    $('#id_daily').val(response.daily.id);
+                    $('#edit_kategori').val(response.daily.kategori_dinas).change();
+                    $('#edit_olt').val(response.daily.nama_olt).change();
+                    $('#edit_kegiatan').val(response.daily.jenis_kegiatan).change();
+                    $('#edit_catatan').val(response.daily.catatan);
+                    $('#view_images').attr("src", "storage/files/" + response.daily.gambar);
                 }
             }
         })
     })
 
-    var form_edit = $('#EditRooms')[0];
-    $(document).on('submit', '#EditRooms', function(e){
+    var form_edit = $('#editDaily')[0];
+    $(document).on('submit', '#editDaily', function(e){
         e.preventDefault();
-        var id = $('#id_rooms').val();
+        var id = $('#id_daily').val();
         let editdata =  new FormData(form_edit);
         $.ajaxSetup({
             headers: {
@@ -103,13 +183,13 @@ $(document).ready(function(){
 
         $.ajax({
             type:"POST",
-            url:"/rooms/update/"+ id,
+            url:"/dailys/update/"+ id,
             data: editdata,
             dataType:"json",
             processData: false,
             contentType: false,
             success: function(response){
-
+                console.log(response);
                   Swal.fire({
                     title: 'Success!',
                     text: 'Data has been changed',
@@ -117,13 +197,12 @@ $(document).ready(function(){
                     });
                   
                   table.draw();
-                  $('#modal_edit_rooms').modal('hide');
-                  $("#EditRooms")[0].reset();
+                  $('#modal_edit_daily').modal('hide');
+                  $("#editDaily")[0].reset();
             }
         })
 
     });
-
 
     //delete
     $(document).on('click', '.delete', function(e){
@@ -149,7 +228,7 @@ $(document).ready(function(){
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "/rooms/delete/" + id,
+                    url: "/dailys/delete/" + id,
                    
                     success: function(){
                         table.draw();
@@ -165,4 +244,36 @@ $(document).ready(function(){
 
     });
     
+
+
+    getLocation();
+    
+    function getLocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }else{
+            alert('Geolocation is not supported by this browser');
+        }
+    }
+
+    function showPosition(position){
+        console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
+        
+        var mymap = L.map("map").setView([position.coords.latitude, position.coords.longitude],13);
+        
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+        }).addTo(mymap);
+
+        L.marker([position.coords.latitude, position.coords.longitude])
+        .addTo(mymap)
+        .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
+        
+        $("[name=latNow]").val(position.coords.latitude);
+        $("[name=lngNow]").val(position.coords.longitude);
+
+
+    }
+
 });
