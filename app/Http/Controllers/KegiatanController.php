@@ -32,7 +32,7 @@ class KegiatanController extends Controller
                 return $formatDate;
             })
             ->addColumn('gambar', function($daily){
-                $images = asset("storage/files/$daily->gambar");
+                $images = asset("images/$daily->gambar");
                 return '<img src="'.$images.'" style="height: 100px; width: 150px;"/>';
             })
             
@@ -76,15 +76,12 @@ class KegiatanController extends Controller
             ]);
         } else {
 
-            $path = 'files/';
             $gambar = $request->file('gambar');
             $format_name_images = time().'.'.$gambar->extension();
-            // $path = public_path('files') . "/" . $format_name_images;
-           
-            $gambar->storeAs($path, $format_name_images,'public');
-            // Image::make($gambar->getRealPath())->resize(150,150)->save($img);
-           
-            // Image::make($gambar->getRealPath())->resize(150,150)->save($path,$format_name_images,'public');
+            $path = 'images/'.$format_name_images;
+            Image::make($gambar->getRealPath())->resize(450,450)->save($path);
+
+            
             $ajax = new Daily();
             $ajax->lat = $request->input('latNow');
             $ajax->lng = $request->input('lngNow');
@@ -171,14 +168,14 @@ class KegiatanController extends Controller
 
                 if($request->hasFile('edit_gambar'))
                 {
-                    $path = 'storage/files/'.$ajax->gambar;
+                    $path = 'images/'.$ajax->gambar;
                     if(File::exists($path))
                     {
                         File::delete($path);
                     }
                     $edit_gambar = $request->file('edit_gambar');
                     $format_name_edit_gambar = time().'.'.$edit_gambar->extension();
-                    $edit_gambar->move('storage/files/', $format_name_edit_gambar);
+                    $edit_gambar->move('images/', $format_name_edit_gambar);
                     $ajax->gambar = $format_name_edit_gambar;
                 }
 
@@ -201,7 +198,7 @@ class KegiatanController extends Controller
     public function destroy($id)
     {
         $daily = Daily::find($id);
-        $deletedFile  = File::delete("storage/files/".$daily->gambar);
+        $deletedFile  = File::delete("images/".$daily->gambar);
         if(File::exists($deletedFile)) {
             File::delete($deletedFile);
         }
