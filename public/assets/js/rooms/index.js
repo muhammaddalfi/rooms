@@ -99,8 +99,8 @@ $(document).ready(function(){
                        $('#view_kategori_dinas').html('Tidak SPPD');
                     }
 
-                   $('#gambar_bukti').attr("src", "images/" + response.daily.gambar);
-                   $('#gambar_bukti_link').attr("href", "images/" + response.daily.gambar);
+                   $('#gambar_bukti').attr("src", "storage/files/" + response.daily.gambar);
+                   $('#gambar_bukti_link').attr("href", "storage/files/" + response.daily.gambar);
 
                 }
             }
