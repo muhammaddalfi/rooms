@@ -55,7 +55,7 @@ class KegiatanController extends Controller
             'kategori' => 'required',
             'olt' => 'required',
             'kegiatan' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:10024',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:5048',
         ];
 
         $message = [
@@ -81,7 +81,7 @@ class KegiatanController extends Controller
 
             $format_name_images = time().'.'.$gambar->extension();
             $resize = Image::make($gambar);
-            $resize->fit(150)->save($gambar);
+            $resize->fit(600)->save($gambar);
 
             $gambar->storeAs($path, $format_name_images,'public');
 
