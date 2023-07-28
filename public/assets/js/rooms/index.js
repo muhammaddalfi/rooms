@@ -112,6 +112,7 @@ $(document).ready(function(){
     var daily = $('#form-daily')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
+        $('#spinner').css("display","inline-block");
         var form  = new FormData(daily);
         // console.log(data);
         $.ajax({
