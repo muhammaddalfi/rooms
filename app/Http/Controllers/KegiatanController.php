@@ -55,7 +55,7 @@ class KegiatanController extends Controller
             'kategori' => 'required',
             'olt' => 'required',
             'kegiatan' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:5048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg',
         ];
 
         $message = [
@@ -79,7 +79,7 @@ class KegiatanController extends Controller
             $gambar = $request->file('gambar');
             $format_name_images = time().'.'.$gambar->extension();
             $path = public_path('images/').$format_name_images;
-            Image::make($gambar->getRealPath())->resize(450,450)->save($path);
+            Image::make($gambar->getRealPath())->resize(150,150)->save($path);
 
             
             $ajax = new Daily();
