@@ -78,8 +78,8 @@ class KegiatanController extends Controller
 
             $gambar = $request->file('gambar');
             $format_name_images = time().'.'.$gambar->extension();
-            $path = public_path('images/').$format_name_images;
-            Image::make($gambar->getRealPath())->resize(150,150)->save($path);
+            $path = 'images/'.$format_name_images;
+            Image::make($gambar->getRealPath())->resize(150, 150)->save($path);
 
             
             $ajax = new Daily();
