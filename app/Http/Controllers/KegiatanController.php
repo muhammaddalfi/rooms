@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
+use Intervention\Image\Facades\Image as Image;
 
 class KegiatanController extends Controller
 {
@@ -54,7 +55,7 @@ class KegiatanController extends Controller
             'kategori' => 'required',
             'olt' => 'required',
             'kegiatan' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:5048',
         ];
 
         $message = [
@@ -78,8 +79,12 @@ class KegiatanController extends Controller
             $path = 'files/';
             $gambar = $request->file('gambar');
             $format_name_images = time().'.'.$gambar->extension();
+            // $path = public_path('files') . "/" . $format_name_images;
+           
             $gambar->storeAs($path, $format_name_images,'public');
-
+            // Image::make($gambar->getRealPath())->resize(150,150)->save($img);
+           
+            // Image::make($gambar->getRealPath())->resize(150,150)->save($path,$format_name_images,'public');
             $ajax = new Daily();
             $ajax->lat = $request->input('latNow');
             $ajax->lng = $request->input('lngNow');
