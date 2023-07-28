@@ -131,7 +131,9 @@ $(document).ready(function(){
                     // $('#error_images').html(response.errors.images_room);
                   
                 }else{
-                   console.log(response); 
+                    
+                   $('#spinner').css("display","none");
+                //    console.log(response); 
                     table.draw();
                     Swal.fire({
                     title: 'Success!',
