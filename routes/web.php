@@ -4,10 +4,13 @@ use App\Http\Controllers\CalendarsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisKegiatanController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\UplineController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +76,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/olt/edit/{id}', [OltController::class,'edit']);
     Route::put('/olt/update/{id}', [OltController::class,'update']);
     Route::delete('/olt/delete/{id}', [OltController::class, 'destroy']);
+
+    Route::get('/pengguna', [PenggunaController::class,'index'])->name('pengguna.dashboard');
+    Route::post('/pengguna/store',[PenggunaController::class,'store']);
+    Route::get('/pengguna/fetch', [PenggunaController::class, 'fetch']);
+    // Route::get('/pengguna/edit/{id}', [PenggunaController::class,'edit']);
+    // Route::put('/pengguna/update/{id}', [PenggunaController::class,'update']);
+    Route::delete('/pengguna/delete/{id}', [PenggunaController::class, 'destroy']);
+
+    Route::get('/upline', [UplineController::class,'index'])->name('upline.dashboard');
+    Route::post('/upline/store',[UplineController::class,'store']);
+    Route::get('/upline/fetch', [UplineController::class, 'fetch']);
+    // Route::get('/upline/edit/{id}', [UplineController::class,'edit']);
+    // Route::put('/upline/update/{id}', [UplineController::class,'update']);
+    Route::delete('/upline/delete/{id}', [UplineController::class, 'destroy']);
+
+
+    Route::get('/mpp', [MppController::class,'index'])->name('mpp.dashboard');
+    Route::post('/mpp/store',[MppController::class,'store']);
+    Route::get('/mpp/fetch', [MppController::class, 'fetch']);
+    // Route::get('/mpp/edit/{id}', [MppController::class,'edit']);
+    // Route::put('/mpp/update/{id}', [MppController::class,'update']);
+    Route::delete('/mpp/delete/{id}', [MppController::class, 'destroy']);
+
+
 });
 
 require __DIR__.'/auth.php';

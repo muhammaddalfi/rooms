@@ -6,7 +6,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-
             <form id="form-daily" enctype="multipart/form-data" action="#" method="post">
                 @csrf
                 <div class="modal-body">

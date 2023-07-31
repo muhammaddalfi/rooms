@@ -63,10 +63,27 @@
                             <span>Jenis Kegiatan</span>
                         </a>
                     </li>
+
+
+
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
                             <i class="ph-user"></i>
-                            <span>Pengguna</span>
+                            <span>Marketer</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('upline.dashboard') }}" class="nav-link">
+                            <i class="ph-git-fork"></i>
+                            <span>PIC Internal</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('mpp.dashboard') }}" class="nav-link">
+                            <i class="ph-user-list"></i>
+                            <span>PIC Perusahaan</span>
                         </a>
                     </li>
 

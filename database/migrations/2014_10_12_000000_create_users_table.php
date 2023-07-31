@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('handphone');
+            $table->string('nama_perusahaan')->nullable();
+            $table->string('nama_upline')->nullable();
+            $table->enum('jenis_pengguna',['mpp','mpi','upline'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('handphone');
             $table->rememberToken();
             $table->timestamps();
         });

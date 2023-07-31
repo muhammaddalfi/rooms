@@ -89,6 +89,7 @@ class KegiatanController extends Controller
 
             
             $ajax = new Daily();
+            $ajax->user_id = auth()->user()->id;
             $ajax->lat = $request->input('latNow');
             $ajax->lng = $request->input('lngNow');
             $ajax->kategori_dinas = $request->input('kategori');
