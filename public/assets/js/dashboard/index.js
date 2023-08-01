@@ -36,7 +36,7 @@ $(document).ready(function(){
                 }
             ],
             scrollX: true,
-            scrollY: 350,
+            scrollY: 450,
             scrollCollapse: true,
             fixedColumns: true
         });
@@ -51,7 +51,7 @@ $(document).ready(function(){
                 }
             ],
             scrollX: true,
-            scrollY: 350,
+            scrollY: 450,
             scrollCollapse: true,
             fixedColumns: true
         });
