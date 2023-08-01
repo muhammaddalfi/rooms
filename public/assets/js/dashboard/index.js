@@ -31,7 +31,7 @@ $(document).ready(function(){
             columnDefs: [
                 { 
                     orderable: false,
-                    width: 750,
+                    width: 450,
                     targets: 0
                 }
             ],
@@ -46,7 +46,7 @@ $(document).ready(function(){
             columnDefs: [
                 { 
                     orderable: false,
-                    width: 750,
+                    width: 450,
                     targets: 0
                 }
             ],
