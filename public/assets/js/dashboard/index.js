@@ -45,7 +45,7 @@ $(document).ready(function(){
             columnDefs: [
                 { 
                     orderable: false,
-                    width: 500,
+                    width: 1000,
                     targets: 1
                 }
             ],
