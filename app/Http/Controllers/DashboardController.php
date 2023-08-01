@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function home()
     {
         $tahun = '2023';
-        $bulan = '07';
+        $bulan = '08';
 
         $db = "select a.user_id as user, date(a.created_at) AS tanggal,
             COUNT(a.id) AS jumlah_kunjungan
