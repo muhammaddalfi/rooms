@@ -58,7 +58,7 @@
                                 <select class="form-control kegiatan" name="kegiatan" id="kegiatan" data-fouc>
                                     <option value=""></option>
                                     @foreach ($kegiatan as $item)
-                                        <option value="{{ $item->jenis_kegiatan }}"> {{ $item->jenis_kegiatan }}
+                                        <option value="{{ $item->id }}"> {{ $item->jenis_kegiatan }}
                                         </option>
                                     @endforeach
                                 </select>

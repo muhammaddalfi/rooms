@@ -6,25 +6,15 @@
  *
  * ---------------------------------------------------------------------------- */
 
+$(document).ready(function(){
 
-// Setup module
-// ------------------------------
+    $('.bulan').select2({
+    });
 
-const DatatableFixedColumns = function() {
+    $('.tahun').select2({
+    });
 
-
-    //
-    // Setup module components
-    //
-
-    // Basic Datatable examples
-    const _componentDatatableFixedColumns = function() {
-        if (!$().DataTable) {
-            console.warn('Warning - datatables.min.js is not loaded.');
-            return;
-        }
-
-        // Setting datatable defaults
+    // Setting datatable defaults
         $.extend( $.fn.dataTable.defaults, {
             dom: '<"datatable-header"fl><"datatable-scroll datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
@@ -36,8 +26,8 @@ const DatatableFixedColumns = function() {
         });
 
 
-        // Left fixed column example
-        $('.datatable-fixed-left').DataTable({
+        // Cluster
+        $('.datatable-cluster').DataTable({
             columnDefs: [
                 { 
                     orderable: false,
@@ -50,31 +40,13 @@ const DatatableFixedColumns = function() {
             fixedColumns: true
         });
 
-
-        // Adjust columns on window resize
-        setTimeout(function() {
-            $(window).on('resize', function () {
-                table.columns.adjust();
-            });
-        }, 100);
-    };
-
-
-    //
-    // Return objects assigned to module
-    //
-
-    return {
-        init: function() {
-            _componentDatatableFixedColumns();
-        }
-    }
-}();
+        // Kegiatan
+        $('.datatable-kegiatan').DataTable({
+            scrollX: true,
+            scrollY: 350,
+            scrollCollapse: true,
+            fixedColumns: true
+        });
 
 
-// Initialize module
-// ------------------------------
-
-document.addEventListener('DOMContentLoaded', function() {
-    DatatableFixedColumns.init();
 });

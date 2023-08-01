@@ -11,7 +11,7 @@ $(document).ready(function(){
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false },
             {data:'created_at'},
             {data:'nama_olt'},
-            {data:'jenis_kegiatan'},
+            {data:'kegiatan_id'},
             {data:'gambar'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],

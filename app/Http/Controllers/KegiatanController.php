@@ -94,7 +94,7 @@ class KegiatanController extends Controller
             $ajax->lng = $request->input('lngNow');
             $ajax->kategori_dinas = $request->input('kategori');
             $ajax->nama_olt = $request->input('olt');
-            $ajax->jenis_kegiatan = $request->input('kegiatan');
+            $ajax->kegiatan_id = $request->input('kegiatan');
             $ajax->catatan = $request->input('catatan');
             $ajax->gambar = $format_name_images;
             $ajax->save();
@@ -170,7 +170,7 @@ class KegiatanController extends Controller
 
                 $ajax->kategori_dinas = $request->input('edit_kategori');
                 $ajax->nama_olt = $request->input('edit_olt');
-                $ajax->jenis_kegiatan = $request->input('edit_kegiatan');
+                $ajax->kegiatan_id = $request->input('edit_kegiatan');
                 $ajax->catatan = $request->input('edit_catatan');
 
                 if($request->hasFile('edit_gambar'))

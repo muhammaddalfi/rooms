@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('lng',55);
             $table->enum('kategori_dinas',['Ya','Tidak']);
             $table->string('nama_olt',255);
-            $table->string('jenis_kegiatan',255);
+            $table->integer('kegiatan_id');
             $table->string('catatan',255)->nullable();
             $table->string('gambar',100);
             $table->timestamps();
