@@ -31,7 +31,8 @@ $(document).ready(function(){
             columnDefs: [
                 { 
                     orderable: false,
-                    targets: 1
+                    width: 750,
+                    targets: 0
                 }
             ],
             scrollX: true,
@@ -45,8 +46,8 @@ $(document).ready(function(){
             columnDefs: [
                 { 
                     orderable: false,
-                    width: 1000,
-                    targets: 1
+                    width: 750,
+                    targets: 0
                 }
             ],
             scrollX: true,
