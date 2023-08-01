@@ -42,6 +42,13 @@ $(document).ready(function(){
 
         // Kegiatan
         $('.datatable-kegiatan').DataTable({
+            columnDefs: [
+                { 
+                    orderable: false,
+                    width: 500,
+                    targets: 1
+                }
+            ],
             scrollX: true,
             scrollY: 350,
             scrollCollapse: true,
