@@ -88,8 +88,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/upline', [UplineController::class,'index'])->name('upline.dashboard');
     Route::post('/upline/store',[UplineController::class,'store']);
     Route::get('/upline/fetch', [UplineController::class, 'fetch']);
-    // Route::get('/upline/edit/{id}', [UplineController::class,'edit']);
-    // Route::put('/upline/update/{id}', [UplineController::class,'update']);
+    Route::get('/upline/edit/{id}', [UplineController::class,'edit']);
+    Route::put('/upline/update/{id}', [UplineController::class,'update']);
     Route::delete('/upline/delete/{id}', [UplineController::class, 'destroy']);
 
 

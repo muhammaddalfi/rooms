@@ -24,7 +24,7 @@ $(document).ready(function(){
             }
     });
 
-    //add olt
+    //add upline
     $(document).on('click','.add_upline', function(e){
         e.preventDefault();
         $('#modal_upline').modal('show');   
@@ -37,18 +37,11 @@ $(document).ready(function(){
         placeholder: 'Pilih'
     });
 
-    
-    $('.edit_prioritas').select2({
-        dropdownParent: $('#modal_edit_olt'),
-        allowClear: true,
-        placeholder: 'Pilih'
-    });
-
-    var olt = $('#form-upline')[0];
+    var upline = $('#form-upline')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form  = new FormData(olt);
-        // console.log(data);
+        var form  = new FormData(upline);
+        console.log(form);
         $.ajax({
             url: '/upline/store',
             method:'POST',
@@ -59,11 +52,9 @@ $(document).ready(function(){
             success: function(response){
                 if(response.status == 400)
                 {
-                    console.log(response);
-                    // $('#error_name').html(response.errors.name_room);
-                    // $('#error_capacity').html(response.errors.capacity_room);
-                    // $('#error_facility').html(response.errors.facility_room);
-                    // $('#error_images').html(response.errors.images_room);
+                    $('#error_nama').html(response.errors.nama);
+                    $('#error_email').html(response.errors.email);
+                    $('#error_hp').html(response.errors.hp);
                   
                 }else{
                    console.log(response); 
@@ -86,28 +77,30 @@ $(document).ready(function(){
     $(document).on('click','.edit', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal_edit_olt').modal('show');
+        $('#modal_edit_upline').modal('show');
         $.ajax({
             type:"GET",
-            url:"/olt/edit/" + id,
-            success: function(response){
+            url:"/upline/edit/" + id,
+            success: function(response){    
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
-                    $('#id_olt').val(response.olt.id);
-                    $('#edit_nama_olt').val(response.olt.nama_olt);
-                    $('#edit_prioritas').val(response.olt.prioritas).change();
+                    $('#id_edit_upline').val(response.upline.id);
+                    $('#edit_nama').val(response.upline.name);
+                    $('#edit_email').val(response.upline.email);
+                    $('#edit_handphone').val(response.upline.handphone);
                 }
             }
         })
     })
 
-   $(document).on('click', '.save', function(e){
+   $(document).on('click', '.update', function(e){
         e.preventDefault();
-        var id = $('#id_olt').val();
+        var id = $('#id_edit_upline').val();
         var data = {
-            'edit_nama_olt': $('#edit_nama_olt').val(),
-            'edit_prioritas': $('#edit_prioritas').val()
+            'edit_nama': $('#edit_nama').val(),
+            'edit_email': $('#edit_email').val(),
+            'edit_handphone': $('#edit_handphone').val()
         }
 
         $.ajaxSetup({
@@ -118,17 +111,39 @@ $(document).ready(function(){
 
         $.ajax({
             type:"PUT",
-            url:"/olt/update/"+ id,
+            url:"/upline/update/"+ id,
             data: data,
             dataType:"json",
-            success: function(response){
-            table.draw();
-              Swal.fire({
-                    title: 'Suksess!',
-                    text: 'Data berhasil disimpan!',
-                    icon: 'success'
-                });
-                    $('#modal_edit_olt').modal('hide');
+             success: function(response){
+                console.log(response);
+                if(response.status == 400){
+
+                    $('#error_edit_nama').html(response.errors.edit_nama);
+                    $('#error_edit_email').html(response.errors.edit_email);
+                    $('#error_edit_handphone').html(response.errors.edit_handphone);
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal disimpan!',
+                        icon: 'error'
+                    });
+                        
+                }else if(response.status == 404){
+                     Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal ditemukan!',
+                        icon: 'error'
+                    });
+                    
+                }else{
+                    table.draw();
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data berhasil disimpan!',
+                        icon: 'success'
+                    });
+                    $('#modal_edit_upline').modal('hide');
+                }
             
             }
         })
