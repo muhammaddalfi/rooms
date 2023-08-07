@@ -1,4 +1,4 @@
-<div id="modal_pengguna" class="modal fade" tabindex="-1">
+<div id="modal_marketer" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form id="form-pengguna" action="#">
+            <form id="form-marketer" action="#">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -15,12 +15,14 @@
                                 <label class="form-label">Nama Lengkap</label>
                                 <input type="text" id="nama" name="nama" placeholder="Muhammad Alfi"
                                     class="form-control">
+                                <span id="error_name" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">Email</label>
                                 <input type="text" id="email" name="email"
                                     placeholder="muhammad.ramadhan@iconpln.co.id" class="form-control">
+                                <span id="error_email" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -31,6 +33,8 @@
                                 <label class="form-label">No. Whatsapp</label>
                                 <input type="text" id="hp" name="hp" placeholder="08116565xxx"
                                     class="form-control">
+                                <span id="error_hp" class="text-danger"></span>
+
                             </div>
 
                             <div class="col-sm-6">
@@ -65,6 +69,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <span id="error_nama_perusahaan" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6 mpi_form d-none">
@@ -76,6 +81,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <span id="error_nama_upline" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6">
@@ -85,6 +91,7 @@
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
+                                <span id="error_role" class="text-danger"></span>
                             </div>
 
                         </div>

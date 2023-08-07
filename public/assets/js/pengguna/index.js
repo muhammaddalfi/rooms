@@ -27,25 +27,25 @@ $(document).ready(function(){
     //add olt
     $(document).on('click','.add_pengguna', function(e){
         e.preventDefault();
-        $('#modal_pengguna').modal('show');   
+        $('#modal_marketer').modal('show');   
 
     })
 
     
     $('.mpp').select2({
-        dropdownParent: $('#modal_pengguna'),
+        dropdownParent: $('#modal_marketer'),
         allowClear: true,
         placeholder: 'Pilih'
     });
 
     $('.mpi').select2({
-        dropdownParent: $('#modal_pengguna'),
+        dropdownParent: $('#modal_marketer'),
         allowClear: true,
         placeholder: 'Pilih'
     });
 
      $('.role').select2({
-        dropdownParent: $('#modal_pengguna'),
+        dropdownParent: $('#modal_marketer'),
         allowClear: true,
         placeholder: 'Pilih'
     });
@@ -61,16 +61,11 @@ $(document).ready(function(){
         });
     
     
-    $('.edit_prioritas').select2({
-        dropdownParent: $('#modal_edit_olt'),
-        allowClear: true,
-        placeholder: 'Pilih'
-    });
 
-    var olt = $('#form-pengguna')[0];
+    var marketers = $('#form-marketer')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form  = new FormData(olt);
+        var form  = new FormData(marketers);
         // console.log(data);
         $.ajax({
             url: '/pengguna/store',
@@ -83,10 +78,10 @@ $(document).ready(function(){
                 if(response.status == 400)
                 {
                     console.log(response);
-                    // $('#error_name').html(response.errors.name_room);
-                    // $('#error_capacity').html(response.errors.capacity_room);
-                    // $('#error_facility').html(response.errors.facility_room);
-                    // $('#error_images').html(response.errors.images_room);
+                    $('#error_name').html(response.errors.nama);
+                    $('#error_email').html(response.errors.email);
+                    $('#error_hp').html(response.errors.hp);
+                    $('#error_role').html(response.errors.role);
                   
                 }else{
                    console.log(response); 
@@ -97,66 +92,14 @@ $(document).ready(function(){
                     icon: 'success'
                     });
 
-                    $('#modal_pengguna').modal('hide');
-                    $("#form-pengguna")[0].reset();
+                    $('#modal_marketer').modal('hide');
+                    $("#form-marketer")[0].reset();
                 }
             }
         })
 
     })
 
-    //  //edit button
-    $(document).on('click','.edit', function(e){
-        e.preventDefault();
-        var id = $(this).data('id');
-        $('#modal_edit_olt').modal('show');
-        $.ajax({
-            type:"GET",
-            url:"/olt/edit/" + id,
-            success: function(response){
-                if(response.status == 404){
-                    console.log("Data not found");
-                }else{
-                    $('#id_olt').val(response.olt.id);
-                    $('#edit_nama_olt').val(response.olt.nama_olt);
-                    $('#edit_prioritas').val(response.olt.prioritas).change();
-                }
-            }
-        })
-    })
-
-   $(document).on('click', '.save', function(e){
-        e.preventDefault();
-        var id = $('#id_olt').val();
-        var data = {
-            'edit_nama_olt': $('#edit_nama_olt').val(),
-            'edit_prioritas': $('#edit_prioritas').val()
-        }
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            type:"PUT",
-            url:"/olt/update/"+ id,
-            data: data,
-            dataType:"json",
-            success: function(response){
-            table.draw();
-              Swal.fire({
-                    title: 'Suksess!',
-                    text: 'Data berhasil disimpan!',
-                    icon: 'success'
-                });
-                    $('#modal_edit_olt').modal('hide');
-            
-            }
-        })
-
-    });
 
 
     //delete
