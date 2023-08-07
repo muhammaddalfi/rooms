@@ -100,8 +100,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" id="save" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" id="save" class="btn btn-success">Simpan</button>
                 </div>
             </form>
         </div>

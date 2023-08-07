@@ -23,7 +23,7 @@
                                         <tr>
                                             <td>Nama Pelaksana</td>
                                             <td>:</td>
-                                            <td id=""></td>
+                                            <td id="view_nama"></td>
                                         </tr>
 
                                         <tr>

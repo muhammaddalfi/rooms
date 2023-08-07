@@ -46,10 +46,7 @@ $(document).ready(function(){
                 if(response.status == 400)
                 {
                     console.log(response);
-                    // $('#error_name').html(response.errors.name_room);
-                    // $('#error_capacity').html(response.errors.capacity_room);
-                    // $('#error_facility').html(response.errors.facility_room);
-                    // $('#error_images').html(response.errors.images_room);
+                    $('#error_jenis_kegiatan').html(response.errors.jenis_kegiatan);
                   
                 }else{
                    console.log(response); 

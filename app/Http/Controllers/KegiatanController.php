@@ -16,19 +16,27 @@ class KegiatanController extends Controller
 {
     public function home()
     {
-        $data['kegiatan'] = Kegiatan::all();
+        $data['kegiatan'] = Kegiatan::orderBy('id','ASC')->get();
         $data['olt'] = Olt::all();
         return view('rooms.index', $data);
     }
 
     public function daily()
     {
-        $daily = Daily::all();
-        
+       
+
+        if(auth()->user()->can('admin read')){
+              $daily = Daily::all();
+        }
+        if(auth()->user()->can('user read')){
+            $daily = Daily::where('user_id', Auth()->user()->id)
+        ->orderBy('id', 'desc')->get();
+        }
+
         return DataTables::of($daily)
             ->addIndexColumn()
              ->addColumn('created_at', function ($daily) {
-                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $daily->created_at)->format('d-m-Y H:i');
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $daily->created_at)->format('d-m-Y');
                 return $formatDate;
             })
             ->addColumn('gambar', function($daily){
@@ -105,15 +113,16 @@ class KegiatanController extends Controller
         }
     }
 
-     public function show($id)
+    public function show($id)
 
     {
-        $daily = Daily::all();
+        // $daily = Daily::all();
+        $daily = Daily::with(['user','jenis_kegiatan'])->first(); 
        
         if ($daily) {
             return response()->json([
                 'status' => 200,
-                'daily' => $daily,
+                'daily' => $daily
             ]);
         } else {
             return response()->json([

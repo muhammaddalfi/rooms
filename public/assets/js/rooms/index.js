@@ -83,13 +83,14 @@ $(document).ready(function(){
                     console.log('Data Not Found');
                 }else{
 
-                    console.log(response.daily);
-                    let tanggal = moment(response.daily.created_at).format('DD-MM-YYYY h:mm');
+                    // console.log(response.daily);
+                    let tanggal = moment(response.daily.created_at).format('DD-MM-YYYY');
 
                     $('#id_kegiatan').val(response.daily.id);
                     $('#view_tanggal').html(tanggal);
+                    $('#view_nama').html(response.daily.user.name);
                     $('#view_nama_olt').html(response.daily.nama_olt);
-                    $('#view_jenis_kegiatan').html(response.daily.jenis_kegiatan);
+                    $('#view_jenis_kegiatan').html(response.daily.jenis_kegiatan.jenis_kegiatan);
                     $('#view_catatan').html(response.daily.catatan);
 
             

@@ -21,7 +21,7 @@ class JenisKegiatanController extends Controller
         ];
 
         $message = [
-            'jenis_kegiatan.required' => 'This field is required'
+            'jenis_kegiatan.required' => 'Tidak boleh kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -73,7 +73,7 @@ class JenisKegiatanController extends Controller
 
     public function activity()
     {
-        $kegiatan = Kegiatan::all();
+        $kegiatan = Kegiatan::orderBy('id','ASC')->get();
         
         return DataTables::of($kegiatan)
             ->addIndexColumn()

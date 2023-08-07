@@ -16,7 +16,7 @@
                             <label class="form-label">Jenis Kegiatan</label>
                             <input type="text" class="form-control" required id="edit_jenis_kegiatan"
                                 name="edit_jenis_kegiatan">
-                            <span id="error_name" class="text-danger"></span>
+                            <span id="error_jenis_kegiatan" class="text-danger"></span>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@
                                 <label class="form-label">Jenis Kegiatan</label>
                                 <input type="text" class="form-control" required id="jenis_kegiatan"
                                     name="jenis_kegiatan">
-                                <span id="error_name" class="text-danger"></span>
+                                <span id="error_jenis_kegiatan" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -23,8 +23,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id="save" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" id="save" class="btn btn-success">Simpan</button>
                 </div>
             </form>
         </div>
