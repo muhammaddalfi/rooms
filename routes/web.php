@@ -96,8 +96,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/mpp', [MppController::class,'index'])->name('mpp.dashboard');
     Route::post('/mpp/store',[MppController::class,'store']);
     Route::get('/mpp/fetch', [MppController::class, 'fetch']);
-    // Route::get('/mpp/edit/{id}', [MppController::class,'edit']);
-    // Route::put('/mpp/update/{id}', [MppController::class,'update']);
+    Route::get('/mpp/edit/{id}', [MppController::class,'edit']);
+    Route::put('/mpp/update/{id}', [MppController::class,'update']);
     Route::delete('/mpp/delete/{id}', [MppController::class, 'destroy']);
 
 

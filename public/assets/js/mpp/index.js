@@ -24,47 +24,22 @@ $(document).ready(function(){
             }
     });
 
-    //add olt
+    //add mpp
     $(document).on('click','.add_mpp', function(e){
         e.preventDefault();
         $('#modal_mpp').modal('show');   
 
     })
 
-    
-    $('.mpp').select2({
+
+    $('.role').select2({
         dropdownParent: $('#modal_mpp'),
         allowClear: true,
         placeholder: 'Pilih'
     });
 
-    $('.mpi').select2({
-        dropdownParent: $('#modal_mpp'),
-        allowClear: true,
-        placeholder: 'Pilih'
-    });
-
-     $('.role').select2({
-        dropdownParent: $('#modal_mpp'),
-        allowClear: true,
-        placeholder: 'Pilih'
-    });
-
-    $('[name="jenis_mpp"]').change(function(){
-            if($(this).val() == 'mpp'){
-                $(".mpp_form").removeClass('d-none');
-                $(".mpi_form").addClass('d-none');
-            }else{
-                $(".mpp_form").addClass('d-none');
-                $(".mpi_form").removeClass('d-none');
-            }
-        });
-    
-    
-    $('.edit_prioritas').select2({
-        dropdownParent: $('#modal_edit_olt'),
-        allowClear: true,
-        placeholder: 'Pilih'
+    $('.edit_role').select2({
+        dropdownParent: $('#modal_edit_mpp'),
     });
 
     var olt = $('#form-mpp')[0];
@@ -83,10 +58,9 @@ $(document).ready(function(){
                 if(response.status == 400)
                 {
                     console.log(response);
-                    // $('#error_name').html(response.errors.name_room);
-                    // $('#error_capacity').html(response.errors.capacity_room);
-                    // $('#error_facility').html(response.errors.facility_room);
-                    // $('#error_images').html(response.errors.images_room);
+                    $('#error_name').html(response.errors.nama);
+                    $('#error_email').html(response.errors.email);
+                    $('#error_hp').html(response.errors.hp);
                   
                 }else{
                    console.log(response); 
@@ -109,29 +83,33 @@ $(document).ready(function(){
     $(document).on('click','.edit', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal_edit_olt').modal('show');
+        $('#modal_edit_mpp').modal('show');
         $.ajax({
             type:"GET",
-            url:"/olt/edit/" + id,
+            url:"/mpp/edit/" + id,
             success: function(response){
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
-                    $('#id_olt').val(response.olt.id);
-                    $('#edit_nama_olt').val(response.olt.nama_olt);
-                    $('#edit_prioritas').val(response.olt.prioritas).change();
+                    $('#id_mpp').val(response.mpp.id);
+                    $('#edit_nama').val(response.mpp.name);
+                    $('#edit_email').val(response.mpp.email);
+                    $('#edit_handphone').val(response.mpp.handphone);
                 }
             }
         })
     })
 
-   $(document).on('click', '.save', function(e){
+   $(document).on('click', '.update', function(e){
         e.preventDefault();
-        var id = $('#id_olt').val();
+        var id = $('#id_mpp').val();
         var data = {
-            'edit_nama_olt': $('#edit_nama_olt').val(),
-            'edit_prioritas': $('#edit_prioritas').val()
+            'edit_nama': $('#edit_nama').val(),
+            'edit_email': $('#edit_email').val(),
+            'edit_handphone': $('#edit_handphone').val()
         }
+
+        // console.log(data);
 
         $.ajaxSetup({
             headers: {
@@ -141,17 +119,40 @@ $(document).ready(function(){
 
         $.ajax({
             type:"PUT",
-            url:"/olt/update/"+ id,
+            url:"/mpp/update/"+ id,
             data: data,
             dataType:"json",
+
             success: function(response){
-            table.draw();
-              Swal.fire({
-                    title: 'Suksess!',
-                    text: 'Data berhasil disimpan!',
-                    icon: 'success'
-                });
-                    $('#modal_edit_olt').modal('hide');
+                console.log(response);
+                if(response.status == 400){
+
+                    $('#error_edit_nama').html(response.errors.edit_nama);
+                    $('#error_edit_email').html(response.errors.edit_email);
+                    $('#error_edit_handphone').html(response.errors.edit_handphone);
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal disimpan!',
+                        icon: 'error'
+                    });
+                        
+                }else if(response.status == 404){
+                     Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal ditemukan!',
+                        icon: 'error'
+                    });
+                    
+                }else{
+                    table.draw();
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data berhasil disimpan!',
+                        icon: 'success'
+                    });
+                    $('#modal_edit_mpp').modal('hide');
+                }
             
             }
         })

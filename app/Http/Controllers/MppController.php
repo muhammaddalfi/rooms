@@ -36,14 +36,12 @@ class MppController extends Controller
             'nama' => 'required',
             'email' => 'required',
             'hp' => 'required',
-            'role' => 'required',
         ];
 
         $message = [
             'nama.required' => 'Tidak Boleh Kosong',
             'email.required' => 'Tidak Boleh Kosong',
             'hp.required' => 'Tidak Boleh Kosong',
-            'role.required' => 'Tidak Boleh Kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -66,11 +64,76 @@ class MppController extends Controller
             $ajax->password = bcrypt($password);
 
             $ajax->save();
-            $ajax->assignRole($request->input('role')); // hardcode assign role
+            $ajax->assignRole('user'); // hardcode assign role
             return response()->json([
                 'status' => 200,
                 'message' => 'Data tersimpan',
             ]);
+        }
+    }
+
+    public function edit($id)
+    {
+        //
+        $mpp = User::find($id);
+        if ($mpp) {
+            return response()->json([
+                'status' => 200,
+                'mpp' => $mpp,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'MPP Users not found',
+            ]);
+        }
+    }
+
+     public function update(Request $request, $id)
+    {
+        //
+        $rule = [
+            'edit_nama' => 'required',
+            'edit_email' => 'required',
+            'edit_handphone' => 'required',
+        ];
+
+        $message = [
+            'edit_nama.required' => 'Tidak Boleh Kosong',
+            'edit_email.required' => 'Tidak Boleh Kosong',
+            'edit_handphone.required' => 'Tidak Boleh Kosong',
+        ];
+
+        $validator = Validator::make($request->all(), $rule, $message);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+            if ($request->input('password') == '') {
+                $user = User::find($id);
+                $user->name = $request->input('edit_nama');
+                $user->email = $request->input('edit_email');
+                $user->handphone = $request->input('edit_handphone');
+                $user->update();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data updated successfully',
+                ]);
+            } else {
+                $user = User::find($id);
+                $user->name = $request->input('edit_nama');
+                $user->email = $request->input('edit_email');
+                $user->handphone = $request->input('edit_handphone');
+                $user->password = bcrypt($request->input('edit_password'));
+                $user->update();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data updated successfully',
+                ]);
+            }
         }
     }
 

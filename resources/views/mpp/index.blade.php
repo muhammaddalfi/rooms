@@ -12,9 +12,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
+                        <th>Perusahaan</th>
                         <th>Email</th>
-                        <th>Handphone</th>
+                        <th>No. Telp</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
