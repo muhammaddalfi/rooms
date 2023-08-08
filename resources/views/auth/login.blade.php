@@ -54,7 +54,7 @@
                                 <div class="form-control-feedback form-control-feedback-start">
                                     <input type="text" id="email" name="email" value="{{ old('email') }}"
                                         class="form-control" value="{{ old('email') }}" required
-                                        placeholder="halo@rooms.id">
+                                        placeholder="halo@monsterjabar.id">
                                     <div class="form-control-feedback-icon">
                                         <i class="ph-user-circle text-muted"></i>
                                     </div>
