@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Daily;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
     // select b.`name`, date(a.created_at) AS tanggal,
     // COUNT(a.id) AS jumlah_kunjungan
     // FROM dailies a
@@ -18,28 +21,61 @@ class DashboardController extends Controller
     
     public function home()
     {
-        $tahun = date('Y');
-        $bulan = date('m');
+        
+                $tahun = date('Y');
+                $bulan = date('m');
 
-        $db = "select a.nama_olt, date(a.created_at) AS tanggal,
-            COUNT(a.id) AS jumlah_kunjungan
-            FROM dailies a
-            LEFT JOIN users b
-            ON b.id = a.user_id
-            WHERE YEAR(a.created_at) = ? 
-            AND MONTH(a.created_at) = ?
-            GROUP BY a.nama_olt, tanggal";
+        if(auth()->user()->can('admin read')){
+                $db = "select a.nama_olt, date(a.created_at) AS tanggal,
+                    COUNT(a.id) AS jumlah_kunjungan
+                    FROM dailies a
+                    LEFT JOIN users b
+                    ON b.id = a.user_id
+                    WHERE YEAR(a.created_at) = ? 
+                    AND MONTH(a.created_at) = ?
+                    GROUP BY a.nama_olt, tanggal";
 
-        $db_kegiatan = "select a.nama_olt, c.jenis_kegiatan,c.id,
-                        COUNT(a.id) AS jumlah_kunjungan
-                        FROM dailies a
-                        LEFT JOIN users b
-                        ON b.id = a.user_id
-                        LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
-                        WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ?
-                        GROUP BY a.nama_olt,c.jenis_kegiatan,c.id
-                        ORDER BY c.id ASC;
-                        ";
+
+                $db_kegiatan = "select a.nama_olt, c.jenis_kegiatan,c.id,
+                                COUNT(a.id) AS jumlah_kunjungan
+                                FROM dailies a
+                                LEFT JOIN users b
+                                ON b.id = a.user_id
+                                LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
+                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ?
+                                GROUP BY a.nama_olt,c.jenis_kegiatan,c.id
+                                ORDER BY c.id ASC;
+                                ";
+        }
+
+        if(auth()->user()->can('user read')){
+
+                $db = "select a.nama_olt, date(a.created_at) AS tanggal,
+                    COUNT(a.id) AS jumlah_kunjungan
+                    FROM dailies a
+                    LEFT JOIN users b
+                    ON b.id = a.user_id
+                    WHERE YEAR(a.created_at) = ? 
+                    AND MONTH(a.created_at) = ?
+                    AND  a.user_id = ".auth()->user()->id."
+                    GROUP BY a.nama_olt, tanggal";
+
+
+                $db_kegiatan = "select a.nama_olt, c.jenis_kegiatan,c.id,
+                                COUNT(a.id) AS jumlah_kunjungan
+                                FROM dailies a
+                                LEFT JOIN users b
+                                ON b.id = a.user_id
+                                LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
+                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ?
+                                AND  a.user_id = ".auth()->user()->id."
+                                GROUP BY a.nama_olt,c.jenis_kegiatan,c.id
+                                ORDER BY c.id ASC;
+                                ";
+        }
+
+
+       
 
         $tes = DB::select($db,[$tahun,$bulan]);
         $tes1 = DB::select($db_kegiatan,[$tahun,$bulan]);
@@ -73,7 +109,9 @@ class DashboardController extends Controller
         $tahun = $request->tahun;
         $bulan = $request->bulan;
 
-         $db = "select a.nama_olt, date(a.created_at) AS tanggal,
+        if(auth()->user()->can('admin read'))
+        {
+            $db = "select a.nama_olt, date(a.created_at) AS tanggal,
             COUNT(a.id) AS jumlah_kunjungan
             FROM dailies a
             LEFT JOIN users b
@@ -92,6 +130,32 @@ class DashboardController extends Controller
                         GROUP BY a.nama_olt,c.jenis_kegiatan,c.id
                         ORDER BY c.id ASC;
                         ";
+        }
+
+        if(auth()->user()->can('user read'))
+        {
+            $db = "select a.nama_olt, date(a.created_at) AS tanggal,
+            COUNT(a.id) AS jumlah_kunjungan
+            FROM dailies a
+            LEFT JOIN users b
+            ON b.id = a.user_id
+            WHERE YEAR(a.created_at) = ? 
+            AND MONTH(a.created_at) = ?
+            AND  a.user_id = ".auth()->user()->id."
+            GROUP BY a.nama_olt, tanggal";
+
+        $db_kegiatan = "select a.nama_olt, c.jenis_kegiatan,c.id,
+                        COUNT(a.id) AS jumlah_kunjungan
+                        FROM dailies a
+                        LEFT JOIN users b
+                        ON b.id = a.user_id
+                        LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
+                        WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ?
+                        AND  a.user_id = ".auth()->user()->id."
+                        GROUP BY a.nama_olt,c.jenis_kegiatan,c.id
+                        ORDER BY c.id ASC;
+                        ";
+        }
 
         $tes = DB::select($db,[$tahun,$bulan]);
         $tes1 = DB::select($db_kegiatan,[$tahun,$bulan]);

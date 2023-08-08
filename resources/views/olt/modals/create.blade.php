@@ -14,19 +14,21 @@
                             <div class="col-sm-6">
                                 <label class="form-label">Nama OLT</label>
                                 <input type="text" class="form-control" required id="nama_olt" name="nama_olt">
-                                <span id="error_name" class="text-danger"></span>
+                                <span id="error_nama_olt" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">Prioritas</label>
                                 <select class="form-control prioritas" required name="prioritas" id="prioritas"
                                     data-minimum-results-for-search="Infinity" data-fouc>
+                                    <option></option>
                                     <option value="P1">P1</option>
                                     <option value="P2">P2</option>
                                     <option value="P3">P3</option>
                                     <option value="P4">P4</option>
                                     <option value="P5">P5</option>
                                 </select>
+                                <span id="error_prioritas" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

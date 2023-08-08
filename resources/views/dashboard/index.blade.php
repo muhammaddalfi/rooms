@@ -79,7 +79,7 @@
                             $total = 0;
                             foreach ($daily as $key => $value) {
                                 echo '<tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <td>' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <td>' .
                                     $key .
                                     '</td>';
                                 $total = 0;
@@ -107,56 +107,58 @@
         </div>
 
         <div class="row">
-            <!-- Left fixed column -->
-            <div class="card">
 
-                <table class="table datatable-kegiatan">
-                    <thead>
-                        <tr>
-                            <th colspan="14" style="text-align:center;">Jenis Kegiatan</th>
-                        </tr>
-                        <tr>
-                            <th>Nama Cluster</th>
-                            @foreach ($jenis_kegiatan as $item)
-                                <th>
-                                    {{ $item->jenis_kegiatan }}
-                                </th>
-                            @endforeach
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        
-                        $no = 1;
-                        $total = 0;
-                        foreach ($kegiatan as $key => $value) {
-                            echo '<tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <td>' .
-                                $key .
-                                '</td>';
+            <div class="col-lg-12">
+                <!-- Left fixed column -->
+                <div class="card">
+                    <table class="table datatable-kegiatan">
+                        <thead>
+                            <tr>
+                                <th colspan="14" style="text-align:center;">Jenis Kegiatan</th>
+                            </tr>
+                            <tr>
+                                <th>Nama Cluster</th>
+                                @foreach ($jenis_kegiatan as $item)
+                                    <th>
+                                        {{ $item->jenis_kegiatan }}
+                                    </th>
+                                @endforeach
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            
+                            $no = 1;
                             $total = 0;
-                            foreach ($jenis_kegiatan as $key_k => $value_k) {
-                                if (!empty($value[$value_k->id])) {
-                                    echo '<td>' . $value[$value_k->id] . '</td>';
-                                    $total += $value[$value_k->id];
-                                } else {
-                                    echo '<td>0</td>';
+                            foreach ($kegiatan as $key => $value) {
+                                echo '<tr>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <td>' .
+                                    $key .
+                                    '</td>';
+                                $total = 0;
+                                foreach ($jenis_kegiatan as $key_k => $value_k) {
+                                    if (!empty($value[$value_k->id])) {
+                                        echo '<td>' . $value[$value_k->id] . '</td>';
+                                        $total += $value[$value_k->id];
+                                    } else {
+                                        echo '<td>0</td>';
+                                    }
                                 }
+                            
+                                echo '<td>' . $total . '</td></tr>';
+                            
+                                # code...
                             }
-                        
-                            echo '<td>' . $total . '</td></tr>';
-                        
-                            # code...
-                        }
-                        ?>
+                            ?>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /left fixed column -->
             </div>
-            <!-- /left fixed column -->
-        </div>
 
+        </div>
 
     </div>
 @endsection

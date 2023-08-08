@@ -60,17 +60,15 @@ $(document).ready(function(){
                 if(response.status == 400)
                 {
                     console.log(response);
-                    // $('#error_name').html(response.errors.name_room);
-                    // $('#error_capacity').html(response.errors.capacity_room);
-                    // $('#error_facility').html(response.errors.facility_room);
-                    // $('#error_images').html(response.errors.images_room);
+                    $('#error_nama_olt').html(response.errors.nama_olt);
+                    $('#error_prioritas').html(response.errors.prioritas);
                   
                 }else{
                    console.log(response); 
                     table.draw();
                     Swal.fire({
-                    title: 'Success!',
-                    text: 'Data inserted successfully',
+                    title: 'Sukses!',
+                    text: 'Data Berhasil Ditambahkan',
                     icon: 'success'
                     });
 
@@ -124,7 +122,7 @@ $(document).ready(function(){
             success: function(response){
             table.draw();
               Swal.fire({
-                    title: 'Suksess!',
+                    title: 'Sukses!',
                     text: 'Data berhasil disimpan!',
                     icon: 'success'
                 });
@@ -150,12 +148,12 @@ $(document).ready(function(){
 
         // Warning alert
         Swal.fire({
-            title: 'Remove data',
-            text: "Are you sure ?",
+            title: 'Hapus data',
+            text: "Kamu Yakin ?",
             showCancelButton: true,
             confirmButtonColor: 'btn btn-success',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
+            confirmButtonText: 'Ya'
           }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -166,7 +164,7 @@ $(document).ready(function(){
                         table.draw();
                         Swal.fire(
                             'Success!',
-                            'Data has been removed',
+                            'Data Berhasil dihapus',
                             'success'
                           )
                     }

@@ -24,8 +24,8 @@ class OltController extends Controller
         ];
 
         $message = [
-            'nama_olt.required' => 'This field is required',
-            'prioritas.required' => 'This field is required'
+            'nama_olt.required' => 'Tidak Boleh Kosong',
+            'prioritas.required' => 'Tidak Boleh Kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -43,7 +43,7 @@ class OltController extends Controller
             $ajax->save();
             return response()->json([
                 'status' => 200,
-                'message' => 'Data saved successfully',
+                'message' => 'Data Berhasil Ditambahkan',
             ]);
         }
     }

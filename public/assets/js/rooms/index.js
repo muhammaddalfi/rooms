@@ -127,19 +127,20 @@ $(document).ready(function(){
                 if(response.status == 400)
                 {
                     console.log(response);
-                    // $('#error_name').html(response.errors.name_room);
-                    // $('#error_capacity').html(response.errors.capacity_room);
-                    // $('#error_facility').html(response.errors.facility_room);
-                    // $('#error_images').html(response.errors.images_room);
+                    $('#error_lat').html(response.errors.latNow);
+                    $('#error_lng').html(response.errors.lngNow);
+                    $('#error_kategori').html(response.errors.kategori);
+                    $('#error_olt').html(response.errors.olt);
+                    $('#error_kegiatan').html(response.errors.kegiatan);
+                    $('#error_images').html(response.errors.catatan);
                   
                 }else{
                     
                    $('#spinner').css("display","none");
-                //    console.log(response); 
                     table.draw();
                     Swal.fire({
-                    title: 'Success!',
-                    text: 'Data inserted successfully',
+                    title: 'Sukses!',
+                    text: 'Data Berhasil ditambahkan',
                     icon: 'success'
                     });
 
