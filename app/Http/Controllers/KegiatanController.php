@@ -26,10 +26,11 @@ class KegiatanController extends Controller
        
 
         if(auth()->user()->can('admin read')){
-              $daily = Daily::all();
+              $daily = Daily::with(['user','jenis_kegiatan']);
         }
         if(auth()->user()->can('user read')){
-            $daily = Daily::where('user_id', Auth()->user()->id)
+            $daily = Daily::with(['user','jenis_kegiatan'])
+            ->where('user_id', Auth()->user()->id)
         ->orderBy('id', 'desc')->get();
         }
 
