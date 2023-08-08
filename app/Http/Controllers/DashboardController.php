@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Daily;
 use App\Models\Kegiatan;
+use App\Models\Olt;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +24,8 @@ class DashboardController extends Controller
     public function home()
     {
         
-                $tahun = date('Y');
-                $bulan = date('m');
+        $tahun = date('Y');
+        $bulan = date('m');
 
         if(auth()->user()->can('admin read')){
                 $db = "select a.nama_olt, date(a.created_at) AS tanggal,
@@ -95,6 +97,18 @@ class DashboardController extends Controller
 
         // die(json_encode($daily));
         //dd($daily);
+
+        $olt = Olt::all();
+        $data['total_cluster'] = $olt->count();
+
+        $kegiatan = Kegiatan::all();
+        $data['total_kegiatan'] = $kegiatan->count();
+
+        $mpi = User::where('jenis_pengguna','upline');
+        $data['total_mpi'] = $mpi->count();
+
+        $mpp = User::where('jenis_pengguna','mpp');
+        $data['total_mpp'] = $mpp->count();
 
         $data['bulan'] = $bulan;
         $data['tahun'] = $tahun;

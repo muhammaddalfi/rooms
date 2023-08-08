@@ -2,6 +2,64 @@
 
 @section('content')
     <div class="content">
+
+        @can('admin read')
+            <div class="row">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body">
+                        <div class="d-flex align-items-center">
+                            <i class="ph-broadcast ph-2x text-success me-3"></i>
+
+                            <div class="flex-fill text-end">
+                                <h4 class="mb-0">{{ $total_cluster }}</h4>
+                                <span class="text-muted">Total cluster</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body">
+                        <div class="d-flex align-items-center">
+                            <i class="ph-activity ph-2x text-indigo me-3"></i>
+
+                            <div class="flex-fill text-end">
+                                <h4 class="mb-0">{{ $total_kegiatan }}</h4>
+                                <span class="text-muted">Total Kegiatan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-fill">
+                                <h4 class="mb-0">{{ $total_mpi }}</h4>
+                                <span class="text-muted">Total MPI</span>
+                            </div>
+
+                            <i class="ph-user ph-2x text-primary ms-3"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-fill">
+                                <h4 class="mb-0">{{ $total_mpp }}</h4>
+                                <span class="text-muted">Total MPP</span>
+                            </div>
+
+                            <i class="ph-user-list ph-2x text-danger ms-3"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        @endcan
         <div class="row">
             <div class="col-lg-12">
                 <!-- Left fixed column -->
@@ -79,7 +137,7 @@
                             $total = 0;
                             foreach ($daily as $key => $value) {
                                 echo '<tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <td>' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <td>' .
                                     $key .
                                     '</td>';
                                 $total = 0;
@@ -133,7 +191,7 @@
                             $total = 0;
                             foreach ($kegiatan as $key => $value) {
                                 echo '<tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <td>' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td>' .
                                     $key .
                                     '</td>';
                                 $total = 0;
