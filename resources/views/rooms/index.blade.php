@@ -19,8 +19,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Pelaksana</th>
                             <th>Tanggal</th>
+                            <th>Pelaksana</th>
                             <th>Nama OLT</th>
                             <th>Kegiatan</th>
                             <th>Gambar</th>
