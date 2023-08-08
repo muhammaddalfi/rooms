@@ -190,6 +190,18 @@ class DashboardController extends Controller
         // die(json_encode($daily));
         //dd($daily);
 
+        $olt = Olt::all();
+        $data['total_cluster'] = $olt->count();
+
+        $kegiatan = Kegiatan::all();
+        $data['total_kegiatan'] = $kegiatan->count();
+
+        $mpi = User::where('jenis_pengguna','upline');
+        $data['total_mpi'] = $mpi->count();
+
+        $mpp = User::where('jenis_pengguna','mpp');
+        $data['total_mpp'] = $mpp->count();
+
         $data['bulan'] = $bulan;
         $data['tahun'] = $tahun;
         $data['daily'] = $daily;
