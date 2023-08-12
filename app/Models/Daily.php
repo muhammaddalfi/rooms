@@ -18,6 +18,9 @@ class Daily extends Model
     {
         return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
     }
+
+    public function olt()
+    {
+        return $this->belongsTo(Olt::class, 'nama_olt');
+    }
 }
-
-

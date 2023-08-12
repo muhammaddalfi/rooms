@@ -11,7 +11,7 @@ $(document).ready(function () {
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'created_at' },
             { data: 'user.name' },
-            { data: 'nama_olt' },
+            { data: 'olt.nama_olt' },
             { data: 'jenis_kegiatan.jenis_kegiatan' },
             { data: 'gambar' },
             { data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false, width: 220 }
@@ -39,13 +39,11 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            url: '/dailys/reload',
-            method: 'POST',
-            data: form,
-            processData: false,
-            contentType: false,
+            url: '/dailys/reload/' + form.lat + '/' + form.lng,
+            method: 'GET',
 
             success: function (response) {
+
                 if (response.status == 404) {
                     console.log('Data Not Found');
                 } else {
@@ -53,15 +51,19 @@ $(document).ready(function () {
                     $('.olt').html('');
                     $.each(response, function (i, item) {
                         $('.olt').append($('<option>', {
-                            value: item.id,
-                            text: item.nama_olt
+                            value: item.id, text: item.nama_olt
                         }));
                     });
                 }
-
+            }, error: function (response) {
+                console.log();
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: `Silahkan Hubungi PIC Aplikasi ${response.responseJSON.message}`,
+                    icon: 'error'
+                });
             }
         })
-
     })
 
 
@@ -231,7 +233,6 @@ $(document).ready(function () {
                     text: 'Data has been changed',
                     icon: 'success'
                 });
-
                 table.draw();
                 $('#modal_edit_daily').modal('hide');
                 $("#editDaily")[0].reset();
@@ -280,8 +281,6 @@ $(document).ready(function () {
 
     });
 
-
-
     getLocation();
 
     function getLocation() {
@@ -296,7 +295,6 @@ $(document).ready(function () {
         console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
 
         var mymap = L.map("map").setView([position.coords.latitude, position.coords.longitude], 13);
-
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
@@ -305,6 +303,17 @@ $(document).ready(function () {
         L.marker([position.coords.latitude, position.coords.longitude])
             .addTo(mymap)
             .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
+        L.circle([position.coords.latitude, position.coords.longitude], 500).addTo(mymap);
+
+        $.ajax({
+            type: "GET",
+            url: "/dailys/olts",
+            success: function (response) {
+                $.each(response.olt, function (index, value) {
+                    L.marker([value.lat, value.lng]).addTo(mymap).bindPopup(value.nama_olt);
+                });
+            }
+        });
 
         $("[name=latNow]").val(position.coords.latitude);
         $("[name=lngNow]").val(position.coords.longitude);

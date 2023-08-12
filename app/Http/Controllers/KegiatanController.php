@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
-use Intervention\Image\Facades\Image as Image;
 
 class KegiatanController extends Controller
 {
@@ -22,21 +21,24 @@ class KegiatanController extends Controller
         return view('rooms.index', $data);
     }
 
-    public function reload_olt(Request $request)
+    public function olts()
     {
-        $lat = $request->lat;
-        $lon = $request->lng;
+        $data['olt'] = Olt::all();
+        return $data;
+    }
 
+    public function reload_olt($lat, $lng)
+    {
         $olts = Olt::select(
             "olts.id",
             "olts.nama_olt",
             DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
                         * cos(radians(olts.lat)) 
-                        * cos(radians(olts.lng) - radians(" . $lon . ")) 
+                        * cos(radians(olts.lng) - radians(" . $lng . ")) 
                         + sin(radians(" . $lat . ")) 
                         * sin(radians(olts.lat))) AS distance")
         )->orderBy("distance", "ASC")
-            ->having('distance', '<', 1.0) //radius
+            ->having('distance', '<', 0.5) //radius
             ->get();
 
         return $olts;
@@ -44,13 +46,11 @@ class KegiatanController extends Controller
 
     public function daily()
     {
-
-
         if (auth()->user()->can('admin read')) {
-            $daily = Daily::with(['user', 'jenis_kegiatan']);
+            $daily = Daily::with(['user', 'olt', 'jenis_kegiatan']);
         }
         if (auth()->user()->can('user read')) {
-            $daily = Daily::with(['user', 'jenis_kegiatan'])
+            $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
                 ->where('user_id', Auth()->user()->id)
                 ->orderBy('id', 'desc')->get();
         }

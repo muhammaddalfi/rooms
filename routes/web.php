@@ -63,8 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/dailys/update/{id}', [KegiatanController::class, 'update']);
     Route::delete('/dailys/delete/{id}', [KegiatanController::class, 'destroy']);
     Route::get('/dailys/show/{id}', [KegiatanController::class, 'show']);
-    Route::post('/dailys/reload', [KegiatanController::class, 'reload_olt']);
-
+    Route::get('/dailys/reload/{lat}/{lng}', [KegiatanController::class, 'reload_olt']);
+    Route::get('/dailys/olts', [KegiatanController::class, 'olts']);
 
     Route::get('/activity', [JenisKegiatanController::class, 'home'])->name('activity.dashboard');
     Route::post('/activity/store', [JenisKegiatanController::class, 'store']);
