@@ -43,7 +43,6 @@
 </head>
 
 <body>
-
     <!-- Main navbar -->
     @include('layouts.navbar')
     <!-- /main navbar -->
