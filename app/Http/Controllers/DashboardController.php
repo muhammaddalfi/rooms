@@ -279,10 +279,10 @@ class DashboardController extends Controller
             GROUP BY u.nama_perusahaan
             ";
 
-            $marketing_db = "SELECT u.nama_perusahaan, COUNT(d.id) as jumlah  FROM users u
+            $marketing_db = "SELECT u.nama_upline, COUNT(d.id) as jumlah  FROM users u
             LEFT JOIN dailies d ON d.user_id = u.id
             WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mpi'
-            GROUP BY u.nama_perusahaan
+            GROUP BY u.nama_upline
             ";
 
             $kegiatan_count = DB::select($kegiatan_db, [$tahun, $bulan]);
