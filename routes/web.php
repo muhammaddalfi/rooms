@@ -8,6 +8,7 @@ use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RadiusController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\UplineController;
@@ -101,6 +102,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/mpp/edit/{id}', [MppController::class, 'edit']);
     Route::put('/mpp/update/{id}', [MppController::class, 'update']);
     Route::delete('/mpp/delete/{id}', [MppController::class, 'destroy']);
+
+    Route::get('/radius', [RadiusController::class, 'index'])->name('radius.dashboard');
+    Route::post('/radius/store', [RadiusController::class, 'store']);
+    Route::get('/radius/fetch', [RadiusController::class, 'fetch']);
+    Route::get('/radius/edit/{id}', [RadiusController::class, 'edit']);
+    Route::put('/radius/update/{id}', [RadiusController::class, 'update']);
+    // Route::delete('/radius/delete/{id}', [RadiusController::class, 'destroy']);
+
+
 });
 
 require __DIR__ . '/auth.php';

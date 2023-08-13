@@ -86,6 +86,13 @@
                             <span>PIC Perusahaan</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('radius.dashboard') }}" class="nav-link">
+                            <i class="ph-map-pin"></i>
+                            <span>Radius Cluster</span>
+                        </a>
+                    </li>
                 @endcan
 
                 <!-- /layout -->
