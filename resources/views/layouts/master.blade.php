@@ -28,14 +28,20 @@
     </style>
 
     <link href="{{ asset('assets/js/vendor/leaflet/css/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/loading_ajax/loading.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/sweet_alert/sweetalert.css') }}" rel="stylesheet">
     <!-- Theme JS files -->
+
+    <script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
     <!-- Core JS files -->
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
     <!-- /core JS files -->
 
     @stack('js_page')
+    <script src="{{ asset('assets/js/loading_ajax/loading.js') }}"></script>
+
     <!-- /theme JS files -->
 
 
@@ -43,6 +49,11 @@
 </head>
 
 <body>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
     <!-- Main navbar -->
     @include('layouts.navbar')
     <!-- /main navbar -->
@@ -57,6 +68,7 @@
 
         <!-- Main content -->
         <div class="content-wrapper">
+
             <!-- Content area -->
             @yield('content')
             <!-- /content area -->

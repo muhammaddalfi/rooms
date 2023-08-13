@@ -281,7 +281,14 @@ $(document).ready(function () {
 
     });
 
+    var lat, lng;
+
+    $(document).ajaxComplete(function () {
+        $("[name=latNow]").val(lat);
+        $("[name=lngNow]").val(lng);
+    });
     getLocation();
+
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -314,6 +321,10 @@ $(document).ready(function () {
                 });
             }
         });
+
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+
 
         $("[name=latNow]").val(position.coords.latitude);
         $("[name=lngNow]").val(position.coords.longitude);
