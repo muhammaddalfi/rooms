@@ -13,7 +13,8 @@
                     <tr>
                         <th>No</th>
                         <th>Nama OLT</th>
-                        <th>Prioritas</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>

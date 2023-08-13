@@ -10,7 +10,8 @@ $(document).ready(function(){
         columns:[
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false },
             {data:'nama_olt'},
-            {data:'prioritas'},
+            {data:'lat'},
+            {data:'lng'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -31,18 +32,6 @@ $(document).ready(function(){
     })
 
     
-    $('.prioritas').select2({
-        dropdownParent: $('#modal_olt'),
-        allowClear: true,
-        placeholder: 'Pilih'
-    });
-    
-    
-    $('.edit_prioritas').select2({
-        dropdownParent: $('#modal_edit_olt'),
-        allowClear: true,
-        placeholder: 'Pilih'
-    });
 
     var olt = $('#form-olt')[0];
     $('#save').on('click',function(e){
@@ -61,7 +50,8 @@ $(document).ready(function(){
                 {
                     console.log(response);
                     $('#error_nama_olt').html(response.errors.nama_olt);
-                    $('#error_prioritas').html(response.errors.prioritas);
+                    $('#error_lat').html(response.errors.lat);
+                    $('#error_lng').html(response.errors.lng);
                   
                 }else{
                    console.log(response); 
@@ -94,7 +84,8 @@ $(document).ready(function(){
                 }else{
                     $('#id_olt').val(response.olt.id);
                     $('#edit_nama_olt').val(response.olt.nama_olt);
-                    $('#edit_prioritas').val(response.olt.prioritas).change();
+                    $('#edit_lat').val(response.olt.lat);
+                    $('#edit_lng').val(response.olt.lng);
                 }
             }
         })
@@ -105,7 +96,8 @@ $(document).ready(function(){
         var id = $('#id_olt').val();
         var data = {
             'edit_nama_olt': $('#edit_nama_olt').val(),
-            'edit_prioritas': $('#edit_prioritas').val()
+            'edit_lat': $('#edit_lat').val(),
+            'edit_lng': $('#edit_lng').val()
         }
 
         $.ajaxSetup({

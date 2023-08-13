@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('olts', function (Blueprint $table) {
             $table->id();
             $table->string('nama_olt');
-            $table->enum('prioritas',['P1','P2','P3','P4','P5']);
+            $table->string('lat');
+            $table->string('lng');
             $table->timestamps();
         });
     }

@@ -20,12 +20,14 @@ class OltController extends Controller
     {
         $rule = [
             'nama_olt' => 'required',
-            'prioritas' => 'required',
+            'lat' => 'required',
+            'lat' => 'required'
         ];
 
         $message = [
             'nama_olt.required' => 'Tidak Boleh Kosong',
-            'prioritas.required' => 'Tidak Boleh Kosong'
+            'lat.required' => 'Tidak Boleh Kosong',
+            'lng.required' => 'Tidak Boleh Kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -39,7 +41,8 @@ class OltController extends Controller
 
             $ajax = new Olt();
             $ajax->nama_olt = $request->input('nama_olt');
-            $ajax->prioritas = $request->input('prioritas');
+            $ajax->lat = $request->input('lat');
+            $ajax->lng = $request->input('lng');
             $ajax->save();
             return response()->json([
                 'status' => 200,
@@ -68,7 +71,8 @@ class OltController extends Controller
     {
             $activity = Olt::find($id);
             $activity->nama_olt = $request->input('edit_nama_olt');
-            $activity->prioritas = $request->input('edit_prioritas');
+            $activity->lat = $request->input('edit_lat');
+            $activity->lng = $request->input('edit_lng');
 
             $activity->update();
             return response()->json([
@@ -85,8 +89,7 @@ class OltController extends Controller
             ->addIndexColumn()
             
             ->addColumn('action', function ($olt) {
-                return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $olt->id . '"><i class="ph-pencil-simple"></i></a>
-                <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $olt->id . '"><i class="ph-trash"></i></a>';
+                return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $olt->id . '"><i class="ph-pencil-simple"></i></a>';
             })
             
             ->rawColumns(['action','images'])

@@ -12,23 +12,24 @@
                 <input type="hidden" id="id_olt">
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label class="form-label">Nama OLT</label>
                             <input type="text" class="form-control" required id="edit_nama_olt" name="edit_nama_olt">
                             <span id="error_name" class="text-danger"></span>
                         </div>
 
-                        <div class="col-sm-6">
-                            <label class="form-label">Prioritas</label>
-                            <select class="form-control edit_prioritas" required name="edit_prioritas"
-                                id="edit_prioritas" data-minimum-results-for-search="Infinity" data-fouc>
-                                <option value="P1">P1</option>
-                                <option value="P2">P2</option>
-                                <option value="P3">P3</option>
-                                <option value="P4">P4</option>
-                                <option value="P5">P5</option>
-                            </select>
+                        <div class="col-sm-4">
+                            <label class="form-label">Latitude</label>
+                            <input type="text" class="form-control" required id="edit_lat" name="edit_lat">
+                            <span id="error_lat" class="text-danger"></span>
                         </div>
+
+                        <div class="col-sm-4">
+                            <label class="form-label">Longitude</label>
+                            <input type="text" class="form-control" required id="edit_lng" name="edit_lng">
+                            <span id="error_lng" class="text-danger"></span>
+                        </div>
+
                     </div>
                 </div>
             </div>
