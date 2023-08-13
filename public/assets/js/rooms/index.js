@@ -314,12 +314,14 @@ $(document).ready(function () {
 
         lat = position.coords.latitude;
         lng = position.coords.longitude;
+
         $.ajax({
             type: "GET",
             url: '/dailys/reload/' + lat + '/' + lng,
             success: function (response) {
-                console.log(response);
-                L.circle([lat,lng], response.setting_radius).addTo(mymap);
+
+                L.circle([lat, lng], response.setting_radius).addTo(mymap);
+
                 $.each(response.olts, function (index, value) {
                     L.marker([value.lat, value.lng]).addTo(mymap).bindPopup(value.nama_olt);
                 });
