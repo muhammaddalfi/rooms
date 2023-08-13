@@ -322,7 +322,7 @@ $(document).ready(function () {
             type: "GET",
             url: '/dailys/reload/' + lat + '/' + lng,
             success: function (response) {
-                $.each(response, function (index, value) {
+                $.each(response.olts, function (index, value) {
                     L.marker([value.lat, value.lng]).addTo(mymap).bindPopup(value.nama_olt);
                 });
             }
