@@ -310,10 +310,6 @@ $(document).ready(function () {
         L.marker([position.coords.latitude, position.coords.longitude])
             .addTo(mymap)
             .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
-        L.circle([position.coords.latitude, position.coords.longitude], 500).addTo(mymap);
-
-
-
 
 
         lat = position.coords.latitude;
@@ -322,6 +318,8 @@ $(document).ready(function () {
             type: "GET",
             url: '/dailys/reload/' + lat + '/' + lng,
             success: function (response) {
+                console.log(response);
+                L.circle([lat,lng], response.setting_radius).addTo(mymap);
                 $.each(response, function (index, value) {
                     L.marker([value.lat, value.lng]).addTo(mymap).bindPopup(value.nama_olt);
                 });

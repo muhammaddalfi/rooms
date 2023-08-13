@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Daily;
 use App\Models\Kegiatan;
 use App\Models\Olt;
+use App\Models\Radiusmap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class KegiatanController extends Controller
 
     public function reload_olt($lat, $lng)
     {
+        $setting = Radiusmap::where('kode_setting','RADIUS_MAP')->first();
         $olts = Olt::select(
             "olts.id",
             "olts.nama_olt",
@@ -40,10 +42,13 @@ class KegiatanController extends Controller
                         + sin(radians(" . $lat . ")) 
                         * sin(radians(olts.lat))) AS distance")
         )->orderBy("distance", "ASC")
-            ->having('distance', '<', 0.5) //radius
+            ->having('distance', '<', $setting->value_setting) //radius
             ->get();
 
-        return $olts;
+        $data['setting_radius'] = $setting->value_setting*1000;
+        $data['olts'] = $olts;
+
+        return $data;
     }
 
     public function daily()
