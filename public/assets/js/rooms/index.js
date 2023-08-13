@@ -49,7 +49,7 @@ $(document).ready(function () {
                 } else {
                     $('#modal_daily').modal('show');
                     $('.olt').html('');
-                    $.each(response, function (i, item) {
+                    $.each(response.olts, function (i, item) {
                         $('.olt').append($('<option>', {
                             value: item.id, text: item.nama_olt
                         }));
