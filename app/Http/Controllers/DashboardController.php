@@ -297,7 +297,6 @@ class DashboardController extends Controller
         }
 
         if (auth()->user()->can('user read')) {
-
             $db = "select c.nama_olt, date(a.created_at) AS tanggal,
                     COUNT(a.id) AS jumlah_kunjungan
                     FROM dailies a
