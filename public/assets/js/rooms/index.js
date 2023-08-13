@@ -312,19 +312,21 @@ $(document).ready(function () {
             .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
         L.circle([position.coords.latitude, position.coords.longitude], 500).addTo(mymap);
 
+
+
+
+
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
         $.ajax({
             type: "GET",
-            url: "/dailys/olts",
+            url: '/dailys/reload/' + lat + '/' + lng,
             success: function (response) {
-                $.each(response.olt, function (index, value) {
+                $.each(response, function (index, value) {
                     L.marker([value.lat, value.lng]).addTo(mymap).bindPopup(value.nama_olt);
                 });
             }
         });
-
-        lat = position.coords.latitude;
-        lng = position.coords.longitude;
-
 
         $("[name=latNow]").val(position.coords.latitude);
         $("[name=lngNow]").val(position.coords.longitude);

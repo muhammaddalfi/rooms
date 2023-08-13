@@ -32,6 +32,8 @@ class KegiatanController extends Controller
         $olts = Olt::select(
             "olts.id",
             "olts.nama_olt",
+            "olts.lat",
+            "olts.lng",
             DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
                         * cos(radians(olts.lat)) 
                         * cos(radians(olts.lng) - radians(" . $lng . ")) 
