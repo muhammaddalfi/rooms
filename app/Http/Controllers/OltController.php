@@ -51,7 +51,7 @@ class OltController extends Controller
         }
     }
 
-     public function edit($id)
+    public function edit($id)
     {
         //
         $olt = Olt::find($id);
