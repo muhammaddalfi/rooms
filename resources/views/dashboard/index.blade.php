@@ -163,7 +163,6 @@
             <!-- /left fixed column -->
         </div>
     </div>
-
     <div class="row">
 
         <div class="col-lg-12">
@@ -217,6 +216,10 @@
         </div>
 
     </div>
+    @if ((auth()->user()->can('admin read')))
+
+
+
 
     <div class="row">
 
@@ -385,6 +388,7 @@
             </div>
         </div>
     </div>
+    @endif
 
 </div>
 @endsection
