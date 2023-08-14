@@ -203,6 +203,7 @@ $(document).ready(function () {
                     $('#edit_kegiatan').val(response.daily.jenis_kegiatan).change();
                     $('#edit_catatan').val(response.daily.catatan);
                     $('#view_images').attr("src", "storage/files/" + response.daily.gambar);
+                    
                 }
             }
         })
@@ -299,7 +300,13 @@ $(document).ready(function () {
     }
 
     function showPosition(position) {
-        console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
+        // console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
+        var url = window.location.href; 
+        var image = '/assets/images/map/pin.png';
+        var me = L.icon({
+        iconUrl: image,
+        iconSize: [38, 38], // size of the icon
+    });
 
         var mymap = L.map("map").setView([position.coords.latitude, position.coords.longitude], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -307,7 +314,7 @@ $(document).ready(function () {
             attribution: '© OpenStreetMap'
         }).addTo(mymap);
 
-        L.marker([position.coords.latitude, position.coords.longitude])
+        L.marker([position.coords.latitude, position.coords.longitude],{icon: me})
             .addTo(mymap)
             .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
 
