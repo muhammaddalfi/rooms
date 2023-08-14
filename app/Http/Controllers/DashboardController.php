@@ -96,7 +96,21 @@ class DashboardController extends Controller
             GROUP BY u.name
             ";
 
+            
             $kegiatan_count = DB::select($kegiatan_db, [$tahun, $bulan]);
+
+            $count_kegiatan = [];
+            foreach ($kegiatan_count as $value) {
+                $count_kegiatan[] = [
+                    "name" => $value->jenis_kegiatan,
+                    "value" => $value->jumlah
+                ];
+                # code...
+            }
+
+            // dd($count_kegiatan);
+            $data['jumlah_kegiatan'] = $count_kegiatan;
+            
             // $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
             $marketing_count = DB::select($marketing_db, [$tahun, $bulan]);
 

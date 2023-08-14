@@ -197,10 +197,11 @@ $(document).ready(function () {
                 if (response.status == 404) {
                     console.log("Data not found");
                 } else {
+                    console.log(response);
                     $('#id_daily').val(response.daily.id);
                     $('#edit_kategori').val(response.daily.kategori_dinas).change();
-                    $('#edit_olt').val(response.daily.nama_olt).change();
-                    $('#edit_kegiatan').val(response.daily.jenis_kegiatan).change();
+                    $('#edit_olt').val(response.daily.olt.nama_olt).change();
+                    $('#edit_kegiatan').val(response.daily.jenis_kegiatan.jenis_kegiatan).change();
                     $('#edit_catatan').val(response.daily.catatan);
                     $('#view_images').attr("src", "storage/files/" + response.daily.gambar);
                     

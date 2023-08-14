@@ -164,7 +164,7 @@ class KegiatanController extends Controller
     public function edit($id)
     {
         //
-        $daily = Daily::find($id);
+        $daily = Daily::with(['user', 'jenis_kegiatan','olt'])->find($id);
         if ($daily) {
             return response()->json([
                 'status' => 200,

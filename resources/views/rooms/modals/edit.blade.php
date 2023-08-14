@@ -26,7 +26,7 @@
                                 <select class="form-control edit_olt" name="edit_olt" id="edit_olt">
                                     <option value=""></option>
                                     @foreach ($olt as $item)
-                                        <option value="{{ $item->nama_olt }}"> {{ $item->nama_olt }}
+                                        <option value="{{ $item->id }}"> {{ $item->nama_olt }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -42,7 +42,7 @@
                                     data-fouc>
                                     <option value=""></option>
                                     @foreach ($kegiatan as $item)
-                                        <option value="{{ $item->jenis_kegiatan }}"> {{ $item->jenis_kegiatan }}
+                                        <option value="{{ $item->id }}"> {{ $item->jenis_kegiatan }}
                                         </option>
                                     @endforeach
                                 </select>
