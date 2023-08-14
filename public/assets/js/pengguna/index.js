@@ -51,7 +51,7 @@ $(document).ready(function(){
     });
 
     $('[name="jenis_pengguna"]').change(function(){
-            if($(this).val() == 'mpp'){
+            if($(this).val() == 'mppc'){
                 $(".mpp_form").removeClass('d-none');
                 $(".mpi_form").addClass('d-none');
             }else{
@@ -75,6 +75,7 @@ $(document).ready(function(){
             contentType: false,
 
             success: function(response){
+                console.log(response);
                 if(response.status == 400)
                 {
                     console.log(response);

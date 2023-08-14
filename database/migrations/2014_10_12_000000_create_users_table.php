@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('handphone');
             $table->string('nama_perusahaan')->nullable();
             $table->string('nama_upline')->nullable();
-            $table->enum('jenis_pengguna',['mpp','mpi','upline'])->nullable();
+            $table->enum('jenis_pengguna',['mpp','mppc','upline','mpi'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

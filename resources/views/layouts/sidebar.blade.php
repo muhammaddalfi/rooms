@@ -1,4 +1,4 @@
-<div class="sidebar sidebar-main sidebar-expand-lg align-self-start">
+<div class="sidebar sidebar-main sidebar-expand-lg align-self-start sidebar-main-resized">
 
     <!-- Sidebar content -->
     <div class="sidebar-content">
@@ -33,8 +33,15 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('home.dashboard') }}" class="nav-link">
-                        <i class="ph-house"></i>
-                        <span>Dashboard</span>
+                        <i class="ph-graph"></i>
+                        <span>Dashboard Cluster</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
+                        <i class="ph-smiley-sad"></i>
+                        <span>Dashboard Keluhan</span>
                     </a>
                 </li>
 
@@ -46,7 +53,14 @@
                 <li class="nav-item">
                     <a href="{{ route('daily.dashboard') }}" class="nav-link">
                         <i class="ph-camera"></i>
-                        <span>Dokumentasi</span>
+                        <span>Kegiatan Cluster</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('daily.dashboard') }}" class="nav-link">
+                        <i class="ph-chat-circle-text"></i>
+                        <span>Keluhan Cluster</span>
                     </a>
                 </li>
 

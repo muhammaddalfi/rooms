@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pivotmarketer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,7 @@ class PenggunaController extends Controller
      public function fetch()
     {
         $user = User::where('jenis_pengguna','mpi')
-        ->orwhere('jenis_pengguna','mpp')
+        ->orwhere('jenis_pengguna','mppc')
         ->get();
         return DataTables::of($user)
             ->addIndexColumn()
@@ -33,7 +34,7 @@ class PenggunaController extends Controller
 
     public function store(Request $request)
     {
-        //
+        
         $rule = [
             'nama' => 'required',
             'email' => 'required',
@@ -63,12 +64,18 @@ class PenggunaController extends Controller
             $ajax->name = $request->input('nama');
             $ajax->email = $request->input('email');
             $ajax->handphone = $request->input('hp');
-            $ajax->nama_perusahaan = $request->input('nama_perusahaan');
-            $ajax->nama_upline = $request->input('nama_upline');
+            // $ajax->nama_perusahaan = $request->input('parent_id');
+            // $ajax->nama_upline = $request->input('nama_upline');
             $ajax->jenis_pengguna = $request->input('jenis_pengguna');
             $ajax->password = bcrypt($password);
 
             $ajax->save();
+
+            $pivot = new Pivotmarketer();
+            $pivot->parent_id =  $request->input('parent_id_mpp') ? $request->input('parent_id_mpp'):$request->input('parent_id_upline');
+            $pivot->child_id = $ajax->id;
+            $pivot->save();
+
             $ajax->assignRole($request->input('role')); // hardcode assign role
             return response()->json([
                 'status' => 200,

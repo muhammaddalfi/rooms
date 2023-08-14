@@ -82,26 +82,29 @@ class DashboardController extends Controller
             ";
 
 
-            $perusahaan_db = "SELECT u.nama_perusahaan, COUNT(d.id) as jumlah  FROM users u
-            LEFT JOIN dailies d ON d.user_id = u.id
-            WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mpp'
-            GROUP BY u.nama_perusahaan
-            ";
+            // $perusahaan_db = "SELECT u.nama_perusahaan, COUNT(d.id) as jumlah  FROM users u
+            // LEFT JOIN dailies d ON d.user_id = u.id
+            // LEFT JOIN pivotmarketers pm ON pm.child_id = d.user_id
+            // LEFT JOIN users u ON u.id = d.user_id AND u.id = pm.child_id
+            // WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mppc'
+            // GROUP BY u.nama_perusahaan
+            // ";
 
-            $marketing_db = "SELECT u.nama_upline, COUNT(d.id) as jumlah  FROM users u
+            $marketing_db = "SELECT u.name, COUNT(d.id) as jumlah  FROM users u
             LEFT JOIN dailies d ON d.user_id = u.id
             WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mpi'
-            GROUP BY u.nama_upline
+            GROUP BY u.name
             ";
 
             $kegiatan_count = DB::select($kegiatan_db, [$tahun, $bulan]);
-            $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
+            // $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
             $marketing_count = DB::select($marketing_db, [$tahun, $bulan]);
 
+            // dd($kegiatan_count);
 
-            //Table Counting
+            // //Table Counting
             $data['kegiatan_count'] = $kegiatan_count;
-            $data['perusahaan_count'] = $perusahaan_count;
+            // $data['perusahaan_count'] = $perusahaan_count;
             $data['marketing_count'] = $marketing_count;
         }
 
@@ -286,13 +289,13 @@ class DashboardController extends Controller
             ";
 
             $kegiatan_count = DB::select($kegiatan_db, [$tahun, $bulan]);
-            $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
+            // $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
             $marketing_count = DB::select($marketing_db, [$tahun, $bulan]);
 
 
             //Table Counting
             $data['kegiatan_count'] = $kegiatan_count;
-            $data['perusahaan_count'] = $perusahaan_count;
+            // $data['perusahaan_count'] = $perusahaan_count;
             $data['marketing_count'] = $marketing_count;
         }
 

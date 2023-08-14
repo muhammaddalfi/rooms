@@ -12,25 +12,11 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-4">
-                                <label class="form-label">Nama Setting</label>
-                                <input type="text" class="form-control" required id="nama_setting"
-                                    name="nama_setting">
-                                <span id="error_nama_setting" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="form-label">Value</label>
+                                <label class="form-label">Radius</label>
                                 <input type="text" class="form-control" required id="value_setting"
                                     name="value_setting">
                                 <span id="error_value_setting" class="text-danger"></span>
                             </div>
-                            <div class="col-sm-4">
-                                <label class="form-label">Kode Setting</label>
-                                <input type="text" class="form-control" required id="kode_setting"
-                                    name="kode_setting">
-                                <span id="error_kode_setting" class="text-danger"></span>
-                            </div>
-
                         </div>
                     </div>
 

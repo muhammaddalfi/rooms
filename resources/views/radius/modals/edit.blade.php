@@ -1,5 +1,5 @@
 <div id="modal_edit_radius" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Ubah Pengaturan</h5>
@@ -12,27 +12,12 @@
                 <input type="hidden" id="id_radius">
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-sm-4">
-                            <label class="form-label">Nama Setting</label>
-                            <input type="text" class="form-control" required id="edit_nama_setting"
-                                name="edit_nama_setting">
-                            <span id="error_nama_setting" class="text-danger"></span>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label class="form-label">Value Setting</label>
+                        <div class="col-sm-12">
+                            <label class="form-label">Nilai radius</label>
                             <input type="text" class="form-control" required id="edit_value_setting"
                                 name="edit_value_setting">
                             <span id="error_value_setting" class="text-danger"></span>
                         </div>
-
-                        <div class="col-sm-4">
-                            <label class="form-label">Kode Setting</label>
-                            <input type="text" class="form-control" required id="edit_kode_setting"
-                                name="edit_kode_setting">
-                            <span id="error_kode_setting" class="text-danger"></span>
-                        </div>
-
                     </div>
                 </div>
             </div>

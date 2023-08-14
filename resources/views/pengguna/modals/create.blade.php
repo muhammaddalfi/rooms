@@ -42,7 +42,7 @@
                                     <p class="fw-semibold">Jenis Pengguna</p>
                                     <div class="form-check form-check-inline">
                                         <input type="radio" class="form-check-input" name="jenis_pengguna"
-                                            value="mpp" id="cr_l_i_s">
+                                            value="mppc" id="cr_l_i_s">
                                         <label class="form-check-label" for="cr_l_i_s">MPP</label>
                                     </div>
 
@@ -62,31 +62,31 @@
                         <div class="row">
                             <div class="col-sm-6 mpp_form">
                                 <label class="form-label">Nama Perusahaan</label>
-                                <select class="form-control mpp" id="nama_perusahaan" name="nama_perusahaan">
+                                <select class="form-control " id="parent_id_mpp" name="parent_id_mpp">
                                     <option value="">Pilih</option>
                                     @foreach ($mpp as $mpp)
-                                        <option value="{{ $mpp->nama_perusahaan }}"> {{ $mpp->nama_perusahaan }}
+                                        <option value="{{ $mpp->id }}"> {{ $mpp->nama_perusahaan }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <span id="error_nama_perusahaan" class="text-danger"></span>
+                                <span id="error_parent_id_mpp" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6 mpi_form d-none">
                                 <label class="form-label">Nama PIC / Upline</label>
-                                <select class="form-control mpi" id="nama_upline" name="nama_upline">
+                                <select class="form-control " id="parent_id_upline" name="parent_id_upline">
                                     <option value=""></option>
                                     @foreach ($upline as $upline)
-                                        <option value="{{ $upline->nama_upline }}"> {{ $upline->nama_upline }}
+                                        <option value="{{ $upline->id }}"> {{ $upline->nama_upline }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <span id="error_nama_upline" class="text-danger"></span>
+                                <span id="error_parent_id_upline" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">Role</label>
-                                <select class="form-control role" name="role" id="role"
+                                <select class="form-control" name="role" id="role"
                                     data-minimum-results-for-search="Infinity" data-fouc>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
