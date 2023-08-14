@@ -108,7 +108,7 @@ $(document).ready(function () {
         var id_kegiatan = $(this).data('id');
         $('#modal_view').modal('show');
 
-        console.log(id_kegiatan);
+        // console.log(id_kegiatan);
         $.ajax({
             type: "GET",
             url: "/dailys/show/" + id_kegiatan,
@@ -117,25 +117,25 @@ $(document).ready(function () {
                     console.log('Data Not Found');
                 } else {
 
-                    console.log(response.daily);
-                        let tanggal = moment(response.daily.created_at).format('DD-MM-YYYY');
+                    console.log(response);
+                        let tanggal = moment(response.show.created_at).format('DD-MM-YYYY');
 
-                        $('#id_kegiatan').val(response.daily.id);
+                        $('#id_kegiatan').val(response.show.id);
                         $('#view_tanggal').html(tanggal);
-                        $('#view_nama').html(response.daily.user.name);
-                        $('#view_nama_olt').html(response.daily.nama_olt);
-                        $('#view_jenis_kegiatan').html(response.daily.jenis_kegiatan.jenis_kegiatan);
-                        $('#view_catatan').html(response.daily.catatan);
+                        $('#view_nama').html(response.show.user.name);
+                        $('#view_nama_olt').html(response.show.olt.nama_olt);
+                        $('#view_jenis_kegiatan').html(response.show.jenis_kegiatan.jenis_kegiatan);
+                        $('#view_catatan').html(response.show.catatan);
 
 
-                        if(response.daily.kategori_dinas == 'Ya'){
+                        if(response.show.kategori_dinas == 'Ya'){
                            $('#view_kategori_dinas').html('SPPD');
-                        }else if(response.daily.kategori_dinas == 'Tidak'){
+                        }else if(response.show.kategori_dinas == 'Tidak'){
                            $('#view_kategori_dinas').html('Tidak SPPD');
                         }
 
-                       $('#gambar_bukti').attr("src", "storage/files/" + response.daily.gambar);
-                       $('#gambar_bukti_link').attr("href", "storage/files/" + response.daily.gambar);
+                       $('#gambar_bukti').attr("src", "storage/files/" + response.show.gambar);
+                       $('#gambar_bukti_link').attr("href", "storage/files/" + response.show.gambar);
 
                 }
             }
