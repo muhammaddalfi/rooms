@@ -32,6 +32,79 @@ class UplineController extends Controller
             ->rawColumns(['action','anggota'])
             ->make(true);
     }
+        public function edit($id)
+    {
+        $leader = User::find($id);
+        if ($leader) {
+            return response()->json([
+                'status' => 200,
+                'leader' => $leader,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'leader tidak ditemukan',
+            ]);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
+        $rule = [
+            'edit_nama_leader' => 'required',
+            'edit_email_leader' => 'required',
+            'edit_handphone_leader' => 'required',
+        ];
+
+        $message = [
+            'edit_nama_leader.required' => 'Tidak Boleh Kosong',
+            'edit_email_leader.required' => 'Tidak Boleh Kosong',
+            'edit_handphone_leader.required' => 'Tidak Boleh Kosong',
+        ];
+
+        $validator = Validator::make($request->all(), $rule, $message);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+            if ($request->input('edit_password_leader') == '') {
+                $user = User::find($id);
+                $user->name = $request->input('edit_nama_leader');
+                $user->email = $request->input('edit_email_leader');
+                $user->handphone = $request->input('edit_handphone_leader');
+                $user->update();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data berhasil diubah',
+                ]);
+            } else {
+                $user = User::find($id);
+                $user->name = $request->input('edit_nama_leader');
+                $user->email = $request->input('edit_email_leader');
+                $user->handphone = $request->input('edit_handphone_leader');
+                $user->password = bcrypt($request->input('edit_password_leader'));
+                $user->update();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data berhasil diubah',
+                ]);
+            }
+        }
+    }
+
+    public function destroy(String $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data Berhasil dihapus',
+        ]);
+    }
 
     public function store(Request $request)
     {
@@ -115,8 +188,9 @@ class UplineController extends Controller
 
 
             $ajax = new User();
-            $password = implode('@', explode('@', $request->input('email'), -1));
-            $ajax->id_leader = $request->input('id_leader');
+            $password = implode('@', explode('@', $request->input('email_anggota_leader'), -1));
+            $ajax->id_leader = $request->input('id_pic');
+            $ajax->leader = $request->input('nama_pic');
             $ajax->name = $request->input('nama_anggota_leader');
             $ajax->email = $request->input('email_anggota_leader');
             $ajax->handphone = $request->input('hp_anggota_leader');
@@ -201,78 +275,23 @@ class UplineController extends Controller
         }
     }
 
-
-    public function edit($id)
+    public function show_leader($id)
     {
-        $leader = User::find($id);
-        if ($leader) {
+        //
+        $show_leader = User::find($id);
+        if ($show_leader) {
             return response()->json([
                 'status' => 200,
-                'leader' => $leader,
+                'show_leader' => $show_leader,
             ]);
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'leader tidak ditemukan',
+                'message' => 'Leader tidak ditemukan',
             ]);
         }
     }
 
-    public function update(Request $request, $id)
-    {
-        //
-        $rule = [
-            'edit_nama_leader' => 'required',
-            'edit_email_leader' => 'required',
-            'edit_handphone_leader' => 'required',
-        ];
 
-        $message = [
-            'edit_nama_leader.required' => 'Tidak Boleh Kosong',
-            'edit_email_leader.required' => 'Tidak Boleh Kosong',
-            'edit_handphone_leader.required' => 'Tidak Boleh Kosong',
-        ];
 
-        $validator = Validator::make($request->all(), $rule, $message);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->messages(),
-            ]);
-        } else {
-            if ($request->input('edit_password_leader') == '') {
-                $user = User::find($id);
-                $user->name = $request->input('edit_nama_leader');
-                $user->email = $request->input('edit_email_leader');
-                $user->handphone = $request->input('edit_handphone_leader');
-                $user->update();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Data berhasil diubah',
-                ]);
-            } else {
-                $user = User::find($id);
-                $user->name = $request->input('edit_nama_leader');
-                $user->email = $request->input('edit_email_leader');
-                $user->handphone = $request->input('edit_handphone_leader');
-                $user->password = bcrypt($request->input('edit_password_leader'));
-                $user->update();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Data berhasil diubah',
-                ]);
-            }
-        }
-    }
-
-    public function destroy(String $id)
-    {
-        $user = User::find($id);
-        $user->delete();
-        return response()->json([
-            'status' => 200,
-            'message' => 'Data Berhasil dihapus',
-        ]);
-    }
 }

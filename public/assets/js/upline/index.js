@@ -37,7 +37,7 @@ $(document).ready(function(){
             {data:'name'},
             {data:'email'},
             {data:'handphone'},
-            {data:'id_leader'},
+            {data:'leader'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -220,13 +220,14 @@ $(document).ready(function(){
         $('#modal_anggota_leader').modal('show');   
         $.ajax({
             type:"GET",
-            url:"/upline/edit/" + id,
+            url:"/leader/" + id,
             success: function(response){
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
-                    console.log(response);
-                    $('#id_leader').val(response.leader.id);
+                    console.log(response.show_leader.name);
+                    $('#nama_pic').val(response.show_leader.name);
+                    $('#id_pic').val(response.show_leader.id);
                 }
             }
         })

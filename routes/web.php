@@ -119,6 +119,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/leader/anggota', [UplineController::class, 'store_anggota']);
     Route::get('/leader/anggota/list', [UplineController::class, 'show_anggota']);
     Route::get('/leader/anggota/edit/{id}', [UplineController::class, 'edit_anggota']);
+    Route::get('/leader/{id}', [UplineController::class, 'show_leader']);
     Route::put('/leader/anggota/update/{id}', [UplineController::class, 'update_anggota']);
 
     Route::get('dashboard/keluhan', [KeluhanController::class,'dashboard'])->name('keluhan.dashboard');

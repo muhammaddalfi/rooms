@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('handphone');
             $table->integer('id_leader')->nullable();
+            $table->string('leader')->nullable();
             $table->enum('jenis_pengguna',['leader_perusahaan','anggota_perusahaan','leader_internal','anggota_internal'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

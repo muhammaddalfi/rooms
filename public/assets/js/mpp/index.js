@@ -37,7 +37,7 @@ $(document).ready(function(){
             {data:'name'},
             {data:'email'},
             {data:'handphone'},
-            {data:'id_leader'},
+            {data:'leader'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -226,6 +226,7 @@ $(document).ready(function(){
                 }else{
                     console.log(response);
                     $('#id_perusahaan').val(response.mpp.id);
+                    $('#nama_perusahaan').val(response.mpp.name);
                 }
             }
         })

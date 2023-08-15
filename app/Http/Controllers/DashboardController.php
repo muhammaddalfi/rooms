@@ -12,15 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-
-    // select b.`name`, date(a.created_at) AS tanggal,
-    // COUNT(a.id) AS jumlah_kunjungan
-    // FROM dailies a
-    // LEFT JOIN users b
-    // ON b.id = a.user_id
-    // WHERE YEAR(a.created_at) = '2023' AND MONTH(a.created_at) = '07'
-    // GROUP BY a.user_id, tanggal;
-
     public function home()
     {
 
@@ -149,27 +140,29 @@ class DashboardController extends Controller
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_perusahaan = "select b.nama_perusahaan, c.jenis_kegiatan,c.id,
+            $pic_perusahaan = "select b.leader, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
                                 WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'mpp' AND  a.user_id = " . auth()->user()->id . "
-                                GROUP BY b.nama_perusahaan,c.jenis_kegiatan,c.id
+                                GROUP BY b.leader,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_upline = "select b.nama_upline, c.jenis_kegiatan,c.id,
+            $pic_upline = "select b.leader, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
                                 WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'upline'  AND  a.user_id = " . auth()->user()->id . "
-                                GROUP BY b.nama_upline,c.jenis_kegiatan,c.id
+                                GROUP BY b.leader,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
+
+                                
         }
 
         $tes = DB::select($db, [$tahun, $bulan]);
@@ -200,9 +193,6 @@ class DashboardController extends Controller
             $upline[$value->nama_upline][$value->id]  = $value->jumlah_kunjungan;
             # code...
         }
-
-
-
 
         $olt = Olt::all();
         $data['total_cluster'] = $olt->count();
@@ -420,3 +410,14 @@ class DashboardController extends Controller
         return view('dashboard.index', $data);
     }
 }
+
+
+
+
+    // select b.`name`, date(a.created_at) AS tanggal,
+    // COUNT(a.id) AS jumlah_kunjungan
+    // FROM dailies a
+    // LEFT JOIN users b
+    // ON b.id = a.user_id
+    // WHERE YEAR(a.created_at) = '2023' AND MONTH(a.created_at) = '07'
+    // GROUP BY a.user_id, tanggal;

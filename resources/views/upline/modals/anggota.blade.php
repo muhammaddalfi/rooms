@@ -11,7 +11,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="row">
-                            <input id="id_leader" name="id_leader" class="form-control">
+                            <input type="hidden" id="id_pic" name="id_pic" class="form-control">
+                            <input type="hidden" id="nama_pic" name="nama_pic" class="form-control">
                             <div class="col-sm-4">
                                 <label class="form-label">Nama Marketer</label>
                                 <input type="text" id="nama_anggota_leader" name="nama_anggota_leader"

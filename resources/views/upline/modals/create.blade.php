@@ -13,8 +13,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label class="form-label">Nama Lengkap</label>
-                                <input type="text" id="nama_leader" name="nama_leader" placeholder="Muhammad Alfi"
-                                    class="form-control">
+                                <input type="text" id="nama_leader" name="nama_leader" class="form-control">
                                 <span id="error_nama_leader" class="text-danger"></span>
                             </div>
 
