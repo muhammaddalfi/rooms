@@ -28,22 +28,17 @@ $(document).ready(function(){
 
         // Cluster
         $('.datatable-cluster').DataTable({
-            columnDefs: [
-                { 
-                    orderable: false,
-                    targets: 0
-                }
-            ],
+           
             scrollX: true,
-            scrollY: 450,
+            scrollY: true,
             scrollCollapse: true,
-            fixedColumns: true
+            fixedColumns: true,
         });
 
         // Kegiatan
         $('.datatable-perusahaan').DataTable({
             scrollX: true,
-            scrollY: 450,
+            scrollY: true,
             scrollCollapse: true,
             fixedColumns: true,
             searching: false,
@@ -52,7 +47,7 @@ $(document).ready(function(){
 
         $('.datatable-kegiatan').DataTable({
             scrollX: true,
-            scrollY: 450,
+            scrollY: true,
             scrollCollapse: true,
             fixedColumns: true,
             searching: false,
