@@ -48,16 +48,14 @@ class DashboardController extends Controller
             ORDER BY k.jenis_kegiatan";
 
            $jumlah_internal_query = "SELECT u.name AS leader_internal,
-	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id
-                                        AND YEAR(dailies.created_at) = '.$tahun.' AND MONTH(dailies.created_at) = '.$bulan.' )) AS jumlah_internal
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_internal
                                 FROM users u
                                 WHERE u.jenis_pengguna = 'leader_internal'";
 
             $data['internal_count'] = DB::select($jumlah_internal_query);
 
             $jumlah_perusahaan_query = "SELECT u.name AS leader_perusahaan,
-	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id
-                                        AND YEAR(dailies.created_at) = '.$tahun.' AND MONTH(dailies.created_at) = '.$bulan.')) AS jumlah_perusahaan
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_perusahaan
                                 FROM users u
                                 WHERE u.jenis_pengguna = 'leader_perusahaan'";
 
