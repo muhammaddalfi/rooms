@@ -19,62 +19,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- Basic pie -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="chart-container">
-                                <div class="chart has-fixed-height" id="pie_kegiatan"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /basic pie -->
-                </div>
-                <div class="col-lg-3">
-                    <div class="card">
-                        <table class="table datatable-perusahaan">
-                            <thead>
-                                <th>Perusahaan</th>
-                                <th>Jumlah</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($perusahaan_count as $item)
-                                    <tr>
-                                        <td>
-                                            {{ $item->leader_perusahaan }}
-                                        </td>
-                                        <td>
-                                            {{ $item->jumlah_perusahaan }}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card">
-                        <table class="table datatable-perusahaan">
-                            <thead>
-                                <th>PIC Internal</th>
-                                <th>Jumlah</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($internal_count as $item)
-                                    <tr>
-                                        <td>
-                                            {{ $item->leader_internal }}
-                                        </td>
-                                        <td>
-                                            {{ $item->jumlah_internal }}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-=======
         <div class="col-sm-6 col-xl-3">
             <div class="card card-body">
                 <div class="d-flex align-items-center">
@@ -83,7 +27,6 @@
                     <div class="flex-fill text-end">
                         <h4 class="mb-0">{{ $total_kegiatan }}</h4>
                         <span class="text-muted">Total Kegiatan</span>
->>>>>>> 30ebc14280e067f24c2f16d6c852b0dfc9aa767e
                     </div>
                 </div>
             </div>

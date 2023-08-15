@@ -71,19 +71,19 @@ class DashboardController extends Controller
             GROUP BY k.jenis_kegiatan
             ORDER BY k.jenis_kegiatan
             ";
-        
+
             $jumlah_internal_query = "SELECT u.name AS leader_internal,
 	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_internal
                                 FROM users u
                                 WHERE u.jenis_pengguna = 'leader_internal'";
-            
+
             $data['internal_count'] = DB::select($jumlah_internal_query);
 
             $jumlah_perusahaan_query = "SELECT u.name AS leader_perusahaan,
 	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_perusahaan
                                 FROM users u
                                 WHERE u.jenis_pengguna = 'leader_perusahaan'";
-            
+
             $data['perusahaan_count'] = DB::select($jumlah_perusahaan_query);
 
             // dd($internal_count);
@@ -94,7 +94,7 @@ class DashboardController extends Controller
             GROUP BY u.name
             ";
 
-            
+
             $kegiatan_count = DB::select($kegiatan_db, [$tahun, $bulan]);
 
             $count_kegiatan = [];
@@ -108,7 +108,7 @@ class DashboardController extends Controller
 
             // dd($count_kegiatan);
             $data['jumlah_kegiatan'] = $count_kegiatan;
-            
+
             // $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
             $marketing_count = DB::select($marketing_db, [$tahun, $bulan]);
 
@@ -118,8 +118,6 @@ class DashboardController extends Controller
             $data['kegiatan_count'] = $kegiatan_count;
             // $data['perusahaan_count'] = $perusahaan_count;
             $data['marketing_count'] = $marketing_count;
-
-            
         }
 
         if (auth()->user()->can('user read')) {
@@ -170,8 +168,6 @@ class DashboardController extends Controller
                                 GROUP BY b.leader,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
-
-                                
         }
 
         $tes = DB::select($db, [$tahun, $bulan]);
@@ -265,19 +261,19 @@ class DashboardController extends Controller
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
-                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'mpp'
-                                GROUP BY b.nama_perusahaan,c.jenis_kegiatan,c.id
+                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'leader_perusahaan'
+                                GROUP BY b.name,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_upline = "select b.nama_upline, c.jenis_kegiatan,c.id,
+            $pic_upline = "select b.name, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
-                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'upline'
-                                GROUP BY b.nama_upline,c.jenis_kegiatan,c.id
+                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'leader_internal'
+                                GROUP BY b.name,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
 
@@ -288,25 +284,49 @@ class DashboardController extends Controller
             ORDER BY k.jenis_kegiatan
             ";
 
+            $jumlah_internal_query = "SELECT u.name AS leader_internal,
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_internal
+                                FROM users u
+                                WHERE u.jenis_pengguna = 'leader_internal'";
 
-            $perusahaan_db = "SELECT u.nama_perusahaan, COUNT(d.id) as jumlah  FROM users u
-            LEFT JOIN dailies d ON d.user_id = u.id
-            WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mpp'
-            GROUP BY u.nama_perusahaan
-            ";
+            $data['internal_count'] = DB::select($jumlah_internal_query);
 
-            $marketing_db = "SELECT u.nama_upline, COUNT(d.id) as jumlah  FROM users u
+            $jumlah_perusahaan_query = "SELECT u.name AS leader_perusahaan,
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_perusahaan
+                                FROM users u
+                                WHERE u.jenis_pengguna = 'leader_perusahaan'";
+
+            $data['perusahaan_count'] = DB::select($jumlah_perusahaan_query);
+
+            // dd($internal_count);
+
+            $marketing_db = "SELECT u.name, COUNT(d.id) as jumlah  FROM users u
             LEFT JOIN dailies d ON d.user_id = u.id
             WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mpi'
-            GROUP BY u.nama_upline
+            GROUP BY u.name
             ";
 
+
             $kegiatan_count = DB::select($kegiatan_db, [$tahun, $bulan]);
+
+            $count_kegiatan = [];
+            foreach ($kegiatan_count as $value) {
+                $count_kegiatan[] = [
+                    "name" => $value->jenis_kegiatan,
+                    "value" => $value->jumlah
+                ];
+                # code...
+            }
+
+            // dd($count_kegiatan);
+            $data['jumlah_kegiatan'] = $count_kegiatan;
+
             // $perusahaan_count = DB::select($perusahaan_db, [$tahun, $bulan]);
             $marketing_count = DB::select($marketing_db, [$tahun, $bulan]);
 
+            // dd($kegiatan_count);
 
-            //Table Counting
+            // //Table Counting
             $data['kegiatan_count'] = $kegiatan_count;
             // $data['perusahaan_count'] = $perusahaan_count;
             $data['marketing_count'] = $marketing_count;
@@ -339,25 +359,25 @@ class DashboardController extends Controller
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_perusahaan = "select b.nama_perusahaan, c.jenis_kegiatan,c.id,
+            $pic_perusahaan = "select b.leader, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
                                 WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'mpp' AND  a.user_id = " . auth()->user()->id . "
-                                GROUP BY b.nama_perusahaan,c.jenis_kegiatan,c.id
+                                GROUP BY b.leader,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_upline = "select b.nama_upline, c.jenis_kegiatan,c.id,
+            $pic_upline = "select b.leader, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
                                 WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'upline'  AND  a.user_id = " . auth()->user()->id . "
-                                GROUP BY b.nama_upline,c.jenis_kegiatan,c.id
+                                GROUP BY b.leader,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
         }
@@ -382,17 +402,14 @@ class DashboardController extends Controller
             # code...
         }
 
-        foreach ($perusahaan_query as $value) {
-            $perusahaan[$value->nama_perusahaan][$value->id]  = $value->jumlah_kunjungan;
-            # code...
-        }
-        foreach ($upline_query as $value) {
-            $upline[$value->nama_upline][$value->id]  = $value->jumlah_kunjungan;
-            # code...
-        }
-
-
-
+        // foreach ($perusahaan_query as $value) {
+        //     $perusahaan[$value->nama_perusahaan][$value->id]  = $value->jumlah_kunjungan;
+        //     # code...
+        // }
+        // foreach ($upline_query as $value) {
+        //     $upline[$value->nama_upline][$value->id]  = $value->jumlah_kunjungan;
+        //     # code...
+        // }
 
         $olt = Olt::all();
         $data['total_cluster'] = $olt->count();
@@ -403,7 +420,7 @@ class DashboardController extends Controller
         $mpi = User::where('jenis_pengguna', 'leader_internal');
         $data['total_mpi'] = $mpi->count();
 
-        $mpp = User::where('jenis_pengguna', 'leader_perusahaan');
+        $mpp = User::where('jenis_pengguna', 'ledaer_perusahaan');
         $data['total_mpp'] = $mpp->count();
 
         $data['bulan'] = $bulan;
@@ -412,8 +429,8 @@ class DashboardController extends Controller
         //Table Counting By Jenis Kegiatan
         $data['daily'] = $daily;
         $data['kegiatan'] = $jenis_kegiatan_count;
-        $data['perusahaan'] = $perusahaan;
-        $data['upline'] = $upline;
+        // $data['perusahaan'] = $perusahaan;
+        // $data['upline'] = $upline;
 
         $data['jenis_kegiatan'] = Kegiatan::orderBy('id', 'ASC')->get();
         return view('dashboard.index', $data);
