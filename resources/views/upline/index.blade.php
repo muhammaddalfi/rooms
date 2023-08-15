@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <a href='#' class="btn btn-light add_leader_internal" data-toggle="modal"
-                        data-target="#modal_leader_internal"><i class="ph-plus-circle me-2"></i>Data PIC Internal</a>
+                        data-target="#modal_leader"><i class="ph-plus-circle me-2"></i>Data PIC Internal</a>
                 </div>
                 <table class="table datatable-leader">
                     <thead>

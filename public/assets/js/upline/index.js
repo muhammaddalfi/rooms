@@ -51,7 +51,7 @@ $(document).ready(function(){
     });
 
     //add leader
-    $(document).on('click','.add_leader_leader', function(e){
+    $(document).on('click','.add_leader_internal', function(e){
         e.preventDefault();
         $('#modal_leader').modal('show');   
 
