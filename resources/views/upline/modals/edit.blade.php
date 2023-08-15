@@ -1,4 +1,4 @@
-<div id="modal_edit_upline" class="modal fade" tabindex="-1">
+<div id="modal_edit_leader" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,19 +8,19 @@
             @csrf
             <div class="modal-body">
                 @csrf
-                <input type="hidden" id="id_edit_upline">
+                <input type="hidden" id="id_leader">
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="form-label">Nama Lengkap</label>
-                            <input type="text" id="edit_nama" name="edit_nama" class="form-control">
-                            <span id="error_edit_nama" class="text-danger"></span>
+                            <label class="form-label">Nama PIC</label>
+                            <input type="text" id="edit_nama_leader" name="edit_nama_leader" class="form-control">
+                            <span id="error_edit_nama_leader" class="text-danger"></span>
                         </div>
 
                         <div class="col-sm-6">
                             <label class="form-label">Email</label>
-                            <input type="text" id="edit_email" name="edit_email" class="form-control">
-                            <span id="error_edit_email" class="text-danger"></span>
+                            <input type="text" id="edit_email_leader" name="edit_email_leader" class="form-control">
+                            <span id="error_edit_email_leader" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -29,13 +29,15 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <label class="form-label">Handphone</label>
-                            <input type="text" id="edit_handphone" name="edit_handphone" class="form-control">
-                            <span id="error_edit_handphone" class="text-danger"></span>
+                            <input type="text" id="edit_handphone_leader" name="edit_handphone_leader"
+                                class="form-control">
+                            <span id="error_edit_handphone_leader" class="text-danger"></span>
                         </div>
 
                         <div class="col-sm-6">
                             <label class="form-label">password</label>
-                            <input type="password" id="edit_password" name="edit_password" class="form-control">
+                            <input type="password" id="edit_password_leader" name="edit_password_leader"
+                                class="form-control">
                         </div>
                     </div>
                 </div>

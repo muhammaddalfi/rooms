@@ -257,8 +257,8 @@ $(document).ready(function () {
 
         // Warning alert
         Swal.fire({
-            title: 'Remove data',
-            text: "Are you sure ?",
+            title: 'Hapus Data',
+            text: "Apakah Kamu Yakin ?",
             showCancelButton: true,
             confirmButtonColor: 'btn btn-success',
             cancelButtonColor: '#d33',

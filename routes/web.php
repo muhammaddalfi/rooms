@@ -109,13 +109,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/radius/edit/{id}', [RadiusController::class, 'edit']);
     Route::put('/radius/update/{id}', [RadiusController::class, 'update']);
 
+    // Anggota Perusahaan
+    Route::post('/perusahaan/anggota', [MppController::class, 'store_anggota']);
+    Route::get('/perusahaan/anggota/list', [MppController::class, 'show_anggota']);
+    Route::get('/perusahaan/anggota/edit/{id}', [MppController::class, 'edit_anggota']);
+    Route::put('/perusahaan/anggota/update/{id}', [MppController::class, 'update_anggota']);
 
-    Route::get('/mpp', [MppController::class, 'index'])->name('mpp.dashboard');
-    Route::post('/mpp/store', [MppController::class, 'store']);
-    Route::get('/mpp/fetch', [MppController::class, 'fetch']);
-    Route::get('/mpp/edit/{id}', [MppController::class, 'edit']);
-    Route::put('/mpp/update/{id}', [MppController::class, 'update']);
-    Route::delete('/mpp/delete/{id}', [MppController::class, 'destroy']);
+    // Anggota Leader
+    Route::post('/leader/anggota', [UplineController::class, 'store_anggota']);
+    Route::get('/leader/anggota/list', [UplineController::class, 'show_anggota']);
+    Route::get('/leader/anggota/edit/{id}', [UplineController::class, 'edit_anggota']);
+    Route::put('/leader/anggota/update/{id}', [UplineController::class, 'update_anggota']);
 
     Route::get('dashboard/keluhan', [KeluhanController::class,'dashboard'])->name('keluhan.dashboard');
 

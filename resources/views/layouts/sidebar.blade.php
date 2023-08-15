@@ -78,15 +78,6 @@
                         </a>
                     </li>
 
-
-
-                    <li class="nav-item">
-                        <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
-                            <i class="ph-user"></i>
-                            <span>Marketer</span>
-                        </a>
-                    </li>
-
                     <li class="nav-item">
                         <a href="{{ route('upline.dashboard') }}" class="nav-link">
                             <i class="ph-git-fork"></i>

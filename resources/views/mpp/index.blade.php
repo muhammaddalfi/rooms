@@ -3,28 +3,52 @@
 @section('content')
     <div class="content">
         <!-- Basic responsive configuration -->
-        <div class="card">
-            <div class="card-body">
-                <a href='#' class="btn btn-light add_mpp" data-toggle="modal" data-target="#modal_mpp"><i
-                        class="ph-plus-circle me-2"></i>Tambah Nama Perusahaan</a>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <a href='#' class="btn btn-light add_mpp" data-toggle="modal" data-target="#modal_mpp"><i
+                            class="ph-plus-circle me-2"></i>Data Perusahaan</a>
+                </div>
+                <table class="table datatable-perusahaan">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Perusahaan</th>
+                            <th>Email</th>
+                            <th>No. Telp</th>
+                            <th>Anggota</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
-            <table class="table datatable-responsive">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Perusahaan</th>
-                        <th>Email</th>
-                        <th>No. Telp</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+        </div>
+
+        <div class="row">
+            <div class="card">
+                <table class="table datatable-anggota-perusahaan">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Marketer</th>
+                            <th>Email</th>
+                            <th>No. Telp</th>
+                            <th>PIC</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- /basic responsive configuration -->
     </div>
     @include('mpp.modals.create')
+    @include('mpp.modals.anggota')
+    @include('mpp.modals.edit_anggota')
     @include('mpp.modals.edit')
 @endsection
 

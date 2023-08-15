@@ -52,25 +52,25 @@ class DashboardController extends Controller
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_perusahaan = "select b.nama_perusahaan, c.jenis_kegiatan,c.id,
+            $pic_perusahaan = "select b.name, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
-                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'mpp'
-                                GROUP BY b.nama_perusahaan,c.jenis_kegiatan,c.id
+                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'leader_perusahaan'
+                                GROUP BY b.name,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_upline = "select b.nama_upline, c.jenis_kegiatan,c.id,
+            $pic_upline = "select b.name, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
                                 LEFT JOIN kegiatans c ON c.id = a.kegiatan_id
                                 LEFT JOIN olts d ON d.id = a.nama_olt
-                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'upline'
-                                GROUP BY b.nama_upline,c.jenis_kegiatan,c.id
+                                WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ? AND b.jenis_pengguna = 'leader_internal'
+                                GROUP BY b.name,c.jenis_kegiatan,c.id
                                 ORDER BY c.id ASC;
                                 ";
 
@@ -210,10 +210,10 @@ class DashboardController extends Controller
         $kegiatan = Kegiatan::all();
         $data['total_kegiatan'] = $kegiatan->count();
 
-        $mpi = User::where('jenis_pengguna', 'upline');
+        $mpi = User::where('jenis_pengguna', 'leader_internal');
         $data['total_mpi'] = $mpi->count();
 
-        $mpp = User::where('jenis_pengguna', 'mpp');
+        $mpp = User::where('jenis_pengguna', 'ledaer_perusahaan');
         $data['total_mpp'] = $mpp->count();
 
         $data['bulan'] = $bulan;
@@ -260,7 +260,7 @@ class DashboardController extends Controller
                                 ORDER BY c.id ASC;
                                 ";
 
-            $pic_perusahaan = "select b.nama_perusahaan, c.jenis_kegiatan,c.id,
+            $pic_perusahaan = "select b.name, c.jenis_kegiatan,c.id,
                                 COUNT(a.id) AS jumlah_kunjungan
                                 FROM dailies a
                                 LEFT JOIN users b ON b.id = a.user_id
@@ -401,10 +401,10 @@ class DashboardController extends Controller
         $kegiatan = Kegiatan::all();
         $data['total_kegiatan'] = $kegiatan->count();
 
-        $mpi = User::where('jenis_pengguna', 'upline');
+        $mpi = User::where('jenis_pengguna', 'leader_internal');
         $data['total_mpi'] = $mpi->count();
 
-        $mpp = User::where('jenis_pengguna', 'mpp');
+        $mpp = User::where('jenis_pengguna', 'leader_perusahaan');
         $data['total_mpp'] = $mpp->count();
 
         $data['bulan'] = $bulan;

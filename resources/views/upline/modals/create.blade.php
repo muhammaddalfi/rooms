@@ -1,35 +1,34 @@
-<div id="modal_upline" class="modal fade" tabindex="-1">
+<div id="modal_leader" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Upline</h5>
+                <h5 class="modal-title">Form PIC Leader</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form id="form-upline" action="#">
+            <form id="form-leader" action="#">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <label class="form-label">Nama Lengkap</label>
-                                <input type="text" id="nama" name="nama" placeholder="Muhammad Alfi"
+                                <input type="text" id="nama_leader" name="nama_leader" placeholder="Muhammad Alfi"
                                     class="form-control">
-                                <span id="error_nama" class="text-danger"></span>
+                                <span id="error_nama_leader" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-4">
                                 <label class="form-label">Email</label>
-                                <input type="text" id="email" name="email"
-                                    placeholder="muhammad.ramadhan@iconpln.co.id" class="form-control">
-                                <span id="error_email" class="text-danger"></span>
+                                <input type="text" id="email_leader" name="email_leader" class="form-control">
+                                <span id="error_email_leader" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-4">
-                                <label class="form-label">No. Whatsapp</label>
-                                <input type="text" id="hp" name="hp" placeholder="08116565xxx"
+                                <label class="form-label">No. Handphone</label>
+                                <input type="text" id="handphone_leader" name="handphone_leader"
                                     class="form-control">
-                                <span id="error_hp" class="text-danger"></span>
+                                <span id="error_handphone_leader" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

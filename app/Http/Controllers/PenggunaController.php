@@ -64,8 +64,6 @@ class PenggunaController extends Controller
             $ajax->name = $request->input('nama');
             $ajax->email = $request->input('email');
             $ajax->handphone = $request->input('hp');
-            // $ajax->nama_perusahaan = $request->input('parent_id');
-            // $ajax->nama_upline = $request->input('nama_upline');
             $ajax->jenis_pengguna = $request->input('jenis_pengguna');
             $ajax->password = bcrypt($password);
 
