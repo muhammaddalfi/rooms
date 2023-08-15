@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\OltsImport;
 use App\Models\Olt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Termwind\Components\Ol;
 use Yajra\DataTables\DataTables;
 
@@ -104,6 +106,12 @@ class OltController extends Controller
             'status' => 200,
             'message' => 'Data has been remove'
         ]);
+    }
+
+    public function import()
+    {
+        Excel::import(new OltsImport, request()->file('file'));
+        return back();
     }
 }
 

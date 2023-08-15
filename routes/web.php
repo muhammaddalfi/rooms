@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/olt/edit/{id}', [OltController::class, 'edit']);
     Route::put('/olt/update/{id}', [OltController::class, 'update']);
     Route::delete('/olt/delete/{id}', [OltController::class, 'destroy']);
+    Route::post('/import/olt',[OltController::class,'import']);
 
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.dashboard');
     Route::post('/pengguna/store', [PenggunaController::class, 'store']);

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('olts', function (Blueprint $table) {
             $table->id();
             $table->string('nama_olt');
-            $table->string('lat');
-            $table->string('lng');
+            $table->float('lat',8,5);
+            $table->float('lng',8,5);
             $table->timestamps();
         });
     }

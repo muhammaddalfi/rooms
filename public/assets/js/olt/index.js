@@ -31,7 +31,48 @@ $(document).ready(function(){
 
     })
 
-    
+     $(document).on('click','.import_olt', function(e){
+        e.preventDefault();
+        $('#modal_import_olt').modal('show');   
+
+    })
+
+    var excel = $('#form-import-olt')[0];
+    $('#import_excel').on('click',function(e){
+        e.preventDefault();
+        var import_excel  = new FormData(excel);
+        // console.log(data);
+        $.ajax({
+            url: '/import/olt',
+            method:'POST',
+            data: import_excel,
+            processData: false,
+            contentType: false,
+
+            success: function(response){
+                if(response.status == 400)
+                {
+                    console.log(response);
+                    // $('#error_nama_olt').html(response.errors.nama_olt);
+                    // $('#error_lat').html(response.errors.lat);
+                    // $('#error_lng').html(response.errors.lng);
+                  
+                }else{
+                   console.log(response); 
+                    table.draw();
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data Berhasil Ditambahkan',
+                        icon: 'success'
+                    });
+
+                    $('#modal_import_olt').modal('hide');
+                    $("#form-import-olt")[0].reset();
+                }
+            }
+        })
+
+    })
 
     var olt = $('#form-olt')[0];
     $('#save').on('click',function(e){

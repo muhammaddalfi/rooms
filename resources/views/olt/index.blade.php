@@ -7,6 +7,10 @@
             <div class="card-body">
                 <a href='#' class="btn btn-light add_olt" data-toggle="modal" data-target="#modal_olt"><i
                         class="ph-plus-circle me-2"></i>Tambah Nama OLT</a>
+
+                <a href='#' class="btn btn-outline-success import_olt" data-toggle="modal"
+                    data-target="#modal_import_olt"><i class="ph-microsoft-excel-logo me-2"></i>Import Excel
+                    Cluster</a>
             </div>
             <table class="table datatable-responsive">
                 <thead>
@@ -26,6 +30,7 @@
         <!-- /basic responsive configuration -->
     </div>
     @include('olt.modals.create')
+    @include('olt.modals.import')
     @include('olt.modals.edit')
 @endsection
 @push('js_page')

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Olt extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nama_olt','lat','lng'];
 }
