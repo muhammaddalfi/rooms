@@ -30,7 +30,7 @@ class KegiatanController extends Controller
 
     public function reload_olt($lat, $lng)
     {
-        $setting = Radiusmap::where('kode_setting','RADIUS_MAP')->first();
+        $setting = Radiusmap::where('kode_setting', 'RADIUS_MAP')->first();
         $olts = Olt::select(
             "olts.id",
             "olts.nama_olt",
@@ -45,7 +45,7 @@ class KegiatanController extends Controller
             ->having('distance', '<', $setting->value_setting) //radius
             ->get();
 
-        $data['setting_radius'] = $setting->value_setting*1000;
+        $data['setting_radius'] = $setting->value_setting * 1000;
         $data['olts'] = $olts;
 
         return $data;
@@ -86,13 +86,14 @@ class KegiatanController extends Controller
 
     public function store(Request $request)
     {
+
         $rule = [
             'latNow' => 'required',
             'lngNow' => 'required',
             'kategori' => 'required',
             'olt' => 'required',
             'kegiatan' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:5048',
+            'image_compressed' => 'required|image|mimes:jpeg,png,jpg|max:5048',
         ];
 
         $message = [
@@ -101,7 +102,7 @@ class KegiatanController extends Controller
             'olt.required' => 'This field is required',
             'kategori.required' => 'This field is required',
             'kegiatan.required' => 'This field is required',
-            'gambar.required' => 'This field is required',
+            'image_compressed.required' => 'This field is required',
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -114,7 +115,7 @@ class KegiatanController extends Controller
         } else {
 
             $path = 'files/';
-            $gambar = $request->file('gambar');
+            $gambar = $request->file('image_compressed');
 
             $format_name_images = time() . '.' . $gambar->extension();
             // $resize = Image::make($gambar);
@@ -146,7 +147,7 @@ class KegiatanController extends Controller
 
     {
         // $daily = Daily::all();
-        $show = Daily::with(['user', 'jenis_kegiatan','olt'])->find($id);
+        $show = Daily::with(['user', 'jenis_kegiatan', 'olt'])->find($id);
 
         if ($show) {
             return response()->json([
@@ -164,7 +165,7 @@ class KegiatanController extends Controller
     public function edit($id)
     {
         //
-        $daily = Daily::with(['user', 'jenis_kegiatan','olt'])->find($id);
+        $daily = Daily::with(['user', 'jenis_kegiatan', 'olt'])->find($id);
         if ($daily) {
             return response()->json([
                 'status' => 200,

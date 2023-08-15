@@ -13,15 +13,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-label">Latitude</label>
-                                <input type="text" readonly class="form-control" required id="latNow"
-                                    name="latNow">
+                                <input type="text" readonly class="form-control" required id="latNow" name="latNow">
                                 <span id="error_lat" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">Longitude</label>
-                                <input type="text" readonly class="form-control" required id="lngNow"
-                                    name="lngNow">
+                                <input type="text" readonly class="form-control" required id="lngNow" name="lngNow">
                                 <span id="error_lng" class="text-danger"></span>
                             </div>
                         </div>
@@ -58,16 +56,15 @@
                                 <select class="form-control kegiatan" name="kegiatan" id="kegiatan" data-fouc>
                                     <option></option>
                                     @foreach ($kegiatan as $item)
-                                        <option value="{{ $item->id }}"> {{ $item->jenis_kegiatan }}
-                                        </option>
+                                    <option value="{{ $item->id }}"> {{ $item->jenis_kegiatan }}
+                                    </option>
                                     @endforeach
                                 </select>
                                 <span id="error_kegiatan" class="text-danger"></span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="view-blob">
                                 <label class="form-label">Upload Dokumentasi</label>
-                                <input type="file" id="gambar" name="gambar" class="form-control"
-                                    accept="image/*">
+                                <input type="file" id="gambar" class="form-control" accept="image/*">
                                 <span id="error_images" class="text-danger"></span>
                             </div>
                         </div>
@@ -77,7 +74,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <label class="form-label">Catatan</label>
-                                <textarea rows="3" id="catatan" name="catatan" cols="3" class="form-control" required></textarea>
+                                <textarea rows="3" id="catatan" name="catatan" cols="3" class="form-control"
+                                    required></textarea>
                             </div>
                         </div>
                     </div>
@@ -87,7 +85,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary" id="save">
-                        <img src='{{ asset('assets/spinner.gif') }}' id="spinner">
                         Simpan
                     </button>
                 </div>

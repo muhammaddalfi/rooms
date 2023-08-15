@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $(document).ajaxSend(function () {
-        $("#overlay").fadeIn(300);
+        $("#overlay").fadeIn(0);
     });
     $(document).ajaxComplete(function () {
-        $("#overlay").fadeOut(300);
+        $("#overlay").fadeOut(0);
     });
 
 });

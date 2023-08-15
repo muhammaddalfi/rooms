@@ -2,63 +2,24 @@
 
 @section('content')
 
-    @can('admin read')
-        <div class="content">
+@can('admin read')
+<div class="content">
 
-            <div class="row">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body">
-                        <div class="d-flex align-items-center">
-                            <i class="ph-broadcast ph-2x text-success me-3"></i>
+    <div class="row">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <i class="ph-broadcast ph-2x text-success me-3"></i>
 
-                            <div class="flex-fill text-end">
-                                <h4 class="mb-0">{{ $total_cluster }}</h4>
-                                <span class="text-muted">Total cluster</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body">
-                        <div class="d-flex align-items-center">
-                            <i class="ph-activity ph-2x text-indigo me-3"></i>
-
-                            <div class="flex-fill text-end">
-                                <h4 class="mb-0">{{ $total_kegiatan }}</h4>
-                                <span class="text-muted">Total Kegiatan</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-fill">
-                                <h4 class="mb-0">{{ $total_mpi }}</h4>
-                                <span class="text-muted">Total MPI</span>
-                            </div>
-
-                            <i class="ph-user ph-2x text-primary ms-3"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-fill">
-                                <h4 class="mb-0">{{ $total_mpp }}</h4>
-                                <span class="text-muted">Total MPP</span>
-                            </div>
-
-                            <i class="ph-user-list ph-2x text-danger ms-3"></i>
-                        </div>
+                    <div class="flex-fill text-end">
+                        <h4 class="mb-0">{{ $total_cluster }}</h4>
+                        <span class="text-muted">Total cluster</span>
                     </div>
                 </div>
             </div>
+        </div>
 
+<<<<<<< HEAD
             <div class="row">
                 <div class="col-lg-6">
                     <!-- Basic pie -->
@@ -113,82 +74,164 @@
                                 @endforeach
                             </tbody>
                         </table>
+=======
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <i class="ph-activity ph-2x text-indigo me-3"></i>
+
+                    <div class="flex-fill text-end">
+                        <h4 class="mb-0">{{ $total_kegiatan }}</h4>
+                        <span class="text-muted">Total Kegiatan</span>
+>>>>>>> 30ebc14280e067f24c2f16d6c852b0dfc9aa767e
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Left fixed column -->
-                    <div class="card">
-                        <?php
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-fill">
+                        <h4 class="mb-0">{{ $total_mpi }}</h4>
+                        <span class="text-muted">Total MPI</span>
+                    </div>
+
+                    <i class="ph-user ph-2x text-primary ms-3"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-fill">
+                        <h4 class="mb-0">{{ $total_mpp }}</h4>
+                        <span class="text-muted">Total MPP</span>
+                    </div>
+
+                    <i class="ph-user-list ph-2x text-danger ms-3"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Basic pie -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="pie_kegiatan"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic pie -->
+        </div>
+        <div class="col-lg-3">
+            <div class="card">
+                <table class="table datatable-perusahaan">
+                    <thead>
+                        <th>MPP</th>
+                        <th>Jumlah</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card">
+                <table class="table datatable-perusahaan">
+                    <thead>
+                        <th>MPI</th>
+                        <th>Jumlah</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($marketing_count as $item)
+                        <th>
+                            {{ $item->jenis_kegiatan }}
+                        </th>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Left fixed column -->
+            <div class="card">
+                <?php
                         $last_date = date('t', strtotime($tahun . '-' . $bulan . '-01'));
                         ?>
-                        <div class="card-body">
-                            {{-- <a href='#' class="btn btn-light add_rooms" data-toggle="modal" data-target="#modal_daily"><i
+                <div class="card-body">
+                    {{-- <a href='#' class="btn btn-light add_rooms" data-toggle="modal" data-target="#modal_daily"><i
                             class="ph-plus-circle me-2"></i>Tambah Dokumentasi Harian</a> --}}
-                            <form action="{{ route('home.cari') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <select class="form-control tahun" name="tahun" id="tahun"
-                                            data-minimum-results-for-search="Infinity" data-fouc>
-                                            <option value="2023">2023</option>
-                                            <option value="2024">2024</option>
+                    <form action="{{ route('home.cari') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <select class="form-control tahun" name="tahun" id="tahun"
+                                    data-minimum-results-for-search="Infinity" data-fouc>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
 
-                                        </select>
-                                    </div>
+                                </select>
+                            </div>
 
-                                    <div class="col-lg-3">
-                                        <select class="form-control bulan" name="bulan" id="bulan"
-                                            data-minimum-results-for-search="Infinity" data-fouc>
-                                            <option value="01">Januari</option>
-                                            <option value="02">Februari</option>
-                                            <option value="03">Maret</option>
-                                            <option value="04">April</option>
-                                            <option value="05">Mei</option>
-                                            <option value="06">Juni</option>
-                                            <option value="07">Juli</option>
-                                            <option value="08">Agustus</option>
-                                            <option value="09">September</option>
-                                            <option value="10">Oktober</option>
-                                            <option value="11">November</option>
-                                            <option value="12">Desember</option>
+                            <div class="col-lg-3">
+                                <select class="form-control bulan" name="bulan" id="bulan"
+                                    data-minimum-results-for-search="Infinity" data-fouc>
+                                    <option value="01">Januari</option>
+                                    <option value="02">Februari</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
 
-                                        </select>
-                                    </div>
+                                </select>
+                            </div>
 
-                                    <div class="col-lg -3">
+                            <div class="col-lg -3">
 
-                                        <button type="submit" class="btn btn-primary" id="save">
-                                            <img src='{{ asset('assets/spinner.gif') }}' id="spinner">
-                                            Cari
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </form>
-
+                                <button type="submit" class="btn btn-primary" id="save">
+                                    <img src='{{ asset(' assets/spinner.gif') }}' id="spinner">
+                                    Cari
+                                </button>
+                            </div>
 
                         </div>
+                    </form>
 
-                        <table class="table datatable-cluster">
-                            <thead>
-                                <tr>
-                                    <th colspan="14" style="text-align:center;">Hari Ke-</th>
-                                </tr>
-                                <tr>
-                                    <th>Nama Cluster</th>
-                                    <?php
+
+                </div>
+
+                <table class="table datatable-cluster">
+                    <thead>
+                        <tr>
+                            <th colspan="14" style="text-align:center;">Hari Ke-</th>
+                        </tr>
+                        <tr>
+                            <th>Nama Cluster</th>
+                            <?php
                                     for ($i = 1; $i <= $last_date; $i++) {
                                         echo '<th>' . $i . ' </th>';
                                     }
                                     ?>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
                                 
                                 $no = 1;
                                 $total = 0;
@@ -214,35 +257,35 @@
                                     # code...
                                 }
                                 ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /left fixed column -->
-                </div>
+                    </tbody>
+                </table>
             </div>
+            <!-- /left fixed column -->
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Left fixed column -->
-                    <div class="card">
-                        <table class="table datatable-kegiatan">
-                            <thead>
-                                <tr>
-                                    <th colspan="{{ $jenis_kegiatan->count() }}" style="text-align:center;">Jenis Kegiatan
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>Nama Cluster</th>
-                                    @foreach ($jenis_kegiatan as $item)
-                                        <th>
-                                            {{ $item->jenis_kegiatan }}
-                                        </th>
-                                    @endforeach
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Left fixed column -->
+            <div class="card">
+                <table class="table datatable-kegiatan">
+                    <thead>
+                        <tr>
+                            <th colspan="{{ $jenis_kegiatan->count()+2 }}" style="text-align:center;">Jenis Kegiatan
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Nama Cluster</th>
+                            @foreach ($jenis_kegiatan as $item)
+                            <th>
+                                {{ $item->jenis_kegiatan }}
+                            </th>
+                            @endforeach
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
                                 
                                 $no = 1;
                                 $total = 0;
@@ -267,28 +310,28 @@
                                 }
                                 ?>
 
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /left fixed column -->
-                </div>
+                    </tbody>
+                </table>
             </div>
-
+            <!-- /left fixed column -->
         </div>
-    @endcan
+    </div>
+
+</div>
+@endcan
 @endsection
 
 @push('js_page')
-    <script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/tables/datatables/extensions/fixed_columns.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/visualization/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboard/index.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/tables/datatables/extensions/fixed_columns.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/visualization/echarts/echarts.min.js') }}"></script>
+<script src="{{ asset('assets/js/dashboard/index.js') }}"></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
 
-    @can('admin read')
-        <script>
-            $(document).ready(function() {
+@can('admin read')
+<script>
+    $(document).ready(function() {
                 var kegiatan_element = document.getElementById('pie_kegiatan');
                 var kegiatan = echarts.init(kegiatan_element, null, {
                     renderer: 'svg'
@@ -384,6 +427,6 @@
                     }, 200);
                 });
             });
-        </script>
-    @endcan
+</script>
+@endcan
 @endpush
