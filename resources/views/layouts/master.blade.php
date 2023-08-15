@@ -48,12 +48,9 @@
 
 </head>
 
+
 <body>
-    <div id="overlay">
-        <div class="cv-spinner">
-            <span class="spinner"></span>
-        </div>
-    </div>
+
     <!-- Main navbar -->
     @include('layouts.navbar')
     <!-- /main navbar -->
@@ -86,3 +83,8 @@
 </body>
 
 </html>
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>

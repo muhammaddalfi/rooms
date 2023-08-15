@@ -26,6 +26,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     //add rooms
     $(document).on('click', '.add_rooms', function (e) {
         var form = {
@@ -118,24 +120,24 @@ $(document).ready(function () {
                 } else {
 
                     console.log(response);
-                        let tanggal = moment(response.show.created_at).format('DD-MM-YYYY');
+                    let tanggal = moment(response.show.created_at).format('DD-MM-YYYY');
 
-                        $('#id_kegiatan').val(response.show.id);
-                        $('#view_tanggal').html(tanggal);
-                        $('#view_nama').html(response.show.user.name);
-                        $('#view_nama_olt').html(response.show.olt.nama_olt);
-                        $('#view_jenis_kegiatan').html(response.show.jenis_kegiatan.jenis_kegiatan);
-                        $('#view_catatan').html(response.show.catatan);
+                    $('#id_kegiatan').val(response.show.id);
+                    $('#view_tanggal').html(tanggal);
+                    $('#view_nama').html(response.show.user.name);
+                    $('#view_nama_olt').html(response.show.olt.nama_olt);
+                    $('#view_jenis_kegiatan').html(response.show.jenis_kegiatan.jenis_kegiatan);
+                    $('#view_catatan').html(response.show.catatan);
 
 
-                        if(response.show.kategori_dinas == 'Ya'){
-                           $('#view_kategori_dinas').html('SPPD');
-                        }else if(response.show.kategori_dinas == 'Tidak'){
-                           $('#view_kategori_dinas').html('Tidak SPPD');
-                        }
+                    if (response.show.kategori_dinas == 'Ya') {
+                        $('#view_kategori_dinas').html('SPPD');
+                    } else if (response.show.kategori_dinas == 'Tidak') {
+                        $('#view_kategori_dinas').html('Tidak SPPD');
+                    }
 
-                       $('#gambar_bukti').attr("src", "storage/files/" + response.show.gambar);
-                       $('#gambar_bukti_link').attr("href", "storage/files/" + response.show.gambar);
+                    $('#gambar_bukti').attr("src", "storage/files/" + response.show.gambar);
+                    $('#gambar_bukti_link').attr("href", "storage/files/" + response.show.gambar);
 
                 }
             }
@@ -145,11 +147,12 @@ $(document).ready(function () {
 
 
     var daily = $('#form-daily')[0];
+    var blob_image;
     $('#save').on('click', function (e) {
         e.preventDefault();
-        $('#spinner').css("display", "inline-block");
+
         var form = new FormData(daily);
-        // console.log(data);
+        form.append('image_compressed', blob_image);
         $.ajax({
             url: '/dailys/store',
             method: 'POST',
@@ -204,7 +207,7 @@ $(document).ready(function () {
                     $('#edit_kegiatan').val(response.daily.jenis_kegiatan.jenis_kegiatan).change();
                     $('#edit_catatan').val(response.daily.catatan);
                     $('#view_images').attr("src", "storage/files/" + response.daily.gambar);
-                    
+
                 }
             }
         })
@@ -302,12 +305,12 @@ $(document).ready(function () {
 
     function showPosition(position) {
         // console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
-        var url = window.location.href; 
+        var url = window.location.href;
         var image = '/assets/images/map/pin.png';
         var me = L.icon({
-        iconUrl: image,
-        iconSize: [38, 38], // size of the icon
-    });
+            iconUrl: image,
+            iconSize: [38, 38], // size of the icon
+        });
 
         var mymap = L.map("map").setView([position.coords.latitude, position.coords.longitude], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -315,7 +318,7 @@ $(document).ready(function () {
             attribution: '© OpenStreetMap'
         }).addTo(mymap);
 
-        L.marker([position.coords.latitude, position.coords.longitude],{icon: me})
+        L.marker([position.coords.latitude, position.coords.longitude], { icon: me })
             .addTo(mymap)
             .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
 
@@ -340,6 +343,76 @@ $(document).ready(function () {
         $("[name=lngNow]").val(position.coords.longitude);
 
 
+    }
+
+    const MAX_WIDTH = 320;
+    const MAX_HEIGHT = 180;
+    const MIME_TYPE = "image/jpeg";
+    const QUALITY = 0.7;
+
+    const input = document.getElementById("gambar");
+    input.onchange = function (ev) {
+        const file = ev.target.files[0]; // get the file
+        const blobURL = URL.createObjectURL(file);
+        const img = new Image();
+        img.src = blobURL;
+        img.onerror = function () {
+            URL.revokeObjectURL(this.src);
+            // Handle the failure properly
+            console.log("Cannot load image");
+        };
+        img.onload = function () {
+            URL.revokeObjectURL(this.src);
+            const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
+            const canvas = document.createElement("canvas");
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+            canvas.toBlob(
+                (blob) => {
+                    // Handle the compressed image. es. upload or save in local state
+                    blob_image = blob;
+                },
+                MIME_TYPE,
+                QUALITY
+            );
+
+        };
+    };
+
+    function calculateSize(img, maxWidth, maxHeight) {
+        let width = img.width;
+        let height = img.height;
+
+        // calculate the width and height, constraining the proportions
+        if (width > height) {
+            if (width > maxWidth) {
+                height = Math.round((height * maxWidth) / width);
+                width = maxWidth;
+            }
+        } else {
+            if (height > maxHeight) {
+                width = Math.round((width * maxHeight) / height);
+                height = maxHeight;
+            }
+        }
+        return [width, height];
+    }
+
+    // Utility functions for demo purpose
+
+    function displayInfo(label, file) {
+        const p = document.createElement('p');
+        p.innerText = `${label} - ${readableBytes(file.size)}`;
+        document.getElementById('view-blob').append(p);
+    }
+
+    function readableBytes(bytes) {
+        const i = Math.floor(Math.log(bytes) / Math.log(1024)),
+            sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];
     }
 
 });

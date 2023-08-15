@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/olt/edit/{id}', [OltController::class, 'edit']);
     Route::put('/olt/update/{id}', [OltController::class, 'update']);
     Route::delete('/olt/delete/{id}', [OltController::class, 'destroy']);
-    Route::post('/import/olt',[OltController::class,'import']);
+    Route::post('/import/olt', [OltController::class, 'import']);
 
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.dashboard');
     Route::post('/pengguna/store', [PenggunaController::class, 'store']);
@@ -123,9 +123,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/leader/{id}', [UplineController::class, 'show_leader']);
     Route::put('/leader/anggota/update/{id}', [UplineController::class, 'update_anggota']);
 
-    Route::get('dashboard/keluhan', [KeluhanController::class,'dashboard'])->name('keluhan.dashboard');
-
-
+    Route::get('dashboard/keluhan', [KeluhanController::class, 'dashboard'])->name('keluhan.dashboard');
 });
 
 require __DIR__ . '/auth.php';
