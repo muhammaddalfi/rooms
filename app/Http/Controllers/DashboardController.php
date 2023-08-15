@@ -120,10 +120,14 @@ class DashboardController extends Controller
             $data['kegiatan'] = $jenis_kegiatan_count;
 
             $data['jenis_kegiatan'] = Kegiatan::orderBy('id', 'ASC')->get();
+            return view('dashboard.index', $data);
+        }
+
+        if (auth()->user()->can('user read')) {
+            return view('dashboard.index');
         }
 
 
-        return view('dashboard.index', $data);
     }
 
     public function home_cari(Request $request)
