@@ -117,7 +117,7 @@ class MppController extends Controller
 
 
             $ajax = new User();
-            $password = implode('@', explode('@', $request->input('email'), -1));
+            $password = implode('@', explode('@', $request->input('email_anggota_perusahaan'), -1));
             $ajax->id_leader = $request->input('id_perusahaan');
             $ajax->leader = $request->input('nama_perusahaan');
             $ajax->name = $request->input('nama_anggota_perusahaan');

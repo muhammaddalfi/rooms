@@ -71,15 +71,22 @@ class DashboardController extends Controller
             GROUP BY k.jenis_kegiatan
             ORDER BY k.jenis_kegiatan
             ";
+        
+            $jumlah_internal_query = "SELECT u.name AS leader_internal,
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_internal
+                                FROM users u
+                                WHERE u.jenis_pengguna = 'leader_internal'";
+            
+            $data['internal_count'] = DB::select($jumlah_internal_query);
 
+            $jumlah_perusahaan_query = "SELECT u.name AS leader_perusahaan,
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)) AS jumlah_perusahaan
+                                FROM users u
+                                WHERE u.jenis_pengguna = 'leader_perusahaan'";
+            
+            $data['perusahaan_count'] = DB::select($jumlah_perusahaan_query);
 
-            // $perusahaan_db = "SELECT u.nama_perusahaan, COUNT(d.id) as jumlah  FROM users u
-            // LEFT JOIN dailies d ON d.user_id = u.id
-            // LEFT JOIN pivotmarketers pm ON pm.child_id = d.user_id
-            // LEFT JOIN users u ON u.id = d.user_id AND u.id = pm.child_id
-            // WHERE YEAR(d.created_at) = ? AND MONTH(d.created_at) =? AND u.jenis_pengguna = 'mppc'
-            // GROUP BY u.nama_perusahaan
-            // ";
+            // dd($internal_count);
 
             $marketing_db = "SELECT u.name, COUNT(d.id) as jumlah  FROM users u
             LEFT JOIN dailies d ON d.user_id = u.id
@@ -111,6 +118,8 @@ class DashboardController extends Controller
             $data['kegiatan_count'] = $kegiatan_count;
             // $data['perusahaan_count'] = $perusahaan_count;
             $data['marketing_count'] = $marketing_count;
+
+            
         }
 
         if (auth()->user()->can('user read')) {
@@ -185,14 +194,14 @@ class DashboardController extends Controller
             # code...
         }
 
-        foreach ($perusahaan_query as $value) {
-            $perusahaan[$value->nama_perusahaan][$value->id]  = $value->jumlah_kunjungan;
-            # code...
-        }
-        foreach ($upline_query as $value) {
-            $upline[$value->nama_upline][$value->id]  = $value->jumlah_kunjungan;
-            # code...
-        }
+        // foreach ($perusahaan_query as $value) {
+        //     $perusahaan[$value->nama_perusahaan][$value->id]  = $value->jumlah_kunjungan;
+        //     # code...
+        // }
+        // foreach ($upline_query as $value) {
+        //     $upline[$value->nama_upline][$value->id]  = $value->jumlah_kunjungan;
+        //     # code...
+        // }
 
         $olt = Olt::all();
         $data['total_cluster'] = $olt->count();
@@ -212,8 +221,8 @@ class DashboardController extends Controller
         //Table Counting By Jenis Kegiatan
         $data['daily'] = $daily;
         $data['kegiatan'] = $jenis_kegiatan_count;
-        $data['perusahaan'] = $perusahaan;
-        $data['upline'] = $upline;
+        // $data['perusahaan'] = $perusahaan;
+        // $data['upline'] = $upline;
 
         $data['jenis_kegiatan'] = Kegiatan::orderBy('id', 'ASC')->get();
 
