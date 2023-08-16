@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CalendarsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardKeluhanController;
 use App\Http\Controllers\JenisKegiatanController;
+use App\Http\Controllers\JenisKeluhanController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KeluhanController;
 use App\Http\Controllers\MppController;
@@ -41,22 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/home/search', [DashboardController::class, 'home_cari'])->name('home.cari');
-
-
-    Route::get('/rooms', [RoomsController::class, 'home'])->name('rooms.dashboard');
-    Route::get('/rooms/fetch', [RoomsController::class, 'rooms']);
-    Route::post('/rooms/store', [RoomsController::class, 'store']);
-    Route::get('/rooms/edit/{id}', [RoomsController::class, 'edit']);
-    Route::post('/rooms/update/{id}', [RoomsController::class, 'update']);
-    Route::delete('/rooms/delete/{id}', [RoomsController::class, 'destroy']);
-
-
-    Route::get('/reservations', [ReservationController::class, 'home'])->name('reservations.dashboard');
-
-
-    Route::get('/calendars', [CalendarsController::class, 'home'])->name('calendars.dashboard');
-    Route::get('/calendars/event{id}', [CalendarsController::class, 'event']);
-
 
     Route::get('/dailys', [KegiatanController::class, 'home'])->name('daily.dashboard');
     Route::post('/dailys/store', [KegiatanController::class, 'store']);
@@ -123,7 +109,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/leader/{id}', [UplineController::class, 'show_leader']);
     Route::put('/leader/anggota/update/{id}', [UplineController::class, 'update_anggota']);
 
-    Route::get('dashboard/keluhan', [KeluhanController::class, 'dashboard'])->name('keluhan.dashboard');
+    Route::get('/keluhan', [KeluhanController::class, 'home'])->name('keluhan.dashboard');
+    Route::get('/map/keluhan/reload/{lat}/{lng}', [KeluhanController::class, 'reload_olt']);
+    Route::post('/keluhan/store', [KeluhanController::class, 'store']);
+    Route::get('/keluhan/fetch', [KeluhanController::class, 'keluhan']);
+    Route::get('/keluhan/show/{id}', [KeluhanController::class, 'show']);
+
+    
+    Route::get('/dashboard/keluhan', [DashboardKeluhanController::class, 'home'])->name('dashboard.keluhan');
+    Route::post('/keluhan/search', [DashboardKeluhanController::class, 'home_cari'])->name('cari.keluhan');
+
+    Route::get('/jenis_keluhan', [JenisKeluhanController::class, 'home'])->name('jenis_keluhan.dashboard');
+    Route::post('/jenis_keluhan/store', [JenisKeluhanController::class, 'store']);
+    Route::get('/jenis_keluhan/fetch', [JenisKeluhanController::class, 'jenis_keluhan']);
+    Route::get('/jenis_keluhan/edit/{id}', [JenisKeluhanController::class, 'edit']);
+    Route::put('/jenis_keluhan/update/{id}', [JenisKeluhanController::class, 'update']);
+    Route::delete('/jenis_keluhan/delete/{id}', [JenisKeluhanController::class, 'destroy']);
 });
 
 require __DIR__ . '/auth.php';

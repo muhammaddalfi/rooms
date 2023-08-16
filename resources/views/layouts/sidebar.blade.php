@@ -38,13 +38,14 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
-                        <i class="ph-smiley-sad"></i>
-                        <span>Dashboard Keluhan</span>
-                    </a>
-                </li>
-
+                @can('admin read')
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
+                            <i class="ph-smiley-sad"></i>
+                            <span>Dashboard Keluhan</span>
+                        </a>
+                    </li>
+                @endcan
                 <!-- Layout -->
                 <li class="nav-item-header">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Layout</div>
@@ -68,13 +69,20 @@
                     <li class="nav-item">
                         <a href="{{ route('olt.dashboard') }}" class="nav-link">
                             <i class="ph-broadcast"></i>
-                            <span>OLT</span>
+                            <span>Nama Cluster</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('activity.dashboard') }}" class="nav-link">
                             <i class="ph-activity"></i>
                             <span>Jenis Kegiatan</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('jenis_keluhan.dashboard') }}" class="nav-link">
+                            <i class="ph-smiley-sad"></i>
+                            <span>Jenis Keluhan</span>
                         </a>
                     </li>
 

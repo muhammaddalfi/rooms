@@ -105,6 +105,8 @@ class DashboardController extends Controller
             $data['daily_user'] = $daily_user;
 
             $data['jenis_kegiatan'] = Kegiatan::orderBy('id', 'ASC')->get();
+           
+           
             $olt = Olt::all();
             $data['total_cluster'] = $olt->count();
 

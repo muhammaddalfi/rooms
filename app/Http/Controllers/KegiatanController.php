@@ -144,11 +144,8 @@ class KegiatanController extends Controller
     }
 
     public function show($id)
-
     {
-        // $daily = Daily::all();
         $show = Daily::with(['user', 'jenis_kegiatan', 'olt'])->find($id);
-
         if ($show) {
             return response()->json([
                 'status' => 200,
