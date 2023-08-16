@@ -39,9 +39,6 @@ class DashboardKeluhanController extends Controller
                 $jenis_keluhan_count[$value->nama_olt][$value->id]  = $value->jumlah_kunjungan;
         }
 
-        
-       
-
         // map view
             $db_keluhan = "SELECT jk.jenis_keluhan, COUNT(k.id) as jumlah  FROM jenis_keluhans jk
             LEFT JOIN keluhans k ON k.keluhan_id = jk.id
@@ -84,8 +81,9 @@ class DashboardKeluhanController extends Controller
                                 ORDER BY jk.id ASC";
 
         $jumlah_keluhan_query = "SELECT o.nama_olt AS nama_olt,
-                                    (SELECT COUNT(id) FROM keluhans WHERE YEAR(dailies.created_at) = ? AND MONTH(dailies.created_at) = ? AND user_id IN (SELECT id FROM users WHERE id = o.id OR id_leader = o.id)) AS jumlah_keluhan
+                                    (SELECT COUNT(id) FROM keluhans WHERE YEAR(keluhans.created_at) = ? AND MONTH(keluhans.created_at) = ? AND user_id IN (SELECT id FROM users WHERE id = o.id OR id_leader = o.id)) AS jumlah_keluhan
                                     FROM olts o";
+        $data['keluhan_count'] = DB::select($jumlah_keluhan_query,[$tahun,$bulan]);
         
         $data['jenis_keluhan'] = Jenis_keluhan::orderBy('id', 'ASC')->get();
         $tes1 = DB::select($db_keluhan, [$tahun, $bulan]);
@@ -94,9 +92,6 @@ class DashboardKeluhanController extends Controller
         foreach ($tes1 as $value) {
                 $jenis_keluhan_count[$value->nama_olt][$value->id]  = $value->jumlah_kunjungan;
         }
-
-        
-       
 
         // map view
             $db_keluhan = "SELECT jk.jenis_keluhan, COUNT(k.id) as jumlah  FROM jenis_keluhans jk
