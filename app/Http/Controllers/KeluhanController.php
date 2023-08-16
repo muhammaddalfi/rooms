@@ -10,6 +10,6 @@ class KeluhanController extends Controller
 
     public function dashboard()
     {
-        return 'halaman dashboard keluhan';
+        return 'Coming Soon';
     }
 }

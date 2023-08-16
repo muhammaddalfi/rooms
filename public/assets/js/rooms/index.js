@@ -27,7 +27,6 @@ $(document).ready(function () {
     });
 
 
-
     //add rooms
     $(document).on('click', '.add_rooms', function (e) {
         var form = {
@@ -305,7 +304,6 @@ $(document).ready(function () {
 
     function showPosition(position) {
         // console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
-        var url = window.location.href;
         var image = '/assets/images/map/pin.png';
         var me = L.icon({
             iconUrl: image,

@@ -7,7 +7,6 @@
  * ---------------------------------------------------------------------------- */
 
 $(document).ready(function(){
-
     $('.bulan').select2({
     });
 
@@ -52,6 +51,15 @@ $(document).ready(function(){
             fixedColumns: true,
             searching: false,
             lengthChange: false
+        });
+
+
+        $('.datatable-cluster-leader-internal').DataTable({
+           
+            scrollX: true,
+            scrollY: true,
+            scrollCollapse: true,
+            fixedColumns: true,
         });
 
 

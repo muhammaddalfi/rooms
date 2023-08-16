@@ -58,7 +58,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('daily.dashboard') }}" class="nav-link">
+                    <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
                         <i class="ph-chat-circle-text"></i>
                         <span>Keluhan Cluster</span>
                     </a>

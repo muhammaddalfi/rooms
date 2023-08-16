@@ -83,7 +83,7 @@
 </body>
 
 </html>
-<div id="overlay">
+<div id="overlay" style="z-index: 1081">
     <div class="cv-spinner">
         <span class="spinner"></span>
     </div>

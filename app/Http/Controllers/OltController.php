@@ -86,15 +86,22 @@ class OltController extends Controller
     public function olt()
     {
         $olt = Olt::all();
-        
         return DataTables::of($olt)
             ->addIndexColumn()
-            
+            ->addColumn('koordinat', function($olt){
+                return $olt->lat .','. $olt->lng;
+            })
             ->addColumn('action', function ($olt) {
-                return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $olt->id . '"><i class="ph-pencil-simple"></i></a>';
+                if(auth()->user()->can('admin read')){
+                       return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $olt->id . '"><i class="ph-pencil-simple"></i></a>';
+                }
+
+                if(auth()->user()->can('user read')){
+                       return '<a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 map" data-id="' . $olt->lat .','. $olt->lng. '"><i class="ph-map-trifold"></i></a>';
+                }
             })
             
-            ->rawColumns(['action','images'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 
