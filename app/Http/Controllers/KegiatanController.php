@@ -54,7 +54,8 @@ class KegiatanController extends Controller
     public function daily()
     {
         if (auth()->user()->can('admin read')) {
-            $daily = Daily::with(['user', 'olt', 'jenis_kegiatan']);
+            $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
+                    ->orderBy('id', 'desc')->get();
         }
         if (auth()->user()->can('user read')) {
             $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
