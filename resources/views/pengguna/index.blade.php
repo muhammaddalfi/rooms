@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <a href='#' class="btn btn-light add_pengguna" data-toggle="modal" data-target="#modal_pengguna"><i
-                        class="ph-plus-circle me-2"></i>Tambah Marketer</a>
+                        class="ph-plus-circle me-2"></i>Tambah Admin</a>
             </div>
             <table class="table datatable-responsive">
                 <thead>

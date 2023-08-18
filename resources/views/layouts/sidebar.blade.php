@@ -106,6 +106,13 @@
                             <span>Radius Cluster</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
+                            <i class="ph-user-plus"></i>
+                            <span>Tambah Admin</span>
+                        </a>
+                    </li>
                 @endcan
 
                 <!-- /layout -->

@@ -50,17 +50,6 @@ $(document).ready(function(){
         placeholder: 'Pilih'
     });
 
-    $('[name="jenis_pengguna"]').change(function(){
-            if($(this).val() == 'mppc'){
-                $(".mpp_form").removeClass('d-none');
-                $(".mpi_form").addClass('d-none');
-            }else{
-                $(".mpp_form").addClass('d-none');
-                $(".mpi_form").removeClass('d-none');
-            }
-        });
-    
-    
 
     var marketers = $('#form-marketer')[0];
     $('#save').on('click',function(e){
@@ -82,7 +71,6 @@ $(document).ready(function(){
                     $('#error_name').html(response.errors.nama);
                     $('#error_email').html(response.errors.email);
                     $('#error_hp').html(response.errors.hp);
-                    $('#error_role').html(response.errors.role);
                   
                 }else{
                    console.log(response); 

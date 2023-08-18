@@ -13,16 +13,12 @@ class PenggunaController extends Controller
     //
 
     public function index(){
-        $data['upline'] = User::where('jenis_pengguna','upline')->get();
-        $data['mpp'] = User::where('jenis_pengguna','mpp')->get();
-        return view('pengguna.index',$data);
+        return view('pengguna.index');
     }
 
      public function fetch()
     {
-        $user = User::where('jenis_pengguna','mpi')
-        ->orwhere('jenis_pengguna','mppc')
-        ->get();
+        $user = User::all();
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
@@ -39,14 +35,12 @@ class PenggunaController extends Controller
             'nama' => 'required',
             'email' => 'required',
             'hp' => 'required',
-            'role' => 'required',
         ];
 
         $message = [
             'nama.required' => 'Tidak Boleh Kosong',
             'email.required' => 'Tidak Boleh Kosong',
             'hp.required' => 'Tidak Boleh Kosong',
-            'role.required' => 'Tidak Boleh Kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -64,17 +58,10 @@ class PenggunaController extends Controller
             $ajax->name = $request->input('nama');
             $ajax->email = $request->input('email');
             $ajax->handphone = $request->input('hp');
-            $ajax->jenis_pengguna = $request->input('jenis_pengguna');
             $ajax->password = bcrypt($password);
 
             $ajax->save();
-
-            $pivot = new Pivotmarketer();
-            $pivot->parent_id =  $request->input('parent_id_mpp') ? $request->input('parent_id_mpp'):$request->input('parent_id_upline');
-            $pivot->child_id = $ajax->id;
-            $pivot->save();
-
-            $ajax->assignRole($request->input('role')); // hardcode assign role
+            $ajax->assignRole('admin'); // hardcode assign role
             return response()->json([
                 'status' => 200,
                 'message' => 'Data tersimpan',
