@@ -15,6 +15,7 @@ $(document).ready(function(){
         ],
         order: [[ 0, "desc" ]],
         dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
+        pageLength : 5,
         language: {
                 search: '<span class="me-3">Filter:</span> <div class="form-control-feedback form-control-feedback-end flex-fill">_INPUT_<div class="form-control-feedback-icon"><i class="ph-magnifying-glass opacity-50"></i></div></div>',
                 searchPlaceholder: 'Type to filter...',
