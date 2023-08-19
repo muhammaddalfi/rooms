@@ -26,6 +26,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end">
+                    <a href="" class="dropdown-item profile"><i class="icon-user-plus"></i> Ganti Password</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button class="dropdown-item">Keluar</button>

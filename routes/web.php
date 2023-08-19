@@ -9,6 +9,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KeluhanController;
 use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RadiusController;
@@ -39,9 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home.dashboard');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/update/password/{id}',[PasswordController::class,'update']);
     Route::post('/home/search', [DashboardController::class, 'home_cari'])->name('home.cari');
 
     Route::get('/dailys', [KegiatanController::class, 'home'])->name('daily.dashboard');

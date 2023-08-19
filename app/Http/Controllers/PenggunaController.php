@@ -18,7 +18,7 @@ class PenggunaController extends Controller
 
      public function fetch()
     {
-        $user = User::all();
+        $user = User::role('admin')->get();
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
