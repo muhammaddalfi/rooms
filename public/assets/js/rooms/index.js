@@ -346,7 +346,7 @@ $(document).ready(function () {
     const MAX_WIDTH = 320;
     const MAX_HEIGHT = 180;
     const MIME_TYPE = "image/jpeg";
-    const QUALITY = 0.7;
+    const QUALITY = 0.9;
 
     const input = document.getElementById("gambar");
     input.onchange = function (ev) {
