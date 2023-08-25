@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -17,7 +18,16 @@ class UplineController extends Controller
 
     public function fetch()
     {
-        $user = User::where('jenis_pengguna','leader_internal')->get();
+        if (auth()->user()->can('admin read')) {
+            $user = User::where('jenis_pengguna','leader_internal')
+                ->get();
+        }
+        if (auth()->user()->can('leader read')) {
+            $user = User::where('jenis_pengguna','leader_internal')
+                ->where('id_leader',Auth()->user()->id)
+                ->get();
+        }
+        
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('anggota', function ($user) {
@@ -32,7 +42,8 @@ class UplineController extends Controller
             ->rawColumns(['action','anggota'])
             ->make(true);
     }
-        public function edit($id)
+
+    public function edit($id)
     {
         $leader = User::find($id);
         if ($leader) {
@@ -141,7 +152,7 @@ class UplineController extends Controller
 
             $ajax->save();
 
-            $ajax->assignRole('user'); // hardcode assign role
+            $ajax->assignRole('leader'); // hardcode assign role
 
             $user = User::where('id',$ajax->id);
             $user->update(['id_leader' => $ajax->id]);
@@ -154,7 +165,16 @@ class UplineController extends Controller
 
     public function show_anggota()
     {
-        $anggota = User::where('jenis_pengguna','anggota_internal')->get();
+        if (auth()->user()->can('admin read')) {
+             $anggota = User::where('jenis_pengguna','anggota_internal')
+                    ->get();
+        }
+        if (auth()->user()->can('leader read')) {
+            $anggota = User::where('jenis_pengguna','anggota_internal')
+                    ->where('id_leader',Auth()->user()->id)
+                    ->get();
+        }
+       
         return DataTables::of($anggota)
             ->addIndexColumn()
             ->addColumn('action', function ($anggota) {

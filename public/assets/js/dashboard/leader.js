@@ -13,9 +13,12 @@ $(document).ready(function(){
     $('.tahun').select2({
     });
 
-    // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
-            dom: '<"datatable-header"fl><"datatable-scroll datatable-scroll-wrap"t><"datatable-footer"ip>',
+    $.extend( $.fn.dataTable.defaults, {
+            autoWidth: false,
+            columnDefs: [{ 
+                orderable: false,
+            }],
+            dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {
                 search: '<span class="me-3">Filter:</span> <div class="form-control-feedback form-control-feedback-end flex-fill">_INPUT_<div class="form-control-feedback-icon"><i class="ph-magnifying-glass opacity-50"></i></div></div>',
                 searchPlaceholder: 'Type to filter...',
@@ -24,38 +27,7 @@ $(document).ready(function(){
             }
         });
 
-
-        // Cluster
-        $('.datatable-cluster').DataTable({
-           
-            scrollX: true,
-            scrollY: true,
-            scrollCollapse: true,
-            fixedColumns: true,
-        });
-
-        // Kegiatan
-        $('.datatable-perusahaan').DataTable({
-            scrollX: true,
-            scrollY: true,
-            scrollCollapse: true,
-            fixedColumns: true,
-            searching: false,
-            lengthChange: false
-        });
-
-        $('.datatable-kegiatan').DataTable({
-            scrollX: true,
-            scrollY: true,
-            scrollCollapse: true,
-            fixedColumns: true,
-            searching: false,
-            lengthChange: false
-        });
-
-
-        $('.datatable-cluster-leader-internal').DataTable({
-           
+        $('.datatable-kegiatan-sales').DataTable({
             scrollX: true,
             scrollY: true,
             scrollCollapse: true,

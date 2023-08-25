@@ -36,17 +36,19 @@
                             <span id="error_edit_handphone_anggota" class="text-danger"></span>
                         </div>
 
-                        <div class="col-sm-4">
-                            <label class="form-label">PIC Internal</label>
-                            <select class="form-control edit_leader" name="edit_leader" id="edit_leader" data-fouc>
-                                <option value=""></option>
-                                @foreach ($leader as $item)
-                                    <option value="{{ $item->id }}"> {{ $item->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <span id="error_perusahaan" class="text-danger"></span>
-                        </div>
+                        @can('admin read')
+                            <div class="col-sm-4">
+                                <label class="form-label">PIC Internal</label>
+                                <select class="form-control edit_leader" name="edit_leader" id="edit_leader" data-fouc>
+                                    <option value=""></option>
+                                    @foreach ($leader as $item)
+                                        <option value="{{ $item->id }}"> {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span id="error_perusahaan" class="text-danger"></span>
+                            </div>
+                        @endcan
 
                         <div class="col-sm-4">
                             <label class="form-label">Password</label>

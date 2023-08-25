@@ -8,6 +8,7 @@ use App\Models\Olt;
 use App\Models\Radiusmap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -54,14 +55,44 @@ class KegiatanController extends Controller
     public function daily()
     {
         if (auth()->user()->can('admin read')) {
-            $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
-                    ->orderBy('id', 'desc')->get();
+            $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+                            FROM dailies d
+                            LEFT JOIN users u ON u.id = d.user_id
+                            LEFT JOIN olts o ON o.id = d.nama_olt
+                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+                            WHERE d.user_id IN (SELECT id FROM users)
+                            ORDER BY d.id DESC";
+
+            $daily = DB::select($daily_raw);
+            // $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
+            //         ->orderBy('id', 'desc')->get();
+        }
+        if (auth()->user()->can('leader read')) {
+            $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+                            FROM dailies d
+                            LEFT JOIN users u ON u.id = d.user_id
+                            LEFT JOIN olts o ON o.id = d.nama_olt
+                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+                            WHERE d.user_id IN (SELECT id FROM users WHERE id_leader = '".Auth()->user()->id."')
+                            ORDER BY d.id DESC";
+
+            $daily = DB::select($daily_raw);
         }
         if (auth()->user()->can('user read')) {
             $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
                 ->where('user_id', Auth()->user()->id)
                 ->orderBy('id', 'desc')->get();
+
+            $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+                            FROM dailies d
+                            LEFT JOIN users u ON u.id = d.user_id
+                            LEFT JOIN olts o ON o.id = d.nama_olt
+                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+                            WHERE d.user_id = '".Auth()->user()->id."'
+                            ORDER BY d.id DESC";
+            $daily = DB::select($daily_raw);
         }
+
 
         return DataTables::of($daily)
             ->addIndexColumn()

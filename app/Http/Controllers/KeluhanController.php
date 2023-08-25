@@ -104,6 +104,20 @@ class KeluhanController extends Controller
         if (auth()->user()->can('admin read')) {
             $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan']);
         }
+        if (auth()->user()->can('leader read')) {
+            // $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan'])
+            //     ->where('user_id', Auth()->user()->id)
+            //     ->orderBy('id', 'desc')->get();
+             $keluhan_raw = "SELECT k.*, u.name AS nama_sales, o.nama_olt AS nama_olt, jk.jenis_keluhan
+                            FROM keluhans k
+                            LEFT JOIN users u ON u.id = k.user_id
+                            LEFT JOIN olts o ON o.id = k.nama_olt
+                            LEFT JOIN jenis_keluhans jk ON jk.id = k.keluhan_id
+                            WHERE k.user_id IN (SELECT id FROM users WHERE id_leader = '".Auth()->user()->id."')
+                            ORDER BY k.id DESC";
+
+            $keluhan = DB::select($keluhan_raw);
+        }
         if (auth()->user()->can('user read')) {
             $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan'])
                 ->where('user_id', Auth()->user()->id)
