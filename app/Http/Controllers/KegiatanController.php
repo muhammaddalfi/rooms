@@ -18,11 +18,6 @@ class KegiatanController extends Controller
 {
     public function home()
     {
-        
-            // $mytime = Carbon::now();
-            // $tgl = $mytime->toDateTimeString();
-
-            // dd(Tgl)
         $data['kegiatan'] = Kegiatan::orderBy('id', 'ASC')->get();
         $data['olt'] = Olt::all();
         return view('rooms.index', $data);
@@ -69,8 +64,6 @@ class KegiatanController extends Controller
                             ORDER BY d.id DESC";
 
             $daily = DB::select($daily_raw);
-            // $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
-            //         ->orderBy('id', 'desc')->get();
           
         }
         if (auth()->user()->can('leader read')) {
@@ -156,12 +149,8 @@ class KegiatanController extends Controller
             $gambar = $request->file('image_compressed');
 
             $format_name_images = time() . '.' . $gambar->extension();
-            // $resize = Image::make($gambar);
-            // $resize->fit(600)->save($gambar);
 
             $gambar->storeAs($path, $format_name_images, 'public');
-
-            // Image::make($gambar)->resize(150,150)->save(storage_path('app/' .$format_name_images));
 
 
             $ajax = new Daily();

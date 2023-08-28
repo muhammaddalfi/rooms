@@ -12,6 +12,7 @@ $(document).ready(function(){
             {data:'nama_olt'},
             {data:'lat'},
             {data:'lng'},
+            {data:'name'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -22,6 +23,25 @@ $(document).ready(function(){
                 lengthMenu: '<span class="me-3">Show:</span> _MENU_',
                 paginate: { 'first': 'First', 'last': 'Last', 'next': document.dir == "rtl" ? '&larr;' : '&rarr;', 'previous': document.dir == "rtl" ? '&rarr;' : '&larr;' }
             }
+    });
+
+    $(document).on('click','.map', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        url = "https://www.google.com/maps/search/"+ id;
+        window.open(url, '_blank');
+    })
+
+    $('.pic').select2({
+        dropdownParent: $('#modal_olt'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+
+    $('.edit_pic').select2({
+        dropdownParent: $('#modal_edit_olt'),
+        allowClear: true,
+        placeholder: 'Pilih'
     });
 
     //add olt
@@ -93,6 +113,7 @@ $(document).ready(function(){
                     $('#error_nama_olt').html(response.errors.nama_olt);
                     $('#error_lat').html(response.errors.lat);
                     $('#error_lng').html(response.errors.lng);
+                    $('#error_pic').html(response.errors.pic);
                   
                 }else{
                    console.log(response); 
@@ -127,6 +148,7 @@ $(document).ready(function(){
                     $('#edit_nama_olt').val(response.olt.nama_olt);
                     $('#edit_lat').val(response.olt.lat);
                     $('#edit_lng').val(response.olt.lng);
+                    $('#edit_pic').val(response.olt.user_id).change();
                 }
             }
         })
@@ -138,7 +160,8 @@ $(document).ready(function(){
         var data = {
             'edit_nama_olt': $('#edit_nama_olt').val(),
             'edit_lat': $('#edit_lat').val(),
-            'edit_lng': $('#edit_lng').val()
+            'edit_lng': $('#edit_lng').val(),
+            'edit_pic': $('#edit_pic').val()
         }
 
         $.ajaxSetup({

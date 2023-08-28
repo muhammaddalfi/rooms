@@ -4,14 +4,16 @@
     <div class="content">
         <!-- Basic responsive configuration -->
         <div class="card">
-            <div class="card-body">
-                <a href='#' class="btn btn-light add_olt" data-toggle="modal" data-target="#modal_olt"><i
-                        class="ph-plus-circle me-2"></i>Tambah Nama OLT</a>
+            @can('admin read')
+                <div class="card-body">
+                    <a href='#' class="btn btn-light add_olt" data-toggle="modal" data-target="#modal_olt"><i
+                            class="ph-plus-circle me-2"></i>Tambah Nama OLT</a>
 
-                <a href='#' class="btn btn-outline-success import_olt" data-toggle="modal"
-                    data-target="#modal_import_olt"><i class="ph-microsoft-excel-logo me-2"></i>Import Excel
-                    Cluster</a>
-            </div>
+                    <a href='#' class="btn btn-outline-success import_olt" data-toggle="modal"
+                        data-target="#modal_import_olt"><i class="ph-microsoft-excel-logo me-2"></i>Import Excel
+                        Cluster</a>
+                </div>
+            @endcan
             <table class="table datatable-responsive">
                 <thead>
                     <tr>
@@ -19,6 +21,12 @@
                         <th>Nama OLT</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
+                        @can('admin read')
+                            <th>PIC</th>
+                        @endcan
+                        @can('leader read')
+                            <th>PIC</th>
+                        @endcan
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>

@@ -135,6 +135,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('olt.dashboard') }}" class="nav-link">
+                            <i class="ph-broadcast"></i>
+                            <span>Nama Cluster</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{ route('upline.dashboard') }}" class="nav-link">
                             <i class="ph-git-fork"></i>
                             <span>Anggota</span>
