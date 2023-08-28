@@ -136,7 +136,7 @@ class DashboardController extends Controller
             // pie kegiaytan sales 
             $count_kegiatan_sales = [];
             $jumlah_internal_query = "SELECT u.name AS anggota_internal,
-	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id OR id_leader = u.id)
+	                                (SELECT COUNT(id) FROM dailies WHERE user_id IN (SELECT id FROM users WHERE id = u.id)
                                     AND DATE(dailies.created_at) = CURDATE()) AS jumlah_internal
                                 FROM users u
                                 WHERE u.id_leader = '".Auth()->user()->id."'";

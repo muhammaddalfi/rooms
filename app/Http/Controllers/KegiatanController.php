@@ -18,6 +18,11 @@ class KegiatanController extends Controller
 {
     public function home()
     {
+        
+            // $mytime = Carbon::now();
+            // $tgl = $mytime->toDateTimeString();
+
+            // dd(Tgl)
         $data['kegiatan'] = Kegiatan::orderBy('id', 'ASC')->get();
         $data['olt'] = Olt::all();
         return view('rooms.index', $data);
@@ -55,7 +60,7 @@ class KegiatanController extends Controller
     public function daily()
     {
         if (auth()->user()->can('admin read')) {
-            $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+            $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
                             FROM dailies d
                             LEFT JOIN users u ON u.id = d.user_id
                             LEFT JOIN olts o ON o.id = d.nama_olt
@@ -66,6 +71,7 @@ class KegiatanController extends Controller
             $daily = DB::select($daily_raw);
             // $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
             //         ->orderBy('id', 'desc')->get();
+          
         }
         if (auth()->user()->can('leader read')) {
             $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
@@ -118,7 +124,7 @@ class KegiatanController extends Controller
 
     public function store(Request $request)
     {
-
+        
         $rule = [
             'latNow' => 'required',
             'lngNow' => 'required',
