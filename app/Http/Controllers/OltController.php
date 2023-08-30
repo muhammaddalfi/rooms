@@ -100,10 +100,13 @@ class OltController extends Controller
             $olt = DB::select($olt_raw); 
         }
         if(auth()->user()->can('leader read')){
+            // $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
+            //             FROM olts o
+            //             LEFT JOIN users u ON u.id = o.user_id
+            //             WHERE o.user_id IN (SELECT id FROM users where id_leader = '".auth()->user()->id."')";
             $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
                         FROM olts o
-                        LEFT JOIN users u ON u.id = o.user_id
-                        WHERE o.user_id IN (SELECT id FROM users where id_leader = '".auth()->user()->id."')";
+                        LEFT JOIN users u ON u.id = o.user_id";
             $olt = DB::select($olt_raw); 
         }
         if(auth()->user()->can('user read')){
