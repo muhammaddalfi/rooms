@@ -27,6 +27,12 @@ class UplineController extends Controller
                 ->where('id_leader',Auth()->user()->id)
                 ->get();
         }
+
+         if (auth()->user()->can('leader read')) {
+            $user = User::where('jenis_pengguna','leader_perusahaan')
+                ->where('id_leader',Auth()->user()->id)
+                ->get();
+        }
         
         return DataTables::of($user)
             ->addIndexColumn()
@@ -174,6 +180,11 @@ class UplineController extends Controller
                     ->where('id_leader',Auth()->user()->id)
                     ->get();
         }
+        if (auth()->user()->can('leader read')) {
+            $anggota = User::where('jenis_pengguna','anggota_perusahaan')
+                    ->where('id_leader',Auth()->user()->id)
+                    ->get();
+        }
        
         return DataTables::of($anggota)
             ->addIndexColumn()
@@ -218,7 +229,12 @@ class UplineController extends Controller
             $ajax->name = $request->input('nama_anggota_leader');
             $ajax->email = $request->input('email_anggota_leader');
             $ajax->handphone = $request->input('hp_anggota_leader');
+
+            if(auth()->user()->jenis_pengguna == 'leader_perusahaan'){                  
+            $ajax->jenis_pengguna = 'anggota_perusahaan';
+            }else if(auth()->user()->jenis_pengguna == 'leader_internal'){
             $ajax->jenis_pengguna = 'anggota_internal';
+            }
             $ajax->password = bcrypt($password);
 
             $ajax->save();
