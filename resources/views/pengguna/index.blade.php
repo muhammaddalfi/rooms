@@ -25,6 +25,7 @@
         <!-- /basic responsive configuration -->
     </div>
     @include('pengguna.modals.create')
+    @include('pengguna.modals.edit')
 @endsection
 
 @push('js_page')

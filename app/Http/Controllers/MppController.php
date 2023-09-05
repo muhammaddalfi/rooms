@@ -68,7 +68,9 @@ class MppController extends Controller
             $ajax->password = bcrypt($password);
 
             $ajax->save();
-            $ajax->assignRole('user'); // hardcode assign role
+            $ajax->assignRole('leader'); // hardcode assign role
+            $user = User::where('id',$ajax->id);
+            $user->update(['id_leader' => $ajax->id]);
             return response()->json([
                 'status' => 200,
                 'message' => 'Data tersimpan',

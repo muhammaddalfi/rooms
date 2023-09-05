@@ -4,14 +4,12 @@ $(document).ready(function(){
         processing:true,
         serverSide:true,
         responsive: true,
-        ajax: '/pengguna/fetch',
+        ajax: '/role/fetch',
         autoWidth: false,
         
         columns:[
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false },
             {data:'name'},
-            {data:'email'},
-            {data:'handphone'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -24,70 +22,100 @@ $(document).ready(function(){
             }
     });
 
-    //add olt
-    $(document).on('click','.add_pengguna', function(e){
+    //add jenis_keluhan
+    $(document).on('click','.add_role', function(e){
         e.preventDefault();
-        $('#modal_marketer').modal('show');   
+        $('#modal_role').modal('show');   
 
     })
 
-    var marketers = $('#form-marketer')[0];
+
+    var jenis_keluhan = $('#form-role')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form  = new FormData(marketers);
+        var form  = new FormData(jenis_keluhan);
         // console.log(data);
         $.ajax({
-            url: '/pengguna/store',
+            url: '/role',
             method:'POST',
             data: form,
             processData: false,
             contentType: false,
 
             success: function(response){
-                console.log(response);
                 if(response.status == 400)
                 {
                     console.log(response);
-                    $('#error_name').html(response.errors.nama);
-                    $('#error_email').html(response.errors.email);
-                    $('#error_hp').html(response.errors.hp);
+                    $('#error_name').html(response.errors.name);
                   
                 }else{
                    console.log(response); 
                     table.draw();
                     Swal.fire({
                     title: 'Success!',
-                    text: 'Data inserted successfully',
+                    text: 'Data berhasil disimpan',
                     icon: 'success'
                     });
 
-                    $('#modal_marketer').modal('hide');
-                    $("#form-marketer")[0].reset();
+                    $('#modal_role').modal('hide');
+                    $("#form-role")[0].reset();
                 }
             }
         })
 
     })
 
-     $(document).on('click','.edit', function(e){
+    //  //edit button
+    $(document).on('click','.edit', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal_edit_admin').modal('show');
-        // $.ajax({
-        //     type:"GET",
-        //     url:"/upline/edit/" + id,
-        //     success: function(response){
-        //         if(response.status == 404){
-        //             console.log("Data not found");
-        //         }else{
-        //             $('#id_leader').val(response.leader.id);
-        //             $('#edit_nama_leader').val(response.leader.name);
-        //             $('#edit_email_leader').val(response.leader.email);
-        //             $('#edit_handphone_leader').val(response.leader.handphone);
-        //         }
-        //     }
-        // })
+        $('#modal_edit_role').modal('show');
+        $.ajax({
+            type:"GET",
+            url:"/role/" + id,
+            success: function(response){
+                if(response.status == 404){
+                    console.log("Data not found");
+                }else{
+                    $('#id_role').val(response.role.id);
+                    $('#edit_name').val(response.role.name);
+                }
+            }
+        })
     })
+
+   $(document).on('click', '.save', function(e){
+        e.preventDefault();
+        var id = $('#id_role').val();
+        var data = {
+            'edit_name': $('#edit_name').val(),
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type:"PUT",
+            url:"/role/"+ id,
+            data: data,
+            dataType:"json",
+            success: function(response){
+            table.draw();
+              Swal.fire({
+                    title: 'Suksess!',
+                    text: 'Data berhasil disimpan!',
+                    icon: 'success'
+                });
+                    $('#modal_edit_role').modal('hide');
+            
+            }
+        })
+
+    });
+
 
     //delete
     $(document).on('click', '.delete', function(e){
@@ -103,8 +131,8 @@ $(document).ready(function(){
 
         // Warning alert
         Swal.fire({
-            title: 'Remove data',
-            text: "Are you sure ?",
+            title: 'Hapus data',
+            text: "Apakah kamu yakin ?",
             showCancelButton: true,
             confirmButtonColor: 'btn btn-success',
             cancelButtonColor: '#d33',
@@ -113,13 +141,13 @@ $(document).ready(function(){
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "/pengguna/delete/" + id,
+                    url: "/role/" + id,
                    
                     success: function(){
                         table.draw();
                         Swal.fire(
-                            'Success!',
-                            'Data has been removed',
+                            'Sukses!',
+                            'Data berhasil dihapus',
                             'success'
                           )
                     }

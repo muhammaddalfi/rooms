@@ -11,9 +11,11 @@ use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RadiusController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\UplineController;
 use App\Models\Kegiatan;
@@ -124,6 +126,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/jenis_keluhan/edit/{id}', [JenisKeluhanController::class, 'edit']);
     Route::put('/jenis_keluhan/update/{id}', [JenisKeluhanController::class, 'update']);
     Route::delete('/jenis_keluhan/delete/{id}', [JenisKeluhanController::class, 'destroy']);
+
+
+    Route::get('/role', [RoleController::class, 'index'])->name('role.index');
+    Route::get('/role/fetch', [RoleController::class, 'fetch']);
+    Route::post('/role', [RoleController::class, 'store']);
+    Route::get('/role/{id}', [RoleController::class, 'edit']);
+    Route::put('/role/{id}', [RoleController::class, 'update']);
+    Route::delete('/role/{id}', [RoleController::class, 'destroy']);
+
+
+    Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
+    Route::get('/permission/fetch', [PermissionController::class, 'fetch']);
+    Route::post('/permission', [PermissionController::class, 'store']);
+    Route::get('/permission/{id}', [PermissionController::class, 'edit']);
+    Route::put('/permission/{id}', [PermissionController::class, 'update']);
+    Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
 });
 
 require __DIR__ . '/auth.php';

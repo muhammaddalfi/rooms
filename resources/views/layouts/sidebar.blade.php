@@ -112,6 +112,13 @@
                             <span>Tambah Admin</span>
                         </a>
                     </li>
+
+                    {{-- <li class="nav-item">
+                        <a href="{{ route('role.index') }}" class="nav-link">
+                            <i class="ph-lock"></i>
+                            <span>Tambah Role</span>
+                        </a>
+                    </li> --}}
                 @endcan
 
                 @can('leader read')
