@@ -104,6 +104,9 @@ class KeluhanController extends Controller
         if (auth()->user()->can('admin read')) {
             $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan']);
         }
+        if (auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')) {
+            $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan']);
+        }
         if (auth()->user()->can('leader read')) {
             // $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan'])
             //     ->where('user_id', Auth()->user()->id)
