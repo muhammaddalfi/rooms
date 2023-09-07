@@ -116,10 +116,16 @@ class KegiatanController extends Controller
             })
 
             ->addColumn('action', function ($daily) {
-                return '
-                <a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $daily->id . '"><i class="ph-eye"></i></a>
-                <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $daily->id . '"><i class="ph-pencil-simple"></i></a>
-                <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $daily->id . '"><i class="ph-trash"></i></a>';
+                if(auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')){
+                     return '
+                        <a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $daily->id . '"><i class="ph-eye"></i></a>';
+                }else{
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $daily->id . '"><i class="ph-eye"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $daily->id . '"><i class="ph-pencil-simple"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $daily->id . '"><i class="ph-trash"></i></a>';
+                }
+               
             })
 
             ->rawColumns(['action', 'gambar'])
