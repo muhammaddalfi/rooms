@@ -54,6 +54,17 @@ class KegiatanController extends Controller
 
     public function daily()
     {
+        if(auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')){
+             $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+                            FROM dailies d
+                            LEFT JOIN users u ON u.id = d.user_id
+                            LEFT JOIN olts o ON o.id = d.nama_olt
+                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+                            WHERE d.user_id IN (SELECT id FROM users)
+                            ORDER BY d.id DESC";
+
+            $daily = DB::select($daily_raw);
+        }
         if (auth()->user()->can('admin read')) {
             $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
                             FROM dailies d

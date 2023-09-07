@@ -3,18 +3,18 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <!-- Basic pie -->
                 <div class="card">
                     <div class="card-body">
                         <div class="chart-container">
-                            <div class="chart has-fixed-height" id="pie_kegiatan"></div>
+                            <div class="chart has-fixed-height" id="pie_keluhan"></div>
                         </div>
                     </div>
                 </div>
                 <!-- /basic pie -->
             </div>
-            <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
                 <div class="card">
                     <table class="table datatable-perusahaan">
                         <thead>
@@ -35,7 +35,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row">
@@ -81,7 +81,7 @@
                             </div>
                         </form>
                     </div>
-                    <table class="table datatable-kegiatan">
+                    <table class="table datatable-keluhan">
                         <thead>
                             <tr>
                                 <th colspan="{{ $jenis_keluhan->count() + 2 }}" style="text-align:center;">Jenis Keluhan
@@ -138,18 +138,18 @@
     <script src="{{ asset('assets/js/vendor/tables/datatables/extensions/fixed_columns.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/visualization/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboard/index.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboard/keluhan.js') }}"></script>
 
     <script>
         $(document).ready(function() {
-            var kegiatan_element = document.getElementById('pie_kegiatan');
-            var kegiatan = echarts.init(kegiatan_element, null, {
+            var keluhan_element = document.getElementById('pie_keluhan');
+            var keluhan = echarts.init(keluhan_element, null, {
                 renderer: 'svg'
             });
 
 
             // Options
-            kegiatan.setOption({
+            keluhan.setOption({
                 // Colors
                 color: [
                     '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
@@ -216,7 +216,7 @@
 
             // Resize function
             var triggerChartResize = function() {
-                kegiatan_element && kegiatan.resize();
+                keluhan_element && keluhan.resize();
             };
 
 
