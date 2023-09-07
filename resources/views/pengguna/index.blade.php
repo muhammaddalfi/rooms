@@ -26,6 +26,7 @@
     </div>
     @include('pengguna.modals.create')
     @include('pengguna.modals.edit')
+    @include('permission.modals.enable')
 @endsection
 
 @push('js_page')

@@ -6,6 +6,7 @@ use App\Models\Pivotmarketer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 class PenggunaController extends Controller
@@ -13,7 +14,8 @@ class PenggunaController extends Controller
     //
 
     public function index(){
-        return view('pengguna.index');
+        $data['role'] = Role::all();
+        return view('pengguna.index', $data);
     }
 
      public function fetch()
@@ -22,7 +24,8 @@ class PenggunaController extends Controller
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
-                return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $user->id . '"><i class="ph-pencil-simple"></i></a>
+                return '
+                <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $user->id . '"><i class="ph-pencil-simple"></i></a>
                 <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $user->id . '"><i class="ph-trash"></i></a>';
             })
             ->rawColumns(['action'])
@@ -36,12 +39,14 @@ class PenggunaController extends Controller
             'nama' => 'required',
             'email' => 'required',
             'hp' => 'required',
+            'role' => 'required'
         ];
 
         $message = [
             'nama.required' => 'Tidak Boleh Kosong',
             'email.required' => 'Tidak Boleh Kosong',
             'hp.required' => 'Tidak Boleh Kosong',
+            'role.required' => 'Tidak Boleh Kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -60,9 +65,8 @@ class PenggunaController extends Controller
             $ajax->email = $request->input('email');
             $ajax->handphone = $request->input('hp');
             $ajax->password = bcrypt($password);
-
+            $ajax->assignRole($request->input('role')); // hardcode assign role
             $ajax->save();
-            $ajax->assignRole('admin'); // hardcode assign role
             return response()->json([
                 'status' => 200,
                 'message' => 'Data tersimpan',

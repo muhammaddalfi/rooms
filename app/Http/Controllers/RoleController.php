@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
@@ -11,13 +13,13 @@ class RoleController extends Controller
 {
     //
     public function index(){
-        return view('role.index');
+        $data['permission'] = Permission::all();
+        return view('role.index',$data);
     }
 
     public function fetch()
     {
         $role = Role::all();
-        
         return DataTables::of($role)
             ->addIndexColumn()
             
@@ -49,9 +51,10 @@ class RoleController extends Controller
             ]);
         } else {
 
-            $ajax = new Role();
-            $ajax->name = $request->input('name');
-            $ajax->save();
+            $role = Role::create(['name' => $request->input('name')]);
+            $role->syncPermissions($request->input('akses'));
+
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Data berhasil disimpan',

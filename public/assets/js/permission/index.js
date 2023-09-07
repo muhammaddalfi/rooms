@@ -33,35 +33,35 @@ $(document).ready(function(){
     var permission = $('#form-permission')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form1  = new FormData(permission);
-        console.log(form1);
-        // $.ajax({
-        //     url: '/permission',
-        //     method:'POST',
-        //     data: form,
-        //     processData: false,
-        //     contentType: false,
+        var form  = new FormData(permission);
+        // console.log(form);
+        $.ajax({
+            url: '/permission',
+            method:'POST',
+            data: form,
+            processData: false,
+            contentType: false,
 
-        //     success: function(response){
-        //         if(response.status == 400)
-        //         {
-        //             console.log(response);
-        //             $('#error_name').html(response.errors.name);
+            success: function(response){
+                if(response.status == 400)
+                {
+                    console.log(response);
+                    $('#error_name').html(response.errors.name);
                   
-        //         }else{
-        //            console.log(response); 
-        //             table.draw();
-        //             Swal.fire({
-        //             title: 'Success!',
-        //             text: 'Data berhasil disimpan',
-        //             icon: 'success'
-        //             });
+                }else{
+                   console.log(response); 
+                    table.draw();
+                    Swal.fire({
+                    title: 'Success!',
+                    text: 'Data berhasil disimpan',
+                    icon: 'success'
+                    });
 
-        //             $('#modal_permission').modal('hide');
-        //             $("#form-permission")[0].reset();
-        //         }
-        //     }
-        // })
+                    $('#modal_permission').modal('hide');
+                    $("#form-permission")[0].reset();
+                }
+            }
+        })
 
     })
 

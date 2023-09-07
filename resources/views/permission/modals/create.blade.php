@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-12">
-                                <label class="form-label">Permission</label>
+                                <label class="form-label">Role</label>
                                 <input type="text" class="form-control" required id="name" name="name">
                                 <span id="error_name" class="text-danger"></span>
                             </div>

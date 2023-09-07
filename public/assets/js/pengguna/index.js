@@ -31,6 +31,12 @@ $(document).ready(function(){
 
     })
 
+    $('.role').select2({
+        dropdownParent: $('#modal_marketer'),
+        allowClear: true,
+        placeholder: 'Pilih'
+    });
+
     var marketers = $('#form-marketer')[0];
     $('#save').on('click',function(e){
         e.preventDefault();

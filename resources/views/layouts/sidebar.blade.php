@@ -38,7 +38,7 @@
                     </a>
                 </li>
 
-                @can('admin read')
+                @role('admin')
                     <li class="nav-item">
                         <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
                             <i class="ph-smiley-sad"></i>
@@ -113,13 +113,47 @@
                         </a>
                     </li>
 
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('role.index') }}" class="nav-link">
                             <i class="ph-lock"></i>
                             <span>Tambah Role</span>
                         </a>
-                    </li> --}}
-                @endcan
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('permission.index') }}" class="nav-link">
+                            <i class="ph-lock"></i>
+                            <span>Tambah Permission</span>
+                        </a>
+                    </li>
+                @endrole
+
+                @role('gm')
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
+                            <i class="ph-smiley-sad"></i>
+                            <span>Dashboard Keluhan</span>
+                        </a>
+                    </li>
+
+                    <!-- Layout -->
+                    <li class="nav-item-header">
+                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Layout</div>
+                        <i class="ph-dots-three sidebar-resize-show"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('daily.dashboard') }}" class="nav-link">
+                            <i class="ph-camera"></i>
+                            <span>Kegiatan Cluster</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
+                            <i class="ph-chat-circle-text"></i>
+                            <span>Keluhan Cluster</span>
+                        </a>
+                    </li>
+                @endrole
 
                 @can('leader read')
                     <!-- Layout -->

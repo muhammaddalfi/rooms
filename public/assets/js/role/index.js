@@ -22,12 +22,15 @@ $(document).ready(function(){
             }
     });
 
-    //add jenis_keluhan
     $(document).on('click','.add_role', function(e){
         e.preventDefault();
         $('#modal_role').modal('show');   
 
     })
+
+     $('.permission').select2({
+        dropdownParent: $('#modal_role'),
+    });
 
 
     var jenis_keluhan = $('#form-role')[0];
