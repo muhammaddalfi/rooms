@@ -26,15 +26,13 @@ class OltController extends Controller
         $rule = [
             'nama_olt' => 'required',
             'lat' => 'required',
-            'lat' => 'required',
-            'pic' => 'required'
+            'lat' => 'required'
         ];
 
         $message = [
             'nama_olt.required' => 'Tidak Boleh Kosong',
             'lat.required' => 'Tidak Boleh Kosong',
-            'lng.required' => 'Tidak Boleh Kosong',
-            'pic.required' => 'Tidak Boleh Kosong'
+            'lng.required' => 'Tidak Boleh Kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -50,7 +48,6 @@ class OltController extends Controller
             $ajax->nama_olt = $request->input('nama_olt');
             $ajax->lat = $request->input('lat');
             $ajax->lng = $request->input('lng');
-            $ajax->user_id = $request->input('pic');
             $ajax->save();
             return response()->json([
                 'status' => 200,
@@ -81,7 +78,6 @@ class OltController extends Controller
             $activity->nama_olt = $request->input('edit_nama_olt');
             $activity->lat = $request->input('edit_lat');
             $activity->lng = $request->input('edit_lng');
-            $activity->user_id = $request->input('edit_pic');
 
             $activity->update();
             return response()->json([
@@ -92,28 +88,27 @@ class OltController extends Controller
 
     public function olt()
     {
-        // $olt = Olt::all();
-        if(auth()->user()->can('admin read')){
-            $olt_raw = "SELECT o.id,o.nama_olt,o.lat, o.lng, u.name
-                        FROM olts o
-                        LEFT JOIN users u ON u.id = o.user_id";
-            $olt = DB::select($olt_raw); 
-        }
-        if(auth()->user()->can('leader read')){
-            // $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
-            //             FROM olts o
-            //             LEFT JOIN users u ON u.id = o.user_id
-            //             WHERE o.user_id IN (SELECT id FROM users where id_leader = '".auth()->user()->id."')";
-           $olt = Olt::all();
-        }
-        if(auth()->user()->can('user read')){
-            // $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
-            //             FROM olts o
-            //             LEFT JOIN users u ON u.id = o.user_id
-            //             WHERE o.user_id = '".auth()->user()->id."'";
-            // $olt = DB::select($olt_raw); 
-            $olt = Olt::all();
-        }
+        $olt = Olt::all();
+        // if(auth()->user()->can('admin read')){
+        //     $olt_raw = "SELECT o.id,o.nama_olt,o.lat, o.lng,
+        //                 FROM olts o";
+        //     $olt = DB::select($olt_raw); 
+        // }
+        // if(auth()->user()->can('leader read')){
+        //     // $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
+        //     //             FROM olts o
+        //     //             LEFT JOIN users u ON u.id = o.user_id
+        //     //             WHERE o.user_id IN (SELECT id FROM users where id_leader = '".auth()->user()->id."')";
+        //    $olt = Olt::all();
+        // }
+        // if(auth()->user()->can('user read')){
+        //     // $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
+        //     //             FROM olts o
+        //     //             LEFT JOIN users u ON u.id = o.user_id
+        //     //             WHERE o.user_id = '".auth()->user()->id."'";
+        //     // $olt = DB::select($olt_raw); 
+        //     $olt = Olt::all();
+        // }
         return DataTables::of($olt)
             ->addIndexColumn()
             ->addColumn('koordinat', function($olt){

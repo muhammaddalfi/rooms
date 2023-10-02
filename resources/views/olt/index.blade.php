@@ -21,12 +21,6 @@
                         <th>Nama OLT</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
-                        @can('admin read')
-                            <th>PIC</th>
-                        @endcan
-                        @can('leader read')
-                            <th>PIC</th>
-                        @endcan
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>

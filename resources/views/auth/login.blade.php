@@ -45,7 +45,7 @@
                                 <div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
                                     <img src="../../../assets/images/logo_icon.svg" class="h-48px" alt="">
                                 </div>
-                                <h5 class="mb-0">Monster Jabar</h5>
+                                <h5 class="mb-0">Monster</h5>
                                 <span class="d-block text-muted">Monitoring Sales Untuk Cluster</span>
                             </div>
 
@@ -54,7 +54,7 @@
                                 <div class="form-control-feedback form-control-feedback-start">
                                     <input type="text" id="email" name="email" value="{{ old('email') }}"
                                         class="form-control" value="{{ old('email') }}" required
-                                        placeholder="halo@monsterjabar.id">
+                                        placeholder="halo@monster.id">
                                     <div class="form-control-feedback-icon">
                                         <i class="ph-user-circle text-muted"></i>
                                     </div>

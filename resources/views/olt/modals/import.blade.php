@@ -22,7 +22,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary" id="import_excel">
-                        <img src='{{ asset('assets/spinner.gif') }}' id="spinner">
                         Simpan
                     </button>
                 </div>

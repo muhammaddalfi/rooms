@@ -11,21 +11,10 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <label class="form-label">Nama OLT</label>
                                 <input type="text" class="form-control" required id="nama_olt" name="nama_olt">
                                 <span id="error_nama_olt" class="text-danger"></span>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label">PIC</label>
-                                <select class="form-control pic" name="pic" id="pic">
-                                    <option value=""></option>
-                                    @foreach ($pic as $item)
-                                        <option value="{{ $item->id }}"> {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span id="error_pic" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
