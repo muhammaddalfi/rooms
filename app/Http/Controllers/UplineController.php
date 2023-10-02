@@ -12,7 +12,7 @@ class UplineController extends Controller
 {
     //
     public function index(){
-        $data['leader'] = User::where('jenis_pengguna','leader_internal')->get();
+        $data['leader'] = User::where('jenis_pengguna', 'leader_internal');
         return view('upline.index',$data);
     }
 
@@ -23,16 +23,12 @@ class UplineController extends Controller
                 ->get();
         }
         if (auth()->user()->can('leader read')) {
-            $user = User::where('jenis_pengguna','leader_internal')
-                ->where('id_leader',Auth()->user()->id)
+            $user = User::where('id_leader',auth()->user()->id)
+                ->where('jenis_pengguna','leader_perusahaan')
+                ->orwhere('jenis_pengguna','leader_internal')
                 ->get();
         }
 
-         if (auth()->user()->can('leader read')) {
-            $user = User::where('jenis_pengguna','leader_perusahaan')
-                ->where('id_leader',Auth()->user()->id)
-                ->get();
-        }
         
         return DataTables::of($user)
             ->addIndexColumn()
@@ -176,13 +172,9 @@ class UplineController extends Controller
                     ->get();
         }
         if (auth()->user()->can('leader read')) {
-            $anggota = User::where('jenis_pengguna','anggota_internal')
-                    ->where('id_leader',Auth()->user()->id)
-                    ->get();
-        }
-        if (auth()->user()->can('leader read')) {
-            $anggota = User::where('jenis_pengguna','anggota_perusahaan')
-                    ->where('id_leader',Auth()->user()->id)
+            $anggota = User::where('id_leader',auth()->user()->id)
+                    ->where('jenis_pengguna','anggota_internal')
+                    ->orWhere('jenis_pengguna','anggota_perusahaan')
                     ->get();
         }
        

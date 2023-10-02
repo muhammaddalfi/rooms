@@ -225,6 +225,7 @@ $(document).ready(function(){
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
+                    console.log(response);
                     console.log(response.show_leader.name);
                     $('#nama_pic').val(response.show_leader.name);
                     $('#id_pic').val(response.show_leader.id);

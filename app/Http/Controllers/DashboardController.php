@@ -310,10 +310,8 @@ class DashboardController extends Controller
             // table cluster
            
            
-            $olt_raw = "SELECT o.nama_olt,o.lat, o.lng, u.name
-                        FROM olts o
-                        LEFT JOIN users u ON u.id = o.user_id
-                        WHERE o.user_id IN (SELECT id FROM users where id_leader = '".auth()->user()->id."')";
+            $olt_raw = "SELECT o.nama_olt,o.lat, o.lng
+                        FROM olts o";
             $olt = DB::select($olt_raw); 
             $data['total_cluster'] = count($olt);
 

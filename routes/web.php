@@ -3,6 +3,7 @@
 use App\Http\Controllers\CalendarsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardKeluhanController;
+use App\Http\Controllers\HaloController;
 use App\Http\Controllers\JenisKegiatanController;
 use App\Http\Controllers\JenisKeluhanController;
 use App\Http\Controllers\KegiatanController;
@@ -21,24 +22,6 @@ use App\Http\Controllers\UplineController;
 use App\Models\Kegiatan;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home.dashboard');
@@ -135,13 +118,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/role/{id}', [RoleController::class, 'update']);
     Route::delete('/role/{id}', [RoleController::class, 'destroy']);
 
-
     Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
     Route::get('/permission/fetch', [PermissionController::class, 'fetch']);
     Route::post('/permission', [PermissionController::class, 'store']);
     Route::get('/permission/{id}', [PermissionController::class, 'edit']);
     Route::put('/permission/{id}', [PermissionController::class, 'update']);
     Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
+
 });
 
 require __DIR__ . '/auth.php';
