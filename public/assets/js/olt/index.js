@@ -12,7 +12,6 @@ $(document).ready(function(){
             {data:'nama_olt'},
             {data:'lat'},
             {data:'lng'},
-            {data:'name'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
