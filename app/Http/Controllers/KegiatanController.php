@@ -72,6 +72,7 @@ class KegiatanController extends Controller
                             LEFT JOIN olts o ON o.id = d.nama_olt
                             LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
                             WHERE d.user_id IN (SELECT id FROM users)
+                            AND DATE(d.created_at) = CURDATE()
                             ORDER BY d.id DESC";
 
             $daily = DB::select($daily_raw);
@@ -84,6 +85,7 @@ class KegiatanController extends Controller
                             LEFT JOIN olts o ON o.id = d.nama_olt
                             LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
                             WHERE d.user_id IN (SELECT id FROM users WHERE id_leader = '".Auth()->user()->id."')
+                            AND DATE(d.created_at) = CURDATE()
                             ORDER BY d.id DESC";
 
             $daily = DB::select($daily_raw);
