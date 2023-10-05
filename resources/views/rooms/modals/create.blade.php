@@ -13,13 +13,15 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-label">Latitude</label>
-                                <input type="text" readonly class="form-control" required id="latNow" name="latNow">
+                                <input type="text" readonly class="form-control" required id="latNow"
+                                    name="latNow">
                                 <span id="error_lat" class="text-danger"></span>
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">Longitude</label>
-                                <input type="text" readonly class="form-control" required id="lngNow" name="lngNow">
+                                <input type="text" readonly class="form-control" required id="lngNow"
+                                    name="lngNow">
                                 <span id="error_lng" class="text-danger"></span>
                             </div>
                         </div>
@@ -28,12 +30,12 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label class="form-label">Kategori Dinas</label>
+                                <label class="form-label">Kewenangan Cluster</label>
                                 <select class="form-control kategori" name="kategori" id="kategori"
                                     data-minimum-results-for-search="Infinity" data-fouc>
                                     <option></option>
-                                    <option value="Ya">SPPD</option>
-                                    <option value="Tidak">Tidak SPPD</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
                                 </select>
                                 <span id="error_kategori" class="text-danger"></span>
                             </div>
@@ -56,8 +58,8 @@
                                 <select class="form-control kegiatan" name="kegiatan" id="kegiatan" data-fouc>
                                     <option></option>
                                     @foreach ($kegiatan as $item)
-                                    <option value="{{ $item->id }}"> {{ $item->jenis_kegiatan }}
-                                    </option>
+                                        <option value="{{ $item->id }}"> {{ $item->jenis_kegiatan }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <span id="error_kegiatan" class="text-danger"></span>
@@ -74,8 +76,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <label class="form-label">Catatan</label>
-                                <textarea rows="3" id="catatan" name="catatan" cols="3" class="form-control"
-                                    required></textarea>
+                                <textarea rows="3" id="catatan" name="catatan" cols="3" class="form-control" required></textarea>
                             </div>
                         </div>
                     </div>

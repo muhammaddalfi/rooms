@@ -130,9 +130,9 @@ $(document).ready(function () {
 
 
                     if (response.show.kategori_dinas == 'Ya') {
-                        $('#view_kategori_dinas').html('SPPD');
+                        $('#view_kategori_dinas').html('Ya');
                     } else if (response.show.kategori_dinas == 'Tidak') {
-                        $('#view_kategori_dinas').html('Tidak SPPD');
+                        $('#view_kategori_dinas').html('Tidak');
                     }
 
                     $('#gambar_bukti').attr("src", "storage/files/" + response.show.gambar);

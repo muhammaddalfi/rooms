@@ -37,7 +37,7 @@
                                             <td id="view_jenis_kegiatan"></td>
                                         </tr>
                                         <tr>
-                                            <td>Ketagori Dinas</td>
+                                            <td>Kewenangan Cluster</td>
                                             <td>:</td>
                                             <td id="view_kategori_dinas"></td>
                                         </tr>

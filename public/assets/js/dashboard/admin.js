@@ -46,6 +46,7 @@ $(document).ready(function(){
             scrollY: true,
             scrollCollapse: true,
             fixedColumns: true,
+            autofill:false
         });
 
         $('.datatable-perusahaan-admin').DataTable({

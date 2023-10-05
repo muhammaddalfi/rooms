@@ -13,11 +13,11 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label class="form-label">Kategori Dinas</label>
+                                <label class="form-label">Kewenangan Cluster</label>
                                 <select class="form-control edit_kategori" name="edit_kategori" id="edit_kategori"
                                     data-minimum-results-for-search="Infinity" data-fouc>
-                                    <option value="Ya">SPPD</option>
-                                    <option value="Tidak">Tidak SPPD</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
 
