@@ -45,12 +45,13 @@ $(document).ready(function(){
         });
 
         $('.datatable-cluster-sales').DataTable({
-            
             scrollX: true,
             scrollY: true,
             scrollCollapse: true,
             fixedColumns: true,
-            autofill:false
+            initComplete: function() {
+            $(this.api().table().container()).find('input').parent().wrap('<form>').parent().attr('autocomplete', 'off');
+    }
         });
 
         $('.datatable-perusahaan-admin').DataTable({
