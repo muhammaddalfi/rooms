@@ -118,8 +118,10 @@ class DashboardController extends Controller
             $olt = Olt::all();
             $data['total_cluster'] = $olt->count();
 
-            $kegiatan = Kegiatan::all();
-            $data['total_kegiatan'] = $kegiatan->count();
+            $kegiatan_query = DB::table('dailies')
+                                ->whereDate('created_at', Carbon::today())
+                                ->count();
+            $data['total_kegiatan'] = $kegiatan_query;
 
             $mpi = User::where('jenis_pengguna', 'leader_internal');
             $data['total_mpi'] = $mpi->count();
