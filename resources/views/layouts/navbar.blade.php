@@ -7,7 +7,7 @@
         </div>
 
         <div class="navbar-brand">
-            <a href="index.html" class="d-inline-flex align-items-center">
+            <a href="{{ route('home.dashboard') }}" class="d-inline-flex align-items-center">
                 <img src="{{ asset('assets/images/logo_icon.svg') }}" alt="">
 
             </a>
