@@ -35,6 +35,9 @@ $(document).ready(function(){
             scrollY: true,
             scrollCollapse: true,
             fixedColumns: true,
+            initComplete: function() {
+            $(this.api().table().container()).find('input').parent().wrap('<form>').parent().attr('autocomplete', 'off');
+            }
         });
 
         $('.datatable-cluster-jenis_kegiatan').DataTable({
@@ -42,6 +45,10 @@ $(document).ready(function(){
             scrollY: true,
             scrollCollapse: true,
             fixedColumns: true,
+            initComplete: function() {
+            $(this.api().table().container()).find('input').parent().wrap('<form>').parent().attr('autocomplete', 'off');
+            }
+            
         });
 
         $('.datatable-cluster-sales').DataTable({
@@ -51,13 +58,13 @@ $(document).ready(function(){
             fixedColumns: true,
             initComplete: function() {
             $(this.api().table().container()).find('input').parent().wrap('<form>').parent().attr('autocomplete', 'off');
-    }
+            }
         });
 
         $('.datatable-perusahaan-admin').DataTable({
             responsive: true,
             searching: false,
-            lengthChange: false
+            lengthChange: false,
         });
 
         $('.datatable-internal-admin').DataTable({
