@@ -23,9 +23,8 @@ class UplineController extends Controller
                 ->get();
         }
         if (auth()->user()->can('leader read')) {
-            $user = User::where('id_leader',auth()->user()->id)
-                ->where('jenis_pengguna','leader_perusahaan')
-                ->orwhere('jenis_pengguna','leader_internal')
+            $user = User::where('jenis_pengguna','leader_internal')
+                ->where('id_leader',auth()->user()->id)
                 ->get();
         }
 
@@ -174,7 +173,6 @@ class UplineController extends Controller
         if (auth()->user()->can('leader read')) {
             $anggota = User::where('id_leader',auth()->user()->id)
                     ->where('jenis_pengguna','anggota_internal')
-                    ->orWhere('jenis_pengguna','anggota_perusahaan')
                     ->get();
         }
        
