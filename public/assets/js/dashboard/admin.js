@@ -13,6 +13,9 @@ $(document).ready(function(){
     $('.tahun').select2({
     });
 
+    $("input[type='search']").wrap("<form>");
+    $("input[type='search']").closest("form").attr("autocomplete","off");
+
     $.extend( $.fn.dataTable.defaults, {
             autoWidth: false,
             columnDefs: [{ 
@@ -42,6 +45,7 @@ $(document).ready(function(){
         });
 
         $('.datatable-cluster-sales').DataTable({
+            
             scrollX: true,
             scrollY: true,
             scrollCollapse: true,
