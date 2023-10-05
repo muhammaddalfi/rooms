@@ -119,7 +119,7 @@ $(document).ready(function () {
                 } else {
 
                     console.log(response);
-                    let tanggal = moment(response.show.created_at).format('DD-MM-YYYY');
+                    let tanggal = moment(response.show.created_at).format('DD-MM-YYYY h:mm:ss');
 
                     $('#id_kegiatan').val(response.show.id);
                     $('#view_tanggal').html(tanggal);
