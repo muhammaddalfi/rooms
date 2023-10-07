@@ -125,6 +125,13 @@
                             <span>Tambah Permission</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('laporan.index') }}" class="nav-link">
+                            <i class="ph-calendar"></i>
+                            <span>Laporan Kegiatan</span>
+                        </a>
+                    </li>
                 @endrole
 
                 @role('gm')

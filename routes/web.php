@@ -8,6 +8,7 @@ use App\Http\Controllers\JenisKegiatanController;
 use App\Http\Controllers\JenisKeluhanController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KeluhanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
 use App\Http\Controllers\PasswordController;
@@ -124,6 +125,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/permission/{id}', [PermissionController::class, 'edit']);
     Route::put('/permission/{id}', [PermissionController::class, 'update']);
     Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
+
+
+    Route::get('/laporan',[LaporanController::class,'index'])->name('laporan.index');
+    Route::get('/laporan/fetch', [LaporanController::class, 'fetch']);
+    Route::get('/laporan/search', [LaporanController::class, 'search'])->name('laporan.search');
 
 });
 
