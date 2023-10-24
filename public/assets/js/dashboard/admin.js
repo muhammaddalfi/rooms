@@ -65,8 +65,6 @@ $(document).ready(function(){
             responsive: true,
             searching: false,
             lengthChange: false,
-            pageLength : 6,
-            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
         });
 
 
