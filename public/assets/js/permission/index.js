@@ -9,7 +9,7 @@ $(document).ready(function(){
         
         columns:[
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false },
-            {data:'name'},
+            {data:'nama_sales'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],

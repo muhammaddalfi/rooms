@@ -255,14 +255,14 @@ class DashboardController extends Controller
             $mpp = User::where('jenis_pengguna', 'leader_perusahaan');
             $data['total_mpp'] = $mpp->count();
 
-             $sales_query = "SELECT u.name as nama_sales
+            $sales_query = "SELECT u.name as nama_sales
                             FROM users u
                             WHERE u.jenis_pengguna IS NOT NULL
                             AND u.id NOT IN(SELECT user_id FROM dailies d WHERE DATE(d.created_at) = CURRENT_DATE())
                             GROUP BY u.name";
 
             $data['sales'] = DB::select($sales_query);
-            
+
             return view('dashboard.index', $data);
         }
 
@@ -482,6 +482,15 @@ class DashboardController extends Controller
 
             $mpp = User::where('jenis_pengguna', 'leader_perusahaan');
             $data['total_mpp'] = $mpp->count();
+
+            $sales_query = "SELECT u.name as nama_sales
+                            FROM users u
+                            WHERE u.jenis_pengguna IS NOT NULL
+                            AND u.id NOT IN(SELECT user_id FROM dailies d WHERE DATE(d.created_at) = CURRENT_DATE())
+                            GROUP BY u.name";
+
+            $data['sales'] = DB::select($sales_query);
+            
         return view('dashboard.index', $data);
     }
 
