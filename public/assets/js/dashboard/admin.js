@@ -61,16 +61,11 @@ $(document).ready(function(){
             }
         });
 
-        $('.datatable-perusahaan-admin').DataTable({
+        $('.datatable-sales-input').DataTable({
             responsive: true,
             searching: false,
             lengthChange: false,
-        });
-
-        $('.datatable-internal-admin').DataTable({
-            responsive: true,
-            searching: false,
-            lengthChange: false
+            pageLength : 6,
         });
 
 
