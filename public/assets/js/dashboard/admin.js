@@ -64,7 +64,6 @@ $(document).ready(function(){
         $('.datatable-sales-input').DataTable({
             responsive: true,
             searching: false,
-            lengthChange: false,
             pageLength : 5,
             lengthMenu: [
                 [ 10, 25, 50, -1 ],
