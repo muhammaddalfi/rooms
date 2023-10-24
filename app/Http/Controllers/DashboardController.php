@@ -257,7 +257,7 @@ class DashboardController extends Controller
 
             $sales_query = "SELECT u.name as nama_sales
                             FROM users u
-                            WHERE u.jenis_pengguna IS NOT NULL
+                            WHERE u.jenis_pengguna IS NOT NULL AND u.jenis_pengguna = 'leader_internal'
                             AND u.id NOT IN(SELECT user_id FROM dailies d WHERE DATE(d.created_at) = CURRENT_DATE())
                             GROUP BY u.name";
 
@@ -485,12 +485,12 @@ class DashboardController extends Controller
 
             $sales_query = "SELECT u.name as nama_sales
                             FROM users u
-                            WHERE u.jenis_pengguna IS NOT NULL
+                            WHERE u.jenis_pengguna IS NOT NULL AND u.jenis_pengguna = 'leader_internal'
                             AND u.id NOT IN(SELECT user_id FROM dailies d WHERE DATE(d.created_at) = CURRENT_DATE())
                             GROUP BY u.name";
 
             $data['sales'] = DB::select($sales_query);
-            
+
         return view('dashboard.index', $data);
     }
 
