@@ -149,7 +149,6 @@ $(document).ready(function () {
     var blob_image;
     $('#save').on('click', function (e) {
         e.preventDefault();
-
         var form = new FormData(daily);
         form.append('image_compressed', blob_image);
         $.ajax({
@@ -170,8 +169,6 @@ $(document).ready(function () {
                     $('#error_images').html(response.errors.catatan);
 
                 } else {
-
-                    $('#spinner').css("display", "none");
                     table.draw();
                     Swal.fire({
                         title: 'Sukses!',

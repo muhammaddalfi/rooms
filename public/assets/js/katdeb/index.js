@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-    var table = $('.datatable-permission').DataTable({
+    var table = $('.datatable-katdeb').DataTable({
         processing:true,
         serverSide:true,
         responsive: true,
-        ajax: '/permission/fetch',
+        ajax: '/katdeb/fetch',
         autoWidth: false,
         
         columns:[
@@ -23,20 +23,20 @@ $(document).ready(function(){
     });
 
     //add jenis_keluhan
-    $(document).on('click','.add_permission', function(e){
+    $(document).on('click','.add_katdeb', function(e){
         e.preventDefault();
-        $('#modal_permission').modal('show');   
+        $('#modal_katdeb').modal('show');   
 
     })
 
 
-    var permission = $('#form-permission')[0];
+    var katdeb = $('#form-katdeb')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form  = new FormData(permission);
+        var form  = new FormData(katdeb);
         // console.log(form);
         $.ajax({
-            url: '/permission',
+            url: '/katdeb',
             method:'POST',
             data: form,
             processData: false,
@@ -57,8 +57,8 @@ $(document).ready(function(){
                     icon: 'success'
                     });
 
-                    $('#modal_permission').modal('hide');
-                    $("#form-permission")[0].reset();
+                    $('#modal_katdeb').modal('hide');
+                    $("#form-katdeb")[0].reset();
                 }
             }
         })
@@ -69,16 +69,16 @@ $(document).ready(function(){
     $(document).on('click','.edit', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal_edit_permission').modal('show');
+        $('#modal_edit_katdeb').modal('show');
         $.ajax({
             type:"GET",
-            url:"/permission/" + id,
+            url:"/katdeb/" + id,
             success: function(response){
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
-                    $('#id_permission').val(response.permission.id);
-                    $('#edit_name').val(response.permission.name);
+                    $('#id_katdeb').val(response.katdeb.id);
+                    $('#edit_name').val(response.katdeb.name);
                 }
             }
         })
@@ -86,7 +86,7 @@ $(document).ready(function(){
 
    $(document).on('click', '.save', function(e){
         e.preventDefault();
-        var id = $('#id_permission').val();
+        var id = $('#id_katdeb').val();
         var data = {
             'edit_name': $('#edit_name').val(),
         }
@@ -99,7 +99,7 @@ $(document).ready(function(){
 
         $.ajax({
             type:"PUT",
-            url:"/permission/"+ id,
+            url:"/katdeb/"+ id,
             data: data,
             dataType:"json",
             success: function(response){
@@ -109,7 +109,7 @@ $(document).ready(function(){
                     text: 'Data berhasil disimpan!',
                     icon: 'success'
                 });
-                    $('#modal_edit_permission').modal('hide');
+                    $('#modal_edit_katdeb').modal('hide');
             
             }
         })
@@ -141,7 +141,7 @@ $(document).ready(function(){
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "/permission/" + id,
+                    url: "/katdeb/" + id,
                    
                     success: function(){
                         table.draw();

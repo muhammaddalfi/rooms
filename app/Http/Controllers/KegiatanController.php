@@ -255,13 +255,13 @@ class KegiatanController extends Controller
                 $ajax->catatan = $request->input('edit_catatan');
 
                 if ($request->hasFile('edit_gambar')) {
-                    $path = 'images/' . $ajax->gambar;
+                    $path = 'storage/files/' . $ajax->gambar;
                     if (File::exists($path)) {
                         File::delete($path);
                     }
                     $edit_gambar = $request->file('edit_gambar');
                     $format_name_edit_gambar = time() . '.' . $edit_gambar->extension();
-                    $edit_gambar->move('images/', $format_name_edit_gambar);
+                    $edit_gambar->move('storage/files/', $format_name_edit_gambar);
                     $ajax->gambar = $format_name_edit_gambar;
                 }
 

@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\BadDebController;
 use App\Http\Controllers\CalendarsController;
+use App\Http\Controllers\DashboardBaddebt;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardKeluhanController;
 use App\Http\Controllers\HaloController;
 use App\Http\Controllers\JenisKegiatanController;
 use App\Http\Controllers\JenisKeluhanController;
+use App\Http\Controllers\KategoriDebt;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KeluhanController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LaporanDebt;
 use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
 use App\Http\Controllers\PasswordController;
@@ -126,10 +130,29 @@ Route::middleware('auth')->group(function () {
     Route::put('/permission/{id}', [PermissionController::class, 'update']);
     Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
 
+    Route::get('/dashboard/baddebt', [DashboardBaddebt::class, 'index'])->name('dashboard');
+    Route::get('/baddeb', [BadDebController::class, 'index'])->name('baddeb.index');
+    Route::get('/baddeb/fetch', [BadDebController::class, 'fetch']);
+    Route::post('/baddeb', [BadDebController::class, 'store']);
+    Route::get('/baddeb/{id}', [BadDebController::class, 'edit']);
+    Route::post('/baddeb/{id}', [BadDebController::class, 'update']);
+    Route::delete('/baddeb/{id}', [BadDebController::class, 'destroy']);
+
+    Route::get('/katdeb', [KategoriDebt::class, 'index'])->name('katdeb.index');
+    Route::get('/katdeb/fetch', [KategoriDebt::class, 'fetch']);
+    Route::post('/katdeb', [KategoriDebt::class, 'store']);
+    Route::get('/katdeb/{id}', [KategoriDebt::class, 'edit']);
+    Route::put('/katdeb/{id}', [KategoriDebt::class, 'update']);
+    Route::delete('/katdeb/{id}', [KategoriDebt::class, 'destroy']);
+
 
     Route::get('/laporan',[LaporanController::class,'index'])->name('laporan.index');
     Route::get('/laporan/fetch', [LaporanController::class, 'fetch']);
     Route::get('/laporan/search', [LaporanController::class, 'search'])->name('laporan.search');
+
+    Route::get('/laporan/baddeb',[LaporanDebt::class,'index'])->name('laporan.baddeb');
+    Route::get('/laporan/baddeb', [LaporanDebt::class, 'fetch']);
+    Route::get('/laporan/baddeb/search', [LaporanDebt::class, 'search'])->name('laporan.search.baddeb');
 
 });
 
