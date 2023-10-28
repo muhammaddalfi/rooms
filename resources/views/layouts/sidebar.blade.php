@@ -1,4 +1,4 @@
-<div class="sidebar sidebar-main sidebar-expand-lg align-self-start sidebar-main-resized">
+<div class="sidebar sidebar-main sidebar-expand-lg align-self-start">
 
     <!-- Sidebar content -->
     <div class="sidebar-content">
