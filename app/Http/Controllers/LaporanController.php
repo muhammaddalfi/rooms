@@ -70,10 +70,6 @@ class LaporanController extends Controller
             ->rawColumns(['action', 'gambar'])
             ->make(true);
             
-        }
-
-
-
-       
+        }       
     }
 }

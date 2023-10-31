@@ -16,7 +16,8 @@
                                 <th>Nama</th>
                                 <th>ID PLN</th>
                                 <th>Layanan</th>
-                                <th>Status Pembayaran</th>
+                                <th>Status</th>
+                                <th>Follow up terakhir</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>

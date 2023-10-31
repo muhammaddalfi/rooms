@@ -260,9 +260,12 @@ class DashboardController extends Controller
                             WHERE u.jenis_pengguna IS NOT NULL AND u.jenis_pengguna = 'leader_internal'
                             AND u.id NOT IN(SELECT user_id FROM dailies d WHERE DATE(d.created_at) = CURRENT_DATE())
                             GROUP BY u.name";
-
             $data['sales'] = DB::select($sales_query);
-
+            
+            // $cluster_query = "SELECT COUNT(o.nama_olt) as jumlah
+            //                     FROM olts o 
+            //                     WHERE o.id NOT IN(SELECT nama_olt FROM dailies)";
+          
             return view('dashboard.index', $data);
         }
 

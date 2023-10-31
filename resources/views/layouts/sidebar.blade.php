@@ -146,12 +146,12 @@
                                 </a>
                             </li>
 
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('laporan.baddeb') }}" class="nav-link">
+                            <li class="nav-item">
+                                <a href="{{ route('report.index') }}" class="nav-link">
                                     <i class="ph-calendar"></i>
                                     <span>Laporan</span>
                                 </a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </li>
 

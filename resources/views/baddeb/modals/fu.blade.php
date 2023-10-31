@@ -94,6 +94,7 @@
                                     <label class="form-label">Follow Up Via</label>
                                     <select class="form-control follow_up_ya" name="follow_up_ya" id="follow_up_ya"
                                         data-minimum-results-for-search="Infinity" data-fouc>
+                                        <option></option>
                                         <option value="chat">Chat WA</option>
                                         <option value="call">Outbound Call</option>
                                         <option value="visit">Site Visit</option>
@@ -136,6 +137,11 @@
                                         </select>
                                     </div>
 
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label class="form-label">Keterangan</label>
+                                    <textarea rows="3" id="keterangan_ya" name="keterangan_ya" cols="3" class="form-control"></textarea>
                                 </div>
 
                             </div>

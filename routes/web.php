@@ -150,9 +150,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan/fetch', [LaporanController::class, 'fetch']);
     Route::get('/laporan/search', [LaporanController::class, 'search'])->name('laporan.search');
 
-    Route::get('/laporan/baddeb',[LaporanDebt::class,'index'])->name('laporan.baddeb');
-    Route::get('/laporan/baddeb', [LaporanDebt::class, 'fetch']);
-    Route::get('/laporan/baddeb/search', [LaporanDebt::class, 'search'])->name('laporan.search.baddeb');
+    Route::get('/report/baddeb',[LaporanDebt::class,'index'])->name('report.index');
+    Route::get('/report/fetch', [LaporanDebt::class, 'fetch']);
+    Route::get('/report/search', [LaporanDebt::class, 'search'])->name('report.search');
 
 });
 

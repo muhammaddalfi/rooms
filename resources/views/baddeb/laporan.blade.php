@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('laporan.search') }}" method="POST">
+                        <form action="{{ route('report.search') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-4">
@@ -26,7 +26,7 @@
                                 <th>ID PLN</th>
                                 <th>Layanan</th>
                                 <th>Status Pembayaran</th>
-                                <th class="text-center">Lihat</th>
+                                <th>Petugas</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +52,6 @@
     <script src="{{ asset('assets/js/moment/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/laporan/index.js') }}"></script>
+    <script src="{{ asset('assets/js/baddebt/laporan.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 @endpush

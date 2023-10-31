@@ -167,6 +167,7 @@ $(document).ready(function(){
             {data:'id_pln'},
             {data:'layanan'},
             {data:'status_bayar'},
+            {data:'updated_at'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -271,6 +272,8 @@ $(document).ready(function(){
         e.preventDefault();
         var id_pelanggan = $('#id_pelanggan').val();
         let from_dafa_fu =  new FormData(form_fu);
+
+        // console.log(from_dafa_fu);
         from_dafa_fu.append('gambar_1', blob_image_1);
         from_dafa_fu.append('gambar_2', blob_image_2);
         $.ajaxSetup({
@@ -302,43 +305,43 @@ $(document).ready(function(){
     });
 
 
-    $(document).on('click', '.edit', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        $('#modal_edit_beddeb').modal('show');
-        $.ajax({
-            type: "GET",
-            url: "/baddeb/" + id,
-            success: function (response) {
-                if (response.status == 404) {
-                    console.log("Data not found");
-                } else {
-                    console.log(response);
-                    // $('#id_daily').val(response.daily.id);
-                    let tgl_bayar = moment(response.pelanggan_baddeb.waktu_bayar).format('DD-MM-YYYY');
-                    $('#edit_nama').val(response.pelanggan_baddeb.nama_pelanggan);
-                    $('#edit_id_pln').val(response.pelanggan_baddeb.id_pln);
-                    $('#edit_telp').val(response.pelanggan_baddeb.telp);
-                    $('#edit_nik').val(response.pelanggan_baddeb.nik);
-                    $('#edit_select_layanan').val(response.pelanggan_baddeb.layanan).change();
-                    $('#edit_tagihan').val(response.pelanggan_baddeb.tagihan);
-                    $('#edit_alamat').val(response.pelanggan_baddeb.alamat);
-                    $('#edit_fu').val(response.pelanggan_baddeb.follow_up).change();
-                    $('#edit_tgl_bayar').val(tgl_bayar);
-                    $('#edit_kategori_debt').val(response.pelanggan_baddeb.kategori_debt).change();
-                    $('#edit_issue_bayar').val(response.pelanggan_baddeb.issue_bayar).change();
-                    $('#edit_select_status_bayar').val(response.pelanggan_baddeb.status_bayar).change();
+    // $(document).on('click', '.edit', function (e) {
+    //     e.preventDefault();
+    //     var id = $(this).data('id');
+    //     $('#modal_edit_beddeb').modal('show');
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/baddeb/" + id,
+    //         success: function (response) {
+    //             if (response.status == 404) {
+    //                 console.log("Data not found");
+    //             } else {
+    //                 console.log(response);
+    //                 // $('#id_daily').val(response.daily.id);
+    //                 let tgl_bayar = moment(response.pelanggan_baddeb.waktu_bayar).format('DD-MM-YYYY');
+    //                 $('#edit_nama').val(response.pelanggan_baddeb.nama_pelanggan);
+    //                 $('#edit_id_pln').val(response.pelanggan_baddeb.id_pln);
+    //                 $('#edit_telp').val(response.pelanggan_baddeb.telp);
+    //                 $('#edit_nik').val(response.pelanggan_baddeb.nik);
+    //                 $('#edit_select_layanan').val(response.pelanggan_baddeb.layanan).change();
+    //                 $('#edit_tagihan').val(response.pelanggan_baddeb.tagihan);
+    //                 $('#edit_alamat').val(response.pelanggan_baddeb.alamat);
+    //                 $('#edit_fu').val(response.pelanggan_baddeb.follow_up).change();
+    //                 $('#edit_tgl_bayar').val(tgl_bayar);
+    //                 $('#edit_kategori_debt').val(response.pelanggan_baddeb.kategori_debt).change();
+    //                 $('#edit_issue_bayar').val(response.pelanggan_baddeb.issue_bayar).change();
+    //                 $('#edit_select_status_bayar').val(response.pelanggan_baddeb.status_bayar).change();
                     
-                    $('#edit_my_icon').val(response.pelanggan_baddeb.myicon).change();
+    //                 $('#edit_my_icon').val(response.pelanggan_baddeb.myicon).change();
 
 
-                    $('#id_gambar_1').attr("src", "storage/files/" + response.pelanggan_baddeb.gambar_bayar_pelanggan);
-                    $('#id_gambar_2').attr("src", "storage/files/" + response.pelanggan_baddeb.gambar_bayar_icrm);
+    //                 $('#id_gambar_1').attr("src", "storage/files/" + response.pelanggan_baddeb.gambar_bayar_pelanggan);
+    //                 $('#id_gambar_2').attr("src", "storage/files/" + response.pelanggan_baddeb.gambar_bayar_icrm);
 
-                }
-            }
-        })
-    })
+    //             }
+    //         }
+    //     })
+    // })
 
     // var form_edit = $('#editDaily')[0];
     // $(document).on('submit', '#editDaily', function (e) {

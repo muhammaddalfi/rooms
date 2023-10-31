@@ -56,6 +56,7 @@ class BadDebController extends Controller
             $ajax->layanan = $request->input('select_layanan');
             $ajax->tagihan = $request->input('tagihan');
             $ajax->alamat = $request->input('alamat');
+            $ajax->user_id = auth()->user()->id;
             $ajax->save();
             return response()->json([
                 'status' => 200,
@@ -93,6 +94,7 @@ class BadDebController extends Controller
                     $ajax->waktu_bayar = Carbon::parse($request->input('tgl_bayar_ya'));
                     $ajax->kategori_debt = $request->input('kategori_debt_ya');
                     $ajax->issue_bayar = $request->input('issue_bayar_ya');
+                    $ajax->keterangan = $request->input('keterangan_ya');
                     $ajax->status_bayar = 'pending';
                 }
 
@@ -146,6 +148,10 @@ class BadDebController extends Controller
         
         return DataTables::of($baddebt)
             ->addIndexColumn()
+            ->addColumn('updated_at', function ($baddebt) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $baddebt->updated_at)->format('d-m-Y H:i');
+                return $formatDate;
+            })
             ->addColumn('action', function ($baddebt) {
             //   if($baddebt->is_minat == 'ya' || $baddebt->is_minat == 'pending' ){
             //      return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $baddebt->id . '"><i class="ph-pencil-simple"></i></a>';
