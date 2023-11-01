@@ -38,6 +38,8 @@ $(document).ready(function(){
         placeholder: 'Pilih'
     });
 
+    $('.edit_role').select2();
+
     var marketers = $('#form-marketer')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
@@ -88,12 +90,11 @@ $(document).ready(function(){
                 if(response.status == 404){
                     console.log("Data not found");
                 }else{
-                    console.log(response);
                     $('#id_pengguna').val(response.users.id);
                     $('#edit_nama_pengguna').val(response.users.name);
                     $('#edit_email_pengguna').val(response.users.email);
                     $('#edit_hp_pengguna').val(response.users.handphone);
-                    //$('#edit_role').val(response.users.role);
+                    $('#edit_role').val(response.role.roles.name);
                 }
             }
         })

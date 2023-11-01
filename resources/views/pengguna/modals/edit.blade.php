@@ -8,7 +8,7 @@
             @csrf
             <div class="modal-body">
                 @csrf
-                <input type="" id="id_pengguna">
+                <input type="hidden" id="id_pengguna">
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-sm-6">
@@ -46,7 +46,7 @@
                 <div class="mb-3">
                     <div class="col-sm-6">
                         <label class="form-label">Role</label>
-                        <select class="form-control edit_role" name="edit_role" id="edit_role">
+                        <select multiple ="multiple" class="form-control edit_role" name="edit_role[]" id="edit_role">
                             <option></option>
                             @foreach ($role as $item)
                                 <option value="{{ $item->id }}"> {{ $item->name }}

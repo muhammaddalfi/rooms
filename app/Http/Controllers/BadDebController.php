@@ -147,7 +147,7 @@ class BadDebController extends Controller
     {
         if(Auth::user()->hasRole(['admin','management'])){
              $baddebt = Baddeb::whereNotIn('status_bayar', ['close','lose'])->get();
-        }else if(Auth::user()->hasRole(['sales'])){
+        }else if(Auth::user()->hasRole(['sales','collection'])){
                 $baddebt = Baddeb::where('user_id', auth()->user()->id)
             ->whereNotIn('status_bayar', ['close','lose'])->get();
         }

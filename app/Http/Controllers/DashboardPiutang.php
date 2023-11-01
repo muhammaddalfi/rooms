@@ -52,5 +52,53 @@ class DashboardPiutang extends Controller
 
             return view('dashboard.piutang.index',$data);
         }
+        else if(Auth::user()->hasRole('collection')){
+               // Kategori Pie
+            $kategori_query = "SELECT d.name, COUNT(b.id) AS jumlah
+                                FROM debts d
+                                LEFT JOIN baddebs b ON b.kategori_debt = d.id
+                                WHERE b.user_id = '".Auth()->user()->id."'
+                                GROUP BY d.name
+                                ORDER BY d.name";
+            $kategori_count = DB::select($kategori_query);
+                $count_kategori = [];
+                foreach ($kategori_count as $value) {
+                    $count_kategori[] = [
+                        "name" => $value->name,
+                        "value" => $value->jumlah
+                    ];
+                }
+            $data['jumlah_kategori'] = $count_kategori;
+            // Kategori Pie
+
+            // Kategori Pie
+            $issue_query = "SELECT b.issue_bayar, COUNT(b.id) AS jumlah
+                    FROM baddebs b
+                    WHERE b.issue_bayar is NOT NULL
+                    AND b.user_id = '".Auth()->user()->id."'
+                    GROUP BY b.issue_bayar
+                    ORDER BY b.issue_bayar";
+            $issue_count = DB::select($issue_query);
+                $count_issue = [];
+                foreach ($issue_count as $value) {
+                    $count_issue[] = [
+                        "name" => $value->issue_bayar,
+                        "value" => $value->jumlah
+                    ];
+                }
+            $data['jumlah_issue'] = $count_issue;
+            // Kategori Pie
+
+            $pending = Baddeb::where('status_bayar', 'pending')->where('user_id', auth()->user()->id);
+            $data['total_pending'] = $pending->count();
+
+            $close = Baddeb::where('status_bayar', 'close')->where('user_id', auth()->user()->id);
+            $data['total_close'] = $close->count();
+
+            $lose = Baddeb::where('status_bayar', 'lose')->where('user_id', auth()->user()->id);
+            $data['total_lose'] = $lose->count();
+
+            return view('dashboard.piutang.index',$data);
+        }
     }
 }

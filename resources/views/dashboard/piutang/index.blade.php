@@ -36,7 +36,7 @@
                         <div class="d-flex align-items-center">
                             <i class="ph-smiley-sad ph-2x text-danger me-3"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">{{ $total_close }}</h4>
+                                <h4 class="mb-0">{{ $total_lose }}</h4>
                                 <span class="text-muted">Lose</span>
                             </div>
                         </div>

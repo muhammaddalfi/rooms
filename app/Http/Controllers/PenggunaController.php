@@ -30,7 +30,7 @@ class PenggunaController extends Controller
                 })
             ->addColumn('action', function ($user) {
                 return '
-                <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $user->id . '"><i class="ph-pencil-simple"></i></a>
+                <a href="'. url('/pengguna/edit',$user->id).'" class="btn btn-outline-primary btn-icon ml-2"><i class="ph-pencil-simple"></i></a>
                 <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $user->id . '"><i class="ph-trash"></i></a>';
             })
             ->rawColumns(['action','role'])
@@ -80,19 +80,25 @@ class PenggunaController extends Controller
     }
 
     public function edit($id)
-    {
+    {   
+
         $users = User::find($id);
-        if ($users) {
-            return response()->json([
-                'status' => 200,
-                'users' => $users,
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Users not found',
-            ]);
-        }
+        $role = Role::latest()->get();
+
+        // dd($users);
+        return view('pengguna.edit', compact('users','role'));
+        // if ($users) {
+        //     return response()->json([
+        //         'status' => 200,
+        //         'users' => $users,
+        //         'role' => $role
+        //     ]);
+        // } else {
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => 'Users not found',
+        //     ]);
+        // }
     }
 
      public function update(Request $request, $id)
@@ -123,26 +129,26 @@ class PenggunaController extends Controller
                 $user->name = $request->input('edit_nama_pengguna');
                 $user->email = $request->input('edit_email_pengguna');
                 $user->handphone = $request->input('edit_hp_pengguna');
-
-                // $user->givePermissionTo('gm read');
-                // $user->assignRole($request->input('edit_role'));
                 $user->syncRoles($request->input('edit_role'));
                 $user->update();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Data updated successfully',
-                ]);
+
+                return redirect('pengguna')->with('status', 'Data berhasil ditambahkan!');
+                // return response()->json([
+                //     'status' => 200,
+                //     'message' => 'Data updated successfully',
+                // ]);
             } else {
-                // $user = User::find($id);
-                // $user->name = $request->input('edit_nama');
-                // $user->email = $request->input('edit_email');
-                // $user->handphone = $request->input('edit_handphone');
-                // $user->role = $request->input('edit_role');
-                // $user->jenis_pengguna = $request->input('edit_jenis_pengguna');
-                // $user->nama_perusahaan = $request->input('edit_nama_perusahaan');
-                // $user->nama_upline = $request->input('edit_nama_upline');
-                // $user->password = bcrypt($request->input('edit_password'));
-                // $user->update();
+                $user = User::find($id);
+                $user->name = $request->input('edit_nama');
+                $user->email = $request->input('edit_email');
+                $user->handphone = $request->input('edit_handphone');
+                $user->syncRoles($request->input('edit_role'));
+                $user->jenis_pengguna = $request->input('edit_jenis_pengguna');
+                $user->nama_perusahaan = $request->input('edit_nama_perusahaan');
+                $user->nama_upline = $request->input('edit_nama_upline');
+                $user->password = bcrypt($request->input('edit_password'));
+                $user->update();
+                return redirect('pengguna')->with('status', 'Data berhasil ditambahkan!');
                 // return response()->json([
                 //     'status' => 200,
                 //     'message' => 'Data updated successfully',
