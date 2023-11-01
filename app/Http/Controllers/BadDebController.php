@@ -6,6 +6,7 @@ use App\Models\Baddeb;
 use App\Models\Debt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -144,8 +145,15 @@ class BadDebController extends Controller
 
     public function fetch()
     {
-        $baddebt = Baddeb::whereNotIn('status_bayar', ['close','lose'])->get();
+        if(Auth::user()->hasRole(['admin','management'])){
+             $baddebt = Baddeb::whereNotIn('status_bayar', ['close','lose'])->get();
+        }else if(Auth::user()->hasRole(['sales'])){
+                $baddebt = Baddeb::where('user_id', auth()->user()->id)
+            ->whereNotIn('status_bayar', ['close','lose'])->get();
+        }
+        // $baddebt = Baddeb::all();
         
+        // dd($baddebt);
         return DataTables::of($baddebt)
             ->addIndexColumn()
             ->addColumn('updated_at', function ($baddebt) {
@@ -153,11 +161,11 @@ class BadDebController extends Controller
                 return $formatDate;
             })
             ->addColumn('action', function ($baddebt) {
-            //   if($baddebt->is_minat == 'ya' || $baddebt->is_minat == 'pending' ){
-            //      return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $baddebt->id . '"><i class="ph-pencil-simple"></i></a>';
-            //   }
-            //   return '<a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 fu" data-id="' . $baddebt->id . '"><i class="ph-phone-outgoing"></i></a>';
-            return '<a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 fu" data-id="' . $baddebt->id . '"><i class="ph-phone-outgoing"></i></a>';
+            if(auth()->user()->can('piutang edit')){
+                 return '<a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 fu" data-id="' . $baddebt->id . '"><i class="ph-phone-outgoing"></i></a>';
+            }else{
+                return '';
+            }
             })
             
             ->rawColumns(['action'])

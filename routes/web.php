@@ -3,8 +3,10 @@
 use App\Http\Controllers\BadDebController;
 use App\Http\Controllers\CalendarsController;
 use App\Http\Controllers\DashboardBaddebt;
+use App\Http\Controllers\DashboardCluster;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardKeluhanController;
+use App\Http\Controllers\DashboardPiutang;
 use App\Http\Controllers\HaloController;
 use App\Http\Controllers\JenisKegiatanController;
 use App\Http\Controllers\JenisKeluhanController;
@@ -30,8 +32,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home.dashboard');
+    Route::get('/dashboard/cluster',[DashboardCluster::class,'home'])->name('dashboard.cluster');
+    Route::get('/dashboard/keluhan', [DashboardKeluhanController::class, 'home'])->name('dashboard.keluhan');
+    Route::get('/dashboard/piutang', [DashboardPiutang::class, 'home'])->name('dashboard.piutang');
+
     Route::put('/update/password/{id}',[PasswordController::class,'update']);
-    Route::post('/home/search', [DashboardController::class, 'home_cari'])->name('home.cari');
+
+    Route::post('/dashboard/cluster/search', [DashboardCluster::class, 'home_cari'])->name('cluster.cari');
 
     Route::get('/dailys', [KegiatanController::class, 'home'])->name('daily.dashboard');
     Route::post('/dailys/store', [KegiatanController::class, 'store']);
@@ -61,8 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.dashboard');
     Route::post('/pengguna/store', [PenggunaController::class, 'store']);
     Route::get('/pengguna/fetch', [PenggunaController::class, 'fetch']);
-    // Route::get('/pengguna/edit/{id}', [PenggunaController::class,'edit']);
-    // Route::put('/pengguna/update/{id}', [PenggunaController::class,'update']);
+    Route::get('/pengguna/edit/{id}', [PenggunaController::class,'edit']);
+    Route::put('/pengguna/update/{id}', [PenggunaController::class,'update']);
     Route::delete('/pengguna/delete/{id}', [PenggunaController::class, 'destroy']);
 
     Route::get('/upline', [UplineController::class, 'index'])->name('upline.dashboard');
@@ -104,8 +111,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/keluhan/fetch', [KeluhanController::class, 'keluhan']);
     Route::get('/keluhan/show/{id}', [KeluhanController::class, 'show']);
 
-    
-    Route::get('/dashboard/keluhan', [DashboardKeluhanController::class, 'home'])->name('dashboard.keluhan');
     Route::post('/keluhan/search', [DashboardKeluhanController::class, 'home_cari'])->name('cari.keluhan');
 
     Route::get('/jenis_keluhan', [JenisKeluhanController::class, 'home'])->name('jenis_keluhan.dashboard');
@@ -117,6 +122,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/role', [RoleController::class, 'index'])->name('role.index');
+    Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
     Route::get('/role/fetch', [RoleController::class, 'fetch']);
     Route::post('/role', [RoleController::class, 'store']);
     Route::get('/role/{id}', [RoleController::class, 'edit']);
@@ -144,7 +150,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/katdeb/{id}', [KategoriDebt::class, 'edit']);
     Route::put('/katdeb/{id}', [KategoriDebt::class, 'update']);
     Route::delete('/katdeb/{id}', [KategoriDebt::class, 'destroy']);
-
 
     Route::get('/laporan',[LaporanController::class,'index'])->name('laporan.index');
     Route::get('/laporan/fetch', [LaporanController::class, 'fetch']);

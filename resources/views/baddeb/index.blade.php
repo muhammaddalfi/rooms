@@ -5,10 +5,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body">
-                        <a href='#' class="btn btn-light add_beddeb" data-toggle="modal" data-target="#modal_beddeb"><i
-                                class="ph-plus-circle me-2"></i>Tambah Pelanggan</a>
-                    </div>
+                    @can('piutang create')
+                        <div class="card-body">
+                            <a href='#' class="btn btn-light add_beddeb" data-toggle="modal" data-target="#modal_beddeb"><i
+                                    class="ph-plus-circle me-2"></i>Tambah Pelanggan</a>
+                        </div>
+                    @endcan
                     <table class="table datatable-baddeb">
                         <thead>
                             <tr>

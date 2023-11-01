@@ -20,8 +20,15 @@ class RadiusController extends Controller
         $radius = Radiusmap::all();
         return DataTables::of($radius)
             ->addIndexColumn()
+
             ->addColumn('action', function ($radius) {
-                return '<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $radius->id . '"><i class="ph-pencil-simple"></i></a>';
+                $btn = '';
+                 if (auth()->user()->can('radius edit')) {
+                        $btn = $btn . ' <a href="javascript:void(0)"  onClick="Delete(this.id)" data-toggle="tooltip"  id="' . $radius->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteRole">Delete</a>';
+                    } else {
+                        $btn = $btn . '';
+                    }
+                return $btn;
             })
             ->rawColumns(['action'])
             ->make(true);

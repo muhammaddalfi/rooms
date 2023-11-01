@@ -18,17 +18,15 @@ class UplineController extends Controller
 
     public function fetch()
     {
-        if (auth()->user()->can('admin read')) {
-            $user = User::where('jenis_pengguna','leader_internal')
+        if (Auth::user()->hasRole('admin')) {
+                $user = User::where('jenis_pengguna','leader_internal')
                 ->get();
         }
-        if (auth()->user()->can('leader read')) {
-            $user = User::where('jenis_pengguna','leader_internal')
+        if (Auth::user()->hasRole('sales')) {
+                $user = User::where('jenis_pengguna','leader_internal')
                 ->where('id_leader',auth()->user()->id)
                 ->get();
         }
-
-        
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('anggota', function ($user) {
@@ -120,7 +118,6 @@ class UplineController extends Controller
 
     public function store(Request $request)
     {
-        //
         $rule = [
             'nama_leader' => 'required',
             'email_leader' => 'required',
@@ -153,7 +150,7 @@ class UplineController extends Controller
 
             $ajax->save();
 
-            $ajax->assignRole('leader'); // hardcode assign role
+            $ajax->assignRole('sales'); // hardcode assign role
 
             $user = User::where('id',$ajax->id);
             $user->update(['id_leader' => $ajax->id]);
@@ -166,14 +163,15 @@ class UplineController extends Controller
 
     public function show_anggota()
     {
-        if (auth()->user()->can('admin read')) {
-             $anggota = User::where('jenis_pengguna','anggota_internal')
-                    ->get();
+        if (Auth::user()->hasRole('admin')) {
+                $anggota = User::where('jenis_pengguna','anggota_internal')
+                ->get();
         }
-        if (auth()->user()->can('leader read')) {
-            $anggota = User::where('id_leader',auth()->user()->id)
-                    ->where('jenis_pengguna','anggota_internal')
-                    ->get();
+
+        if (Auth::user()->hasRole('sales')) {
+                $anggota = User::where('jenis_pengguna','anggota_internal')
+                ->where('id_leader',auth()->user()->id)
+                ->get();
         }
        
         return DataTables::of($anggota)
@@ -213,22 +211,19 @@ class UplineController extends Controller
 
 
             $ajax = new User();
-            $password = implode('@', explode('@', $request->input('email_anggota_leader'), -1));
-            $ajax->id_leader = $request->input('id_pic');
-            $ajax->leader = $request->input('nama_pic');
-            $ajax->name = $request->input('nama_anggota_leader');
-            $ajax->email = $request->input('email_anggota_leader');
-            $ajax->handphone = $request->input('hp_anggota_leader');
-
-            if(auth()->user()->jenis_pengguna == 'leader_perusahaan'){                  
-            $ajax->jenis_pengguna = 'anggota_perusahaan';
-            }else if(auth()->user()->jenis_pengguna == 'leader_internal'){
-            $ajax->jenis_pengguna = 'anggota_internal';
+            if(Auth::user()->hasRole(['admin','sales'])){
+                $password = implode('@', explode('@', $request->input('email_anggota_leader'), -1));
+                $ajax->id_leader = $request->input('id_pic');
+                $ajax->leader = $request->input('nama_pic');
+                $ajax->name = $request->input('nama_anggota_leader');
+                $ajax->email = $request->input('email_anggota_leader');
+                $ajax->handphone = $request->input('hp_anggota_leader');
+                $ajax->jenis_pengguna = 'anggota_internal';
+                $ajax->password = bcrypt($password);
+                $ajax->save();
+                $ajax->assignRole('mitra'); // hardcode assign role
             }
-            $ajax->password = bcrypt($password);
 
-            $ajax->save();
-            $ajax->assignRole('user'); // hardcode assign role
             return response()->json([
                 'status' => 200,
                 'message' => 'Data tersimpan',

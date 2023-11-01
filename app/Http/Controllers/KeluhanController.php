@@ -9,6 +9,7 @@ use App\Models\Olt;
 use App\Models\Radiusmap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -101,16 +102,7 @@ class KeluhanController extends Controller
 
     public function keluhan()
     {
-        if (auth()->user()->can('admin read')) {
-            $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan']);
-        }
-        if (auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')) {
-            $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan']);
-        }
-        if (auth()->user()->can('leader read')) {
-            // $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan'])
-            //     ->where('user_id', Auth()->user()->id)
-            //     ->orderBy('id', 'desc')->get();
+        if(Auth::user()->hasRole('sales')){
              $keluhan_raw = "SELECT k.*, u.name AS nama_sales, o.nama_olt AS nama_olt, jk.jenis_keluhan
                             FROM keluhans k
                             LEFT JOIN users u ON u.id = k.user_id
@@ -118,13 +110,27 @@ class KeluhanController extends Controller
                             LEFT JOIN jenis_keluhans jk ON jk.id = k.keluhan_id
                             WHERE k.user_id IN (SELECT id FROM users WHERE id_leader = '".Auth()->user()->id."')
                             ORDER BY k.id DESC";
-
             $keluhan = DB::select($keluhan_raw);
         }
-        if (auth()->user()->can('user read')) {
-            $keluhan = Keluhan::with(['user', 'olt', 'jenis_keluhan'])
-                ->where('user_id', Auth()->user()->id)
-                ->orderBy('id', 'desc')->get();
+
+        else if(Auth::user()->hasRole('mitra')){
+            $keluhan_raw = "SELECT k.*, u.name AS nama_sales, o.nama_olt AS nama_olt, jk.jenis_keluhan
+                            FROM keluhans k
+                            LEFT JOIN users u ON u.id = k.user_id
+                            LEFT JOIN olts o ON o.id = k.nama_olt
+                            LEFT JOIN jenis_keluhans jk ON jk.id = k.keluhan_id
+                            WHERE k.user_id = '".Auth()->user()->id."'
+                            ORDER BY k.id DESC";
+            $keluhan = DB::select($keluhan_raw);
+        }
+        else if(Auth::user()->hasRole(['admin','management'])){
+            $keluhan_raw = "SELECT k.*, u.name AS nama_sales, o.nama_olt AS nama_olt, jk.jenis_keluhan
+                            FROM keluhans k
+                            LEFT JOIN users u ON u.id = k.user_id
+                            LEFT JOIN olts o ON o.id = k.nama_olt
+                            LEFT JOIN jenis_keluhans jk ON jk.id = k.keluhan_id
+                            ORDER BY k.id DESC";
+            $keluhan = DB::select($keluhan_raw);
         }
 
         return DataTables::of($keluhan)
@@ -141,8 +147,6 @@ class KeluhanController extends Controller
             ->addColumn('action', function ($keluhan) {
                 return '
                 <a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $keluhan->id . '"><i class="ph-eye"></i></a>';
-                // <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $keluhan->id . '"><i class="ph-pencil-simple"></i></a>
-                // <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $keluhan->id . '"><i class="ph-trash"></i></a>';
             })
 
             ->rawColumns(['action', 'gambar'])

@@ -4,7 +4,7 @@
     <div class="content">
         <!-- Basic responsive configuration -->
         <div class="card">
-            @can('admin read')
+            @can('olt create')
                 <div class="card-body">
                     <a href='#' class="btn btn-light add_olt" data-toggle="modal" data-target="#modal_olt"><i
                             class="ph-plus-circle me-2"></i>Tambah Nama OLT</a>

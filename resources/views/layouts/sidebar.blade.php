@@ -32,158 +32,190 @@
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
 
-                @role('admin')
+                @can('monster read')
                     <li class="nav-item nav-item-submenu">
                         <a href="#" class="nav-link">
                             <i class="ph-finn-the-human"></i>
                             <span>MONSTER</span>
                         </a>
                         <ul class="nav-group-sub collapse" data-submenu-title="Layouts">
-                            <li class="nav-item">
-                                <a href="{{ route('home.dashboard') }}" class="nav-link">
-                                    <i class="ph-graph"></i>
-                                    <span>Dashboard Cluster</span>
-                                </a>
-                            </li>
 
-                            <li class="nav-item">
-                                <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
-                                    <i class="ph-smiley-sad"></i>
-                                    <span>Dashboard Keluhan</span>
-                                </a>
-                            </li>
+                            @can('dashboard cluster')
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.cluster') }}" class="nav-link">
+                                        <i class="ph-graph"></i>
+                                        <span>Dashboard Cluster</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('daily.dashboard') }}" class="nav-link">
-                                    <i class="ph-camera"></i>
-                                    <span>Kegiatan Cluster</span>
-                                </a>
-                            </li>
+                            @can('dashboard keluhan')
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
+                                        <i class="ph-smiley-sad"></i>
+                                        <span>Dashboard Keluhan</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
-                                    <i class="ph-chat-circle-text"></i>
-                                    <span>Keluhan Cluster</span>
-                                </a>
-                            </li>
+                            @can('kegiatan read')
+                                <li class="nav-item">
+                                    <a href="{{ route('daily.dashboard') }}" class="nav-link">
+                                        <i class="ph-camera"></i>
+                                        <span>Kegiatan Cluster</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('olt.dashboard') }}" class="nav-link">
-                                    <i class="ph-broadcast"></i>
-                                    <span>Nama Cluster</span>
-                                </a>
-                            </li>
+                            @can('keluhan read')
+                                <li class="nav-item">
+                                    <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
+                                        <i class="ph-chat-circle-text"></i>
+                                        <span>Keluhan Cluster</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('laporan.index') }}" class="nav-link">
-                                    <i class="ph-calendar"></i>
-                                    <span>Laporan Kegiatan</span>
-                                </a>
-                            </li>
+                            @can('olt read')
+                                <li class="nav-item">
+                                    <a href="{{ route('olt.dashboard') }}" class="nav-link">
+                                        <i class="ph-broadcast"></i>
+                                        <span>Nama Cluster</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('activity.dashboard') }}" class="nav-link">
-                                    <i class="ph-activity"></i>
-                                    <span>Jenis Kegiatan</span>
-                                </a>
-                            </li>
+                            @can('laporan read')
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan.index') }}" class="nav-link">
+                                        <i class="ph-calendar"></i>
+                                        <span>Laporan Kegiatan</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('jenis_keluhan.dashboard') }}" class="nav-link">
-                                    <i class="ph-smiley-sad"></i>
-                                    <span>Jenis Keluhan</span>
-                                </a>
-                            </li>
+                            @can('kategori kegiatan read')
+                                <li class="nav-item">
+                                    <a href="{{ route('activity.dashboard') }}" class="nav-link">
+                                        <i class="ph-activity"></i>
+                                        <span>kategori Kegiatan</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('upline.dashboard') }}" class="nav-link">
-                                    <i class="ph-git-fork"></i>
-                                    <span>PIC Internal</span>
-                                </a>
-                            </li>
+                            @can('kategori keluhan read')
+                                <li class="nav-item">
+                                    <a href="{{ route('jenis_keluhan.dashboard') }}" class="nav-link">
+                                        <i class="ph-smiley-sad"></i>
+                                        <span>Kategori Keluhan</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('mpp.dashboard') }}" class="nav-link">
-                                    <i class="ph-user-list"></i>
-                                    <span>PIC Perusahaan</span>
-                                </a>
-                            </li>
+                            @can('sales read')
+                                <li class="nav-item">
+                                    <a href="{{ route('upline.dashboard') }}" class="nav-link">
+                                        <i class="ph-git-fork"></i>
+                                        <span>Sales Internal</span>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('radius.dashboard') }}" class="nav-link">
-                                    <i class="ph-map-pin"></i>
-                                    <span>Radius Cluster</span>
-                                </a>
-                            </li>
+                            @can('perusahaan read')
+                                <li class="nav-item">
+                                    <a href="{{ route('mpp.dashboard') }}" class="nav-link">
+                                        <i class="ph-user-list"></i>
+                                        <span>Sales Perusahaan</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('radius read')
+                                <li class="nav-item">
+                                    <a href="{{ route('radius.dashboard') }}" class="nav-link">
+                                        <i class="ph-map-pin"></i>
+                                        <span>Radius Cluster</span>
+                                    </a>
+                                </li>
+                            @endcan
 
                         </ul>
                     </li>
+                @endcan
+                {{-- {{ dd(auth()->user()->status) }} --}}
+                @if (auth()->user()->status)
+                    @can('muntang read')
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link">
+                                <i class="ph-layout"></i>
+                                <span>MUNTANG</span>
+                            </a>
 
-                    <li class="nav-item nav-item-submenu">
-                        <a href="#" class="nav-link">
-                            <i class="ph-layout"></i>
-                            <span>MUNTANG</span>
-                        </a>
+                            <ul class="nav-group-sub collapse" data-submenu-title="Layouts">
 
-                        <ul class="nav-group-sub collapse" data-submenu-title="Layouts">
-                            <li class="nav-item">
-                                <a href="{{ route('dashboard') }}" class="nav-link">
-                                    <i class="ph-chart-pie-slice"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('baddeb.index') }}" class="nav-link">
-                                    <i class="ph-currency-circle-dollar"></i>
-                                    <span>Data Piutang</span>
-                                </a>
-                            </li>
+                                @can('dashboard piutang')
+                                    <li class="nav-item">
+                                        <a href="{{ route('dashboard.piutang') }}" class="nav-link">
+                                            <i class="ph-chart-pie-slice"></i>
+                                            <span>Dashboard</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                <li class="nav-item">
+                                    <a href="{{ route('baddeb.index') }}" class="nav-link">
+                                        <i class="ph-currency-circle-dollar"></i>
+                                        <span>Data Piutang</span>
+                                    </a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a href="{{ route('katdeb.index') }}" class="nav-link">
-                                    <i class="ph-diamonds-four"></i>
-                                    <span>Kategori Telat Bayar</span>
-                                </a>
-                            </li>
+                                @can('kategori piutang read')
+                                    <li class="nav-item">
+                                        <a href="{{ route('katdeb.index') }}" class="nav-link">
+                                            <i class="ph-diamonds-four"></i>
+                                            <span>Kategori Telat Bayar</span>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                            <li class="nav-item">
-                                <a href="{{ route('report.index') }}" class="nav-link">
-                                    <i class="ph-calendar"></i>
-                                    <span>Laporan</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('report.index') }}" class="nav-link">
+                                        <i class="ph-calendar"></i>
+                                        <span>Laporan</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endcan
+                @endif
 
-
-
-
-
-
-
-
+                @can('user read')
                     <li class="nav-item">
                         <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
                             <i class="ph-user-plus"></i>
-                            <span>Tambah Admin</span>
+                            <span>Tambah Pengguna</span>
                         </a>
                     </li>
+                @endcan
 
+                @can('role read')
                     <li class="nav-item">
                         <a href="{{ route('role.index') }}" class="nav-link">
                             <i class="ph-lock"></i>
                             <span>Tambah Role</span>
                         </a>
                     </li>
+                @endcan
+
+                @can('permission read')
                     <li class="nav-item">
                         <a href="{{ route('permission.index') }}" class="nav-link">
                             <i class="ph-lock"></i>
                             <span>Tambah Permission</span>
                         </a>
                     </li>
-                @endrole
+                @endcan
 
-                @role('gm')
+                {{-- @role('gm')
                     <li class="nav-item">
                         <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
                             <i class="ph-smiley-sad"></i>
@@ -265,7 +297,7 @@
                             <span>Keluhan Cluster</span>
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
                 <!-- /layout -->
 
             </ul>

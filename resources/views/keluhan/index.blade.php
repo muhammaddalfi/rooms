@@ -11,12 +11,12 @@
 
         <div class="row">
             <div class="card">
-                <div class="card-body">
-                    <a href='#' class="btn btn-light tambah_keluhan" data-toggle="modal" data-target="#modal_keluhan"><i
-                            class="ph-plus-circle me-2"></i>Tambah Keluhan</a>
-
-
-                </div>
+                @can('keluhan create')
+                    <div class="card-body">
+                        <a href='#' class="btn btn-light tambah_keluhan" data-toggle="modal" data-target="#modal_keluhan"><i
+                                class="ph-plus-circle me-2"></i>Tambah Keluhan</a>
+                    </div>
+                @endcan
                 <table class="table datatable-responsive">
                     <thead>
                         <tr>

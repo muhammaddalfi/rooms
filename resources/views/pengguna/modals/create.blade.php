@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label">Role</label>
-                                <select class="form-control role" name="role" id="role" data-fouc>
+                                <select multiple ="multiple" class="form-control role" name="role[]" id="role">
                                     <option></option>
                                     @foreach ($role as $item)
                                         <option value="{{ $item->id }}"> {{ $item->name }}

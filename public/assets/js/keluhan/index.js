@@ -241,9 +241,9 @@ $(document).ready(function () {
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'created_at' },
-            { data: 'user.name' },
-            { data: 'olt.nama_olt' },
-            { data: 'jenis_keluhan.jenis_keluhan' },
+            { data: 'nama_sales' },
+            { data: 'nama_olt' },
+            { data: 'jenis_keluhan' },
             { data: 'gambar' },
             { data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false, width: 220 }
         ],

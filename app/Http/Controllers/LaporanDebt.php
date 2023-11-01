@@ -18,7 +18,8 @@ class LaporanDebt extends Controller
     {
         if($request->ajax())
         {
-               $data = Baddeb::whereNotIn('status_bayar', ['close'])->get();
+               $data = Baddeb::where('user_id', auth()->user()->id)
+               ->whereNotIn('status_bayar', ['close'])->get();
                if($request->filled('from_date') && $request->filled('end_date'))
                {
                     // $data_raw = "SELECT *
@@ -31,6 +32,7 @@ class LaporanDebt extends Controller
                                     FROM baddebs b
                                     WHERE status_bayar IN('close')
                                     AND created_at BETWEEN ? AND ?
+                                    AND b.user_id = '".Auth()->user()->id."'
                                     ORDER BY id DESC";
                     $data = DB::select($data_raw,[$request->from_date,$request->end_date]);
                }

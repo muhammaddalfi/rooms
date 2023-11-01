@@ -12,6 +12,7 @@ $(document).ready(function(){
             {data:'name'},
             {data:'email'},
             {data:'handphone'},
+            {data:'role'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -78,22 +79,85 @@ $(document).ready(function(){
      $(document).on('click','.edit', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal_edit_admin').modal('show');
-        // $.ajax({
-        //     type:"GET",
-        //     url:"/upline/edit/" + id,
-        //     success: function(response){
-        //         if(response.status == 404){
-        //             console.log("Data not found");
-        //         }else{
-        //             $('#id_leader').val(response.leader.id);
-        //             $('#edit_nama_leader').val(response.leader.name);
-        //             $('#edit_email_leader').val(response.leader.email);
-        //             $('#edit_handphone_leader').val(response.leader.handphone);
-        //         }
-        //     }
-        // })
+        console.log(id);
+        $('#modal_edit_pengguna').modal('show');
+        $.ajax({
+            type:"GET",
+            url:"/pengguna/edit/" + id,
+            success: function(response){
+                if(response.status == 404){
+                    console.log("Data not found");
+                }else{
+                    console.log(response);
+                    $('#id_pengguna').val(response.users.id);
+                    $('#edit_nama_pengguna').val(response.users.name);
+                    $('#edit_email_pengguna').val(response.users.email);
+                    $('#edit_hp_pengguna').val(response.users.handphone);
+                    //$('#edit_role').val(response.users.role);
+                }
+            }
+        })
     })
+
+    $(document).on('click', '.update', function(e){
+        e.preventDefault();
+        var id = $('#id_pengguna').val();
+        var data = {
+            'edit_nama_pengguna': $('#edit_nama_pengguna').val(),
+            'edit_email_pengguna': $('#edit_email_pengguna').val(),
+            'edit_hp_pengguna': $('#edit_hp_pengguna').val(),
+            'edit_role': $('#edit_role').val()
+        }
+
+        // console.log(data);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type:"PUT",
+            url:"/pengguna/update/"+ id,
+            data: data,
+            dataType:"json",
+
+            success: function(response){
+                console.log(response);
+                if(response.status == 400){
+
+                    $('#error_edit_nama_pengguna').html(response.errors.edit_nama_pengguna);
+                    $('#error_edit_email_pengguna').html(response.errors.edit_email_pengguna);
+                    $('#error_edit_hp_pengguna').html(response.errors.edit_hp_pengguna);
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal disimpan!',
+                        icon: 'error'
+                    });
+                        
+                }else if(response.status == 404){
+                     Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal ditemukan!',
+                        icon: 'error'
+                    });
+                    
+                }else{
+                    table.draw();
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data berhasil disimpan!',
+                        icon: 'success'
+                    });
+                    $('#modal_edit_pengguna').modal('hide');
+                }
+            
+            }
+        })
+
+    });
 
     //delete
     $(document).on('click', '.delete', function(e){

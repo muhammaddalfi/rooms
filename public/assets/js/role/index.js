@@ -10,6 +10,7 @@ $(document).ready(function(){
         columns:[
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false },
             {data:'name'},
+            {data:'permission'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],
@@ -33,11 +34,11 @@ $(document).ready(function(){
     });
 
 
-    var jenis_keluhan = $('#form-role')[0];
+    var form_role = $('#form-role')[0];
     $('#save').on('click',function(e){
         e.preventDefault();
-        var form  = new FormData(jenis_keluhan);
-        // console.log(data);
+        // console.log('clik');
+        var form  = new FormData(form_role);
         $.ajax({
             url: '/role',
             method:'POST',
@@ -49,7 +50,7 @@ $(document).ready(function(){
                 if(response.status == 400)
                 {
                     console.log(response);
-                    $('#error_name').html(response.errors.name);
+                    // $('#error_name').html(response.errors.role);
                   
                 }else{
                    console.log(response); 
@@ -59,8 +60,6 @@ $(document).ready(function(){
                     text: 'Data berhasil disimpan',
                     icon: 'success'
                     });
-
-                    $('#modal_role').modal('hide');
                     $("#form-role")[0].reset();
                 }
             }
@@ -87,37 +86,42 @@ $(document).ready(function(){
         })
     })
 
-   $(document).on('click', '.save', function(e){
-        e.preventDefault();
-        var id = $('#id_role').val();
-        var data = {
-            'edit_name': $('#edit_name').val(),
-        }
+    
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+//    $(document).on('click', '.save', function(e){
+//         e.preventDefault();
+//         var id = $('#id_role').val();
+        
 
-        $.ajax({
-            type:"PUT",
-            url:"/role/"+ id,
-            data: data,
-            dataType:"json",
-            success: function(response){
-            table.draw();
-              Swal.fire({
-                    title: 'Suksess!',
-                    text: 'Data berhasil disimpan!',
-                    icon: 'success'
-                });
-                    $('#modal_edit_role').modal('hide');
+//         var data = {
+//             'role': $('#role').val(),
+//             'permission[]': $('#permission[]').val(),
+//         }
+
+//         $.ajaxSetup({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         });
+
+//         $.ajax({
+//             type:"PUT",
+//             url:"/role/"+ id,
+//             data: data,
+//             dataType:"json",
+//             success: function(response){
+//             table.draw();
+//               Swal.fire({
+//                     title: 'Suksess!',
+//                     text: 'Data berhasil disimpan!',
+//                     icon: 'success'
+//                 });
+//                     $('#modal_edit_role').modal('hide');
             
-            }
-        })
+//             }
+//         })
 
-    });
+//     });
 
 
     //delete

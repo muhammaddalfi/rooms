@@ -4,7 +4,7 @@
     @can('piutang read')
         <div class="content">
             <div class="row">
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-4 col-xl-3">
                     <div class="card card-body">
                         <div class="d-flex align-items-center">
                             <i class="ph-hourglass ph-2x text-warning me-3"></i>
@@ -19,13 +19,25 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-4 col-xl-3">
                     <div class="card card-body">
                         <div class="d-flex align-items-center">
                             <i class="ph-hands-clapping ph-2x text-teal me-3"></i>
                             <div class="flex-fill text-end">
                                 <h4 class="mb-0">{{ $total_close }}</h4>
                                 <span class="text-muted">Close</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-xl-3">
+                    <div class="card card-body">
+                        <div class="d-flex align-items-center">
+                            <i class="ph-smiley-sad ph-2x text-danger me-3"></i>
+                            <div class="flex-fill text-end">
+                                <h4 class="mb-0">{{ $total_close }}</h4>
+                                <span class="text-muted">Lose</span>
                             </div>
                         </div>
                     </div>

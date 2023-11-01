@@ -54,32 +54,59 @@ class KegiatanController extends Controller
 
     public function daily()
     {
-        if(auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')){
-             $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
-                            FROM dailies d
-                            LEFT JOIN users u ON u.id = d.user_id
-                            LEFT JOIN olts o ON o.id = d.nama_olt
-                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
-                            WHERE d.user_id IN (SELECT id FROM users)
-                            ORDER BY d.id DESC";
+        // if(auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')){
+        //      $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+        //                     FROM dailies d
+        //                     LEFT JOIN users u ON u.id = d.user_id
+        //                     LEFT JOIN olts o ON o.id = d.nama_olt
+        //                     LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+        //                     WHERE d.user_id IN (SELECT id FROM users)
+        //                     ORDER BY d.id DESC";
 
-            $daily = DB::select($daily_raw);
-        }
-        if (auth()->user()->can('admin read')) {
-            $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
-                            FROM dailies d
-                            LEFT JOIN users u ON u.id = d.user_id
-                            LEFT JOIN olts o ON o.id = d.nama_olt
-                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
-                            WHERE d.user_id IN (SELECT id FROM users)
-                            AND DATE(d.created_at) = CURDATE()
-                            ORDER BY d.id DESC";
+        //     $daily = DB::select($daily_raw);
+        // }
+        // if (auth()->user()->can('admin read')) {
+        //     $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+        //                     FROM dailies d
+        //                     LEFT JOIN users u ON u.id = d.user_id
+        //                     LEFT JOIN olts o ON o.id = d.nama_olt
+        //                     LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+        //                     WHERE d.user_id IN (SELECT id FROM users)
+        //                     AND DATE(d.created_at) = CURDATE()
+        //                     ORDER BY d.id DESC";
 
-            $daily = DB::select($daily_raw);
+        //     $daily = DB::select($daily_raw);
           
-        }
-        if (auth()->user()->can('leader read')) {
-            $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+        // }
+        // if (auth()->user()->can('leader read')) {
+        //     $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+        //                     FROM dailies d
+        //                     LEFT JOIN users u ON u.id = d.user_id
+        //                     LEFT JOIN olts o ON o.id = d.nama_olt
+        //                     LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+        //                     WHERE d.user_id IN (SELECT id FROM users WHERE id_leader = '".Auth()->user()->id."')
+        //                     AND DATE(d.created_at) = CURDATE()
+        //                     ORDER BY d.id DESC";
+
+        //     $daily = DB::select($daily_raw);
+        // }
+        // if (auth()->user()->can('user read')) {
+        //     $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
+        //         ->where('user_id', Auth()->user()->id)
+        //         ->orderBy('id', 'desc')->get();
+
+        //     $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+        //                     FROM dailies d
+        //                     LEFT JOIN users u ON u.id = d.user_id
+        //                     LEFT JOIN olts o ON o.id = d.nama_olt
+        //                     LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+        //                     WHERE d.user_id = '".Auth()->user()->id."'
+        //                     ORDER BY d.id DESC";
+        //     $daily = DB::select($daily_raw);
+        // }
+        
+        if(Auth::user()->hasRole('sales')){
+                     $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
                             FROM dailies d
                             LEFT JOIN users u ON u.id = d.user_id
                             LEFT JOIN olts o ON o.id = d.nama_olt
@@ -90,11 +117,7 @@ class KegiatanController extends Controller
 
             $daily = DB::select($daily_raw);
         }
-        if (auth()->user()->can('user read')) {
-            $daily = Daily::with(['user', 'olt', 'jenis_kegiatan'])
-                ->where('user_id', Auth()->user()->id)
-                ->orderBy('id', 'desc')->get();
-
+        else if(Auth::user()->hasRole('mitra')){
             $daily_raw = "SELECT d.*, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
                             FROM dailies d
                             LEFT JOIN users u ON u.id = d.user_id
@@ -102,6 +125,18 @@ class KegiatanController extends Controller
                             LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
                             WHERE d.user_id = '".Auth()->user()->id."'
                             ORDER BY d.id DESC";
+            $daily = DB::select($daily_raw);
+        }
+        else if(Auth::user()->hasRole(['admin','management'])){
+            $daily_raw = "SELECT d.*, d.created_at AS tanggal, u.name AS nama_sales, o.nama_olt AS nama_olt, k.jenis_kegiatan
+                            FROM dailies d
+                            LEFT JOIN users u ON u.id = d.user_id
+                            LEFT JOIN olts o ON o.id = d.nama_olt
+                            LEFT JOIN kegiatans k ON k.id = d.kegiatan_id
+                            WHERE d.user_id IN (SELECT id FROM users)
+                            AND DATE(d.created_at) = CURDATE()
+                            ORDER BY d.id DESC";
+
             $daily = DB::select($daily_raw);
         }
 
@@ -118,12 +153,12 @@ class KegiatanController extends Controller
             })
 
             ->addColumn('action', function ($daily) {
-                if(auth()->user()->can('read-dashboard-cluster') && auth()->user()->can('read-dashboard-keluhan')){
+
+                if(auth()->user()->can('kegiatan view')){
                      return '
                         <a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $daily->id . '"><i class="ph-eye"></i></a>';
-                }else{
+                }else if(auth()->user()->can('kegiatan edit')){
                     return '
-                        <a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $daily->id . '"><i class="ph-eye"></i></a>
                         <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $daily->id . '"><i class="ph-pencil-simple"></i></a>
                         <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $daily->id . '"><i class="ph-trash"></i></a>';
                 }

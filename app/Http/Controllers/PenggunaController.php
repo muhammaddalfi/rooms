@@ -18,17 +18,22 @@ class PenggunaController extends Controller
         return view('pengguna.index', $data);
     }
 
-     public function fetch()
+    public function fetch()
     {
-        $user = User::role('admin')->get();
+        $user = User::all();
         return DataTables::of($user)
             ->addIndexColumn()
+            ->addColumn('role', function ($data) {
+                    return $data->getRoleNames()->map(function ($role) {
+                        return $role;
+                    })->implode(' ');
+                })
             ->addColumn('action', function ($user) {
                 return '
                 <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon ml-2 edit" data-id="' . $user->id . '"><i class="ph-pencil-simple"></i></a>
                 <a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 delete" data-id="' . $user->id . '"><i class="ph-trash"></i></a>';
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action','role'])
             ->make(true);
     }
 
@@ -65,7 +70,7 @@ class PenggunaController extends Controller
             $ajax->email = $request->input('email');
             $ajax->handphone = $request->input('hp');
             $ajax->password = bcrypt($password);
-            $ajax->assignRole($request->input('role')); // hardcode assign role
+            $ajax->syncRoles($request->input('role'));
             $ajax->save();
             return response()->json([
                 'status' => 200,
@@ -76,7 +81,6 @@ class PenggunaController extends Controller
 
     public function edit($id)
     {
-        //
         $users = User::find($id);
         if ($users) {
             return response()->json([
@@ -95,15 +99,15 @@ class PenggunaController extends Controller
     {
         //
          $rule = [
-            'nama' => 'required',
-            'email' => 'required',
-            'hp' => 'required',
+            'edit_nama_pengguna' => 'required',
+            'edit_email_pengguna' => 'required',
+            'edit_hp_pengguna' => 'required',
         ];
 
         $message = [
-            'nama.required' => 'Tidak Boleh Kosong',
-            'email.required' => 'Tidak Boleh Kosong',
-            'hp.required' => 'Tidak Boleh Kosong',
+            'edit_nama_pengguna.required' => 'Tidak Boleh Kosong',
+            'edit_email_pengguna.required' => 'Tidak Boleh Kosong',
+            'edit_hp_pengguna.required' => 'Tidak Boleh Kosong',
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -114,33 +118,35 @@ class PenggunaController extends Controller
                 'errors' => $validator->messages(),
             ]);
         } else {
-            if ($request->input('password') == '') {
+            if ($request->input('edit_password_pengguna') == '') {
                 $user = User::find($id);
-                $user->name = $request->input('edit_nama');
-                $user->email = $request->input('edit_email');
-                $user->handphone = $request->input('edit_handphone');
+                $user->name = $request->input('edit_nama_pengguna');
+                $user->email = $request->input('edit_email_pengguna');
+                $user->handphone = $request->input('edit_hp_pengguna');
 
-                $user->givePermissionTo('gm read');
+                // $user->givePermissionTo('gm read');
+                // $user->assignRole($request->input('edit_role'));
+                $user->syncRoles($request->input('edit_role'));
                 $user->update();
                 return response()->json([
                     'status' => 200,
                     'message' => 'Data updated successfully',
                 ]);
             } else {
-                $user = User::find($id);
-                $user->name = $request->input('edit_nama');
-                $user->email = $request->input('edit_email');
-                $user->handphone = $request->input('edit_handphone');
-                $user->role = $request->input('edit_role');
-                $user->jenis_pengguna = $request->input('edit_jenis_pengguna');
-                $user->nama_perusahaan = $request->input('edit_nama_perusahaan');
-                $user->nama_upline = $request->input('edit_nama_upline');
-                $user->password = bcrypt($request->input('edit_password'));
-                $user->update();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Data updated successfully',
-                ]);
+                // $user = User::find($id);
+                // $user->name = $request->input('edit_nama');
+                // $user->email = $request->input('edit_email');
+                // $user->handphone = $request->input('edit_handphone');
+                // $user->role = $request->input('edit_role');
+                // $user->jenis_pengguna = $request->input('edit_jenis_pengguna');
+                // $user->nama_perusahaan = $request->input('edit_nama_perusahaan');
+                // $user->nama_upline = $request->input('edit_nama_upline');
+                // $user->password = bcrypt($request->input('edit_password'));
+                // $user->update();
+                // return response()->json([
+                //     'status' => 200,
+                //     'message' => 'Data updated successfully',
+                // ]);
             }
         }
     }
