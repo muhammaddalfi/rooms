@@ -79,17 +79,6 @@ class RoleController extends Controller
         $data['role'] = Role::find($id);
         $data['permissions'] = Permission::all();
         return view('role.edit',$data);
-        // if ($role) {
-        //     return response()->json([
-        //         'status' => 200,
-        //         'role' => $role,
-        //     ]);
-        // } else {
-        //     return response()->json([
-        //         'status' => 404,
-        //         'message' => 'Role tidak ditemukan',
-        //     ]);
-        // }
     }
     public function update(Request $request, string $id)
     {
@@ -98,11 +87,7 @@ class RoleController extends Controller
             $name->syncPermissions($request->input('permissions'));
 
             $name->update();
-            // return redirect('/role')->with('success','Data Berhasi disimpan');
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data has been changed!',
-            ]);
+            return redirect('role')->with('status', 'Data berhasil ditambahkan!');
     }
 
     public function destroy($id)

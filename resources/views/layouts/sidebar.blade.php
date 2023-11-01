@@ -142,7 +142,6 @@
                         </ul>
                     </li>
                 @endcan
-                {{-- {{ dd(auth()->user()->status) }} --}}
                 @if (auth()->user()->status)
                     @can('muntang read')
                         <li class="nav-item nav-item-submenu">
@@ -215,90 +214,6 @@
                     </li>
                 @endcan
 
-                {{-- @role('gm')
-                    <li class="nav-item">
-                        <a href="{{ route('dashboard.keluhan') }}" class="nav-link">
-                            <i class="ph-smiley-sad"></i>
-                            <span>Dashboard Keluhan</span>
-                        </a>
-                    </li>
-
-                    <!-- Layout -->
-                    <li class="nav-item-header">
-                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Layout</div>
-                        <i class="ph-dots-three sidebar-resize-show"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('daily.dashboard') }}" class="nav-link">
-                            <i class="ph-camera"></i>
-                            <span>Kegiatan Cluster</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
-                            <i class="ph-chat-circle-text"></i>
-                            <span>Keluhan Cluster</span>
-                        </a>
-                    </li>
-                @endrole
-
-                @can('leader read')
-                    <!-- Layout -->
-                    <li class="nav-item-header">
-                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Layout</div>
-                        <i class="ph-dots-three sidebar-resize-show"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('daily.dashboard') }}" class="nav-link">
-                            <i class="ph-camera"></i>
-                            <span>Kegiatan Cluster</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
-                            <i class="ph-chat-circle-text"></i>
-                            <span>Keluhan Cluster</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('olt.dashboard') }}" class="nav-link">
-                            <i class="ph-broadcast"></i>
-                            <span>Nama Cluster</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('upline.dashboard') }}" class="nav-link">
-                            <i class="ph-git-fork"></i>
-                            <span>Anggota</span>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('user read')
-                    <!-- Layout -->
-                    <li class="nav-item-header">
-                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Layout</div>
-                        <i class="ph-dots-three sidebar-resize-show"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('daily.dashboard') }}" class="nav-link">
-                            <i class="ph-camera"></i>
-                            <span>Kegiatan Cluster</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('keluhan.dashboard') }}" class="nav-link">
-                            <i class="ph-chat-circle-text"></i>
-                            <span>Keluhan Cluster</span>
-                        </a>
-                    </li>
-                @endcan --}}
-                <!-- /layout -->
 
             </ul>
         </div>
