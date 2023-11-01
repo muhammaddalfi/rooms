@@ -129,6 +129,7 @@ class PenggunaController extends Controller
                 $user->name = $request->input('edit_nama_pengguna');
                 $user->email = $request->input('edit_email_pengguna');
                 $user->handphone = $request->input('edit_hp_pengguna');
+                $user->status = $request->input('edit_status');
                 $user->syncRoles($request->input('edit_role'));
                 $user->update();
 

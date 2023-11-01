@@ -15,13 +15,16 @@
                         <input type="text" id="role" name="role" class="form-control">
                     </div>
 
-                    <div class="mb-3">
+
+                    <div class="row mb-3">
                         @foreach ($permission as $value)
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="akses[]" value="{{ $value->id }}">
-                                    {{ $value->name }}
-                                </label>
+                            <div class="col-md-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="akses[]" value="{{ $value->id }}">
+                                        {{ $value->name }}
+                                    </label>
+                                </div>
                             </div>
                         @endforeach
                     </div>

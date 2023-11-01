@@ -61,6 +61,15 @@
                             </select>
                             <span id="error_role" class="text-danger"></span>
                         </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-control edit_status" name="edit_status" id="edit_status"
+                                data-minimum-results-for-search="Infinity" data-fouc>
+                                <option value="0" {{ $users->status == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                                <option value="1" {{ $users->status == 1 ? 'selected' : '' }}>Aktif</option>
+                            </select>
+                        </div>
+
                     </div>
 
                     <div class="text-end">

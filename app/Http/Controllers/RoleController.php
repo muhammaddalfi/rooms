@@ -20,7 +20,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        $data['permission'] = Permission::all();
+        $data['permission'] = Permission::orderBy('name', 'ASC')->get();
         return view('role.create',$data);
     }
 

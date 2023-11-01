@@ -50,6 +50,9 @@ class DashboardPiutang extends Controller
             $close = Baddeb::where('status_bayar', 'close');
             $data['total_close'] = $close->count();
 
+            $lose = Baddeb::where('status_bayar', 'lose');
+            $data['total_lose'] = $lose->count();
+
             return view('dashboard.piutang.index',$data);
         }
         else if(Auth::user()->hasRole('collection')){
