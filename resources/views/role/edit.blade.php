@@ -31,17 +31,9 @@
                                 </div>
                             </div>
                         @endforeach
-                        {{-- @foreach ($permission as $value)
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="akses[]" value="{{ $value->id }}">
-                                    {{ $value->name }}
-                                </label>
-                            </div>
-                        @endforeach --}}
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary" id="save">Simpan></button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -54,7 +46,5 @@
     <script src="{{ asset('assets/js/vendor/tables/datatables/extensions/responsive.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}"></script>
-
-    {{-- <script src="{{ asset('assets/js/role/index.js') }}"></script> --}}
     <script src="{{ asset('assets/js/app.js') }}"></script>
 @endpush

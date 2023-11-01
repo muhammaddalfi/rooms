@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href='{{ route('role.create') }}' class="btn btn-lights"><i class="ph-plus-circle me-2"></i>Tambah
+                        <a href='{{ route('role.create') }}' class="btn btn-teal"><i class="ph-plus-circle me-2"></i>Tambah
                             Role</a>
                     </div>
                     <table class="table datatable-responsive">
