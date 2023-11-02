@@ -64,7 +64,8 @@ class PMController extends Controller
                 FROM pms p
                 LEFT JOIN users u ON u.id = p.user_id
                 LEFT JOIN olts o ON o.id = p.id_lokasi
-                WHERE p.is_olt = '0' AND p.is_feeder = '0' AND p.is_fdt = '0' AND p.is_fat = '0'";
+                WHERE p.is_olt = '0' 
+                OR p.is_feeder = '0' OR p.is_fdt = '0' OR p.is_fat = '0'";
         $pm = DB::select($query);
         return DataTables::of($pm)
             ->addIndexColumn()

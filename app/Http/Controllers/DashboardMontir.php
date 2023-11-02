@@ -31,10 +31,10 @@ class DashboardMontir extends Controller
             // Kategori Pie
 
 
-            $data['plan_pm'] = Pm::where('is_olt','=','0')
-                                ->where('is_feeder','=','0')
-                                ->where('is_fdt','=','0')
-                                ->where('is_fat','=','0')
+           $data['plan_pm'] = Pm::where('is_olt','=','0')
+                                ->orWhere('is_feeder','=','0')
+                                ->orWhere('is_fdt','=','0')
+                                ->orWhere('is_fat','=','0')
                                 ->count();
 
             $data['total_pm'] = Pm::count();
@@ -43,7 +43,8 @@ class DashboardMontir extends Controller
                                 p.tgl_mulai
                                 FROM pms p
                                 LEFT JOIN olts o ON o.id = p.id_lokasi
-                                WHERE p.is_olt = '0' AND p.is_feeder = '0' AND p.is_fdt = '0' AND p.is_fat = '0'";
+                                WHERE p.is_olt = '0' 
+                                OR p.is_feeder = '0' OR p.is_fdt = '0' OR p.is_fat = '0'";
             $data['petugas_pm'] = DB::select($query_petugas);
 
             return view('dashboard.montir.index',$data);
