@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardBaddebt;
 use App\Http\Controllers\DashboardCluster;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardKeluhanController;
+use App\Http\Controllers\DashboardMontir;
 use App\Http\Controllers\DashboardPiutang;
 use App\Http\Controllers\HaloController;
 use App\Http\Controllers\JenisKegiatanController;
@@ -15,11 +16,13 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KeluhanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LaporanDebt;
+use App\Http\Controllers\LaporanPmController;
 use App\Http\Controllers\MppController;
 use App\Http\Controllers\OltController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PMController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RadiusController;
 use App\Http\Controllers\ReservationController;
@@ -159,6 +162,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/report/fetch', [LaporanDebt::class, 'fetch']);
     Route::get('/report/search', [LaporanDebt::class, 'search'])->name('report.search');
 
+
+    Route::get('/dashboard/montir', [DashboardMontir::class, 'home'])->name('montir.dashboard');
+    Route::get('/montir', [PMController::class, 'index'])->name('pm.index');
+    Route::get('/montir/fetch', [PMController::class, 'fetch']);
+    Route::post('/montir', [PMController::class, 'store']);
+    Route::get('/montir/pm/olt/edit/{id}', [PMController::class, 'edit_olt']);
+    Route::get('/montir/pm/feeder/edit/{id}', [PMController::class, 'edit_feeder']);
+    Route::get('/montir/pm/fdt/edit/{id}', [PMController::class, 'edit_fdt']);
+    Route::get('/montir/pm/fat/edit/{id}', [PMController::class, 'edit_fat']);
+
+    Route::post('/montir/pm/olt/{id}', [PMController::class, 'olt']);
+    Route::post('/montir/pm/feeder/{id}', [PMController::class, 'feeder']);
+    Route::post('/montir/pm/fdt/{id}', [PMController::class, 'fdt']);
+    Route::post('/montir/pm/fat/{id}', [PMController::class, 'fat']);
+
+    Route::get('/montir/laporan',[LaporanPmController::class,'index'])->name('laporan.pm');
+    Route::get('/montir/laporan/fetch', [LaporanPmController::class, 'fetch']);
+    Route::get('/montir/laporan/search', [LaporanPmController::class, 'search'])->name('pm.search');
+    Route::get('/montir/pm/laporan/download/{id}', [LaporanPmController::class, 'generate']);
 });
 
 require __DIR__ . '/auth.php';

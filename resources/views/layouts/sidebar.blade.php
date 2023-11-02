@@ -187,6 +187,42 @@
                     @endcan
                 @endif
 
+                @can('montir read')
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link">
+                            <i class="ph-circles-four"></i>
+                            <span>MONTIR</span>
+                        </a>
+                        <ul class="nav-group-sub collapse" data-submenu-title="Layouts">
+
+                            @can('dashboard montir read')
+                                <li class="nav-item">
+                                    <a href="{{ route('montir.dashboard') }}" class="nav-link">
+                                        <i class="ph-check-square-offset"></i>
+                                        <span>Dashboard Montir</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('jadwal pm read')
+                                <li class="nav-item">
+                                    <a href="{{ route('pm.index') }}" class="nav-link">
+                                        <i class="ph-clock-clockwise"></i>
+                                        <span>Jadwal PM</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('pm read')
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan.pm') }}" class="nav-link">
+                                        <i class="ph-calendar"></i>
+                                        <span>Laporan PM</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 @can('user read')
                     <li class="nav-item">
                         <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
