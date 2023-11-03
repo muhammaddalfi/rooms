@@ -52,8 +52,7 @@ class DashboardCluster extends Controller
                                 LEFT JOIN olts d ON d.id = a.nama_olt
                                 WHERE YEAR(a.created_at) = ? AND MONTH(a.created_at) = ?
                                 GROUP BY d.nama_olt,c.jenis_kegiatan,c.id
-                                ORDER BY c.id ASC;
-                                ";
+                                ORDER BY c.id ASC";
             $tes1 = DB::select($db_kegiatan, [$tahun, $bulan]);
             $jenis_kegiatan_count = [];
             foreach ($tes1 as $value) {

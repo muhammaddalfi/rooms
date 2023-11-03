@@ -46,7 +46,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                     <!-- Basic pie -->
                     <div class="card">
                         <div class="card-body">
@@ -56,6 +56,38 @@
                         </div>
                     </div>
                     <!-- /basic pie -->
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Daily financials -->
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h5 class="mb-0">Total Follow Up</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="chart mb-3" id="bullets"></div>
+
+
+                            @foreach ($jumlah_user_fu as $item)
+                                <div class="d-flex mb-3">
+                                    <div class="me-3">
+                                        <div class="bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-2">
+                                            <i class="ph-users"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill">
+                                        {{ $item->nama_collection }}
+                                        <div class="text-muted fs-sm">Total -> {{ $item->jumlah_fu }} Pelanggan</div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+                        </div>
+                    </div>
+                    <!-- /daily financials -->
+
                 </div>
 
             </div>

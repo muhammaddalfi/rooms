@@ -30,7 +30,6 @@ class DashboardMontir extends Controller
             $data['jumlah_cluster_pm'] = $count_pm_cluster;
             // Kategori Pie
 
-
            $data['plan_pm'] = Pm::where('is_olt','=','0')
                                 ->orWhere('is_feeder','=','0')
                                 ->orWhere('is_fdt','=','0')
