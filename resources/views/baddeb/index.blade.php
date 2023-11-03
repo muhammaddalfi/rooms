@@ -16,7 +16,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>ID PLN</th>
+                                <th>ID Pelanggan</th>
                                 <th>Layanan</th>
                                 <th>Status</th>
                                 <th>Tanggal</th>
