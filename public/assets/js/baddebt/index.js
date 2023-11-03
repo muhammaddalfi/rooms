@@ -166,8 +166,9 @@ $(document).ready(function(){
             {data:'nama_pelanggan'},
             {data:'id_pln'},
             {data:'layanan'},
-            {data:'status_bayar'},
+            {data:'status'},
             {data:'updated_at'},
+            {data:'keterangan'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
         order: [[ 0, "desc" ]],

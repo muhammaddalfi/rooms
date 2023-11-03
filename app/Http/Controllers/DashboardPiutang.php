@@ -50,8 +50,9 @@ class DashboardPiutang extends Controller
             $close = Baddeb::where('status_bayar', 'close');
             $data['total_close'] = $close->count();
 
-            $lose = Baddeb::where('status_bayar', 'lose');
-            $data['total_lose'] = $lose->count();
+
+            $no_call = Baddeb::where('is_minat', 'no_call');
+            $data['total_no_call'] = $no_call->count();
 
             return view('dashboard.piutang.index',$data);
         }
@@ -98,8 +99,8 @@ class DashboardPiutang extends Controller
             $close = Baddeb::where('status_bayar', 'close')->where('user_id', auth()->user()->id);
             $data['total_close'] = $close->count();
 
-            $lose = Baddeb::where('status_bayar', 'lose')->where('user_id', auth()->user()->id);
-            $data['total_lose'] = $lose->count();
+            $no_call = Baddeb::where('is_minat', 'no_call')->where('user_id', auth()->user()->id);
+            $data['total_no_call'] = $no_call->count();
 
             return view('dashboard.piutang.index',$data);
         }

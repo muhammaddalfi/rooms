@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <p class="fw-semibold">Apakah Masih Berminat ?</p>
+                                <p class="fw-semibold">Apakah Pelanggan Masih Berminat ?</p>
                                 <div class="border p-3 rounded">
                                     <div class="form-check form-check-inline">
                                         <input type="radio" class="form-check-input" name="is_minat" id="is_minat_ya"
@@ -85,6 +85,12 @@
                                         <input type="radio" class="form-check-input" name="is_minat"
                                             id="is_minat_tidak" value="tidak">
                                         <label class="form-check-label" for="cr_l_i_u">Tidak</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="is_minat" id="is_minat_no"
+                                            value="no_call">
+                                        <label class="form-check-label" for="cr_l_i_u">Tidak Dapat Dihubungi</label>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +121,7 @@
 
                                 <div class="row mb-3">
                                     <div class="col-sm-6">
-                                        <label class="form-label">Kategori Bad Debt</label>
+                                        <label class="form-label">Alasan Telat Bayar</label>
                                         <select class="form-control kategori_debt_ya" name="kategori_debt_ya"
                                             id="kategori_debt_ya" data-minimum-results-for-search="Infinity" data-fouc>
                                             <option></option>
@@ -125,24 +131,13 @@
                                             @endforeach
                                         </select>
                                     </div>
-
                                     <div class="col-sm-6">
-                                        <label class="form-label">Issue Bayar</label>
-                                        <select class="form-control issue_bayar_ya" name="issue_bayar_ya"
-                                            id="issue_bayar_ya" data-minimum-results-for-search="Infinity" data-fouc>
-                                            <option></option>
-                                            <option value="tidak">Tidak Ada</option>
-                                            <option value="kliring">Kliring</option>
-                                            <option value="error_flagging">Error Flagging</option>
-                                        </select>
+                                        <label class="form-label">Keterangan</label>
+                                        <textarea rows="3" id="keterangan_ya" name="keterangan_ya" cols="3" class="form-control"></textarea>
                                     </div>
-
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label class="form-label">Keterangan</label>
-                                    <textarea rows="3" id="keterangan_ya" name="keterangan_ya" cols="3" class="form-control"></textarea>
-                                </div>
+
 
                             </div>
 
@@ -187,7 +182,7 @@
 
                                 <div class="row mb-3">
                                     <div class="col-sm-6">
-                                        <label class="form-label">Kategori Bad Debt</label>
+                                        <label class="form-label">Alasan Telat Bayar</label>
                                         <select class="form-control kategori_debt_bayar" name="kategori_debt_bayar"
                                             id="kategori_debt_bayar" data-minimum-results-for-search="Infinity"
                                             data-fouc>
@@ -200,21 +195,6 @@
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label">Issue Bayar</label>
-                                        <select class="form-control issue_bayar_bayar" name="issue_bayar_bayar"
-                                            id="issue_bayar_bayar" data-minimum-results-for-search="Infinity"
-                                            data-fouc>
-                                            <option></option>
-                                            <option value="tidak">Tidak Ada</option>
-                                            <option value="kliring">Kliring</option>
-                                            <option value="error_flagging">Error Flagging</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                                <div class="row mb-3 ">
-                                    <div class="col-sm-6">
                                         <label class="form-label">Download MyIcon+</label>
                                         <select class="form-control my_icon" name="my_icon" id="my_icon"
                                             data-minimum-results-for-search="Infinity" data-fouc>
@@ -225,13 +205,12 @@
                                     </div>
 
                                 </div>
-
                             </div>
 
                             <div class="row kategori_tidak d-none">
                                 <div class="row mb-3">
                                     <div class="col-sm-6">
-                                        <label class="form-label">Kategori Bad Debt</label>
+                                        <label class="form-label">Alasan Berhenti</label>
                                         <select class="form-control kategori_debt_tidak" name="kategori_debt_tidak"
                                             id="kategori_debt_tidak" data-minimum-results-for-search="Infinity"
                                             data-fouc>

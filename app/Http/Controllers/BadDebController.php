@@ -24,20 +24,12 @@ class BadDebController extends Controller
     {
         $rule = [
             'nama' => 'required',
-            'id_pln' => 'required',
-            'telp' => 'required',
-            'select_layanan' => 'required',
-            'tagihan' => 'required',
-            'alamat' => 'required'
+            'telp' => 'required'
         ];
 
         $message = [
             'nama.required' => 'Tidak boleh kosong',
-            'id_pln.required' => 'Tidak boleh kosong',
-            'telp.required' => 'Tidak boleh kosong',
-            'select_layanan.required' => 'Tidak boleh kosong',
-            'tagihan.required' => 'Tidak boleh kosong',
-            'alamat.required' => 'Tidak boleh kosong'
+            'telp.required' => 'Tidak boleh kosong'
         ];
 
         $validator = Validator::make($request->all(), $rule, $message);
@@ -128,6 +120,11 @@ class BadDebController extends Controller
                     $ajax->status_bayar = 'lose';
                 }
 
+                 if ($request->input('is_minat') == 'no_call' ){
+                    $ajax->is_minat = $request->input('is_minat');
+                    $ajax->status_bayar = 'pending';
+                }
+
 
 
                 $ajax->update();
@@ -157,8 +154,22 @@ class BadDebController extends Controller
         return DataTables::of($baddebt)
             ->addIndexColumn()
             ->addColumn('updated_at', function ($baddebt) {
-                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $baddebt->updated_at)->format('d-m-Y H:i');
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $baddebt->updated_at)->format('d-m-Y');
                 return $formatDate;
+            })
+
+            ->addColumn('status', function ($pm) {
+               if($pm->status_bayar == 'pending'){
+                    return '<span class="badge bg-warning">Pending</span>';
+                }
+            })
+
+             ->addColumn('keterangan', function ($pm) {
+               if($pm->is_minat == 'no_call'){
+                    return '<span class="badge bg-warning">Tidak Dapat Dihubungi</span>';
+                }else if($pm->is_minat != 'no_call'){
+                    return $pm->keterangan;
+                }
             })
             ->addColumn('action', function ($baddebt) {
             if(auth()->user()->can('piutang edit')){
@@ -168,7 +179,7 @@ class BadDebController extends Controller
             }
             })
             
-            ->rawColumns(['action'])
+            ->rawColumns(['action','keterangan','status'])
             ->make(true);
     }
 }

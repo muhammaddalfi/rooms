@@ -23,9 +23,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>ID PLN</th>
+                                <th>ID Pelanggan</th>
                                 <th>Layanan</th>
-                                <th>Status Pembayaran</th>
+                                <th>Status</th>
                                 <th>Petugas</th>
                             </tr>
                         </thead>
@@ -41,7 +41,7 @@
 
         <!-- /basic responsive configuration -->
     </div>
-    @include('rooms.modals.view')
+    @include('baddeb.modals.view')
 @endsection
 @push('js_page')
     <script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>

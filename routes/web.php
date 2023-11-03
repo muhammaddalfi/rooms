@@ -160,6 +160,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/report/baddeb',[LaporanDebt::class,'index'])->name('report.index');
     Route::get('/report/fetch', [LaporanDebt::class, 'fetch']);
+    Route::get('/report/baddeb/{id}', [LaporanDebt::class, 'show']);
     Route::get('/report/search', [LaporanDebt::class, 'search'])->name('report.search');
 
 

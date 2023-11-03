@@ -19,7 +19,8 @@
                                 <th>ID PLN</th>
                                 <th>Layanan</th>
                                 <th>Status</th>
-                                <th>Follow up terakhir</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>

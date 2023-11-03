@@ -35,7 +35,7 @@ $(document).ready(function(){
             {data:'nama_pelanggan'},
             {data:'id_pln'},
             {data:'layanan'},
-            {data:'status_bayar'},
+            {data:'status'},
             {data:'nama_petugas'},
             // {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false, width: 220 }
         ],
@@ -51,37 +51,38 @@ $(document).ready(function(){
 
     // $(document).on('click', '.view', function (e) {
     //     e.preventDefault();
-    //     var id_kegiatan = $(this).data('id');
-    //     $('#modal_view').modal('show');
-
+    //     // alert('halo');
+    //     var id_pelanggan = $(this).data('id');
+    //     $('#modal_view_baddeb').modal('show');
+    //     console.log(id_pelanggan);
     //     // console.log(id_kegiatan);
     //     $.ajax({
     //         type: "GET",
-    //         url: "/dailys/show/" + id_kegiatan,
+    //         url: "/report/baddeb/" + id_pelanggan,
     //         success: function (response) {
     //             if (response.status == 404) {
     //                 console.log('Data Not Found');
     //             } else {
 
-    //                 console.log(response);
-    //                 let tanggal = moment(response.show.created_at).format('DD-MM-YYYY h:mm:ss');
+    //                 console.log(response.show.nama_pelanggan);
+    //                 // let tanggal = moment(response.show.created_at).format('DD-MM-YYYY h:mm:ss');
 
-    //                 $('#id_kegiatan').val(response.show.id);
-    //                 $('#view_tanggal').html(tanggal);
-    //                 $('#view_nama').html(response.show.user.name);
-    //                 $('#view_nama_olt').html(response.show.olt.nama_olt);
-    //                 $('#view_jenis_kegiatan').html(response.show.jenis_kegiatan.jenis_kegiatan);
-    //                 $('#view_catatan').html(response.show.catatan);
+    //                 // $('#id_pelanggan').val(response.show.id);
+    //                 $('#nama_pelanggan_baddeb').val(response.show.nama_pelanggan);
+    //                 // $('#view_tanggal').html(tanggal);
+    //                 // $('#view_nama_olt').html(response.show.olt.nama_olt);
+    //                 // $('#view_jenis_kegiatan').html(response.show.jenis_kegiatan.jenis_kegiatan);
+    //                 // $('#view_catatan').html(response.show.catatan);
 
 
-    //                 if (response.show.kategori_dinas == 'Ya') {
-    //                     $('#view_kategori_dinas').html('Ya');
-    //                 } else if (response.show.kategori_dinas == 'Tidak') {
-    //                     $('#view_kategori_dinas').html('Tidak');
-    //                 }
+    //                 // if (response.show.kategori_dinas == 'Ya') {
+    //                 //     $('#view_kategori_dinas').html('Ya');
+    //                 // } else if (response.show.kategori_dinas == 'Tidak') {
+    //                 //     $('#view_kategori_dinas').html('Tidak');
+    //                 // }
 
-    //                 $('#gambar_bukti').attr("src", "storage/files/" + response.show.gambar);
-    //                 $('#gambar_bukti_link').attr("href", "storage/files/" + response.show.gambar);
+    //                 // $('#gambar_bukti').attr("src", "storage/files/" + response.show.gambar);
+    //                 // $('#gambar_bukti_link').attr("href", "storage/files/" + response.show.gambar);
 
     //             }
     //         }

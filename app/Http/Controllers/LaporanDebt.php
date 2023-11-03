@@ -39,8 +39,37 @@ class LaporanDebt extends Controller
             
             return DataTables::of($data)
             ->addIndexColumn()
+            ->addColumn('status', function ($data) {
+               if($data->status_bayar == 'close'){
+                    return '<span class="badge bg-success">Close</span>';
+                }
+            })
+            // ->addColumn('action', function ($data) {
+            // if(auth()->user()->can('piutang edit')){
+            //      return '<a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $data->id . '"><i class="ph-eye"></i></a>';
+            // }else{
+            //     return '';
+            // }
+            // })
+            ->rawColumns(['status'])
             ->make(true);
             
         }       
+    }
+
+    public function show($id)
+    {
+        $show = Baddeb::with(['user', 'kategori'])->find($id);
+        if ($show) {
+            return response()->json([
+                'status' => 200,
+                'show' => $show
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Daily not found',
+            ]);
+        }
     }
 }

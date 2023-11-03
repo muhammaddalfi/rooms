@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Pelanggan Bad Debt</h5>
+                <h5 class="modal-title">Tambah Pelanggan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -18,7 +18,7 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <label class="form-label">ID PLN</label>
+                                <label class="form-label">ID Pelanggan</label>
                                 <input type="text" class="form-control" required id="id_pln" name="id_pln">
                                 <span id="error_id_pln" class="text-danger"></span>
                             </div>
@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <label class="form-label">Tagihan</label>
+                                <label class="form-label">Jumlah Tagihan</label>
                                 <input type="text" class="form-control" required id="tagihan" name="tagihan">
                                 <span id="error_tagihan" class="text-danger"></span>
                             </div>

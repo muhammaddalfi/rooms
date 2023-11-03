@@ -13,7 +13,7 @@
                                 <a href="{{ route('baddeb.index') }}">
                                     <h4 class="mb-0">{{ $total_pending }}</h4>
                                 </a>
-                                <span class="text-muted">Pending</span>
+                                <span class="text-muted">Follow Up</span>
                             </div>
                         </div>
                     </div>
@@ -31,13 +31,13 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-xl-3">
+                <div class="col-sm-4 col-xl-4">
                     <div class="card card-body">
                         <div class="d-flex align-items-center">
-                            <i class="ph-smiley-sad ph-2x text-danger me-3"></i>
+                            <i class="ph-phone-x ph-2x text-danger me-3"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">{{ $total_lose }}</h4>
-                                <span class="text-muted">Lose</span>
+                                <h4 class="mb-0">{{ $total_no_call }}</h4>
+                                <span class="text-muted">Tidak Dapat Dihubungi</span>
                             </div>
                         </div>
                     </div>
@@ -46,24 +46,12 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <!-- Basic pie -->
                     <div class="card">
                         <div class="card-body">
                             <div class="chart-container">
                                 <div class="chart has-fixed-height" id="pie_kategori_debt"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /basic pie -->
-                </div>
-
-                <div class="col-lg-6">
-                    <!-- Basic pie -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="chart-container">
-                                <div class="chart has-fixed-height" id="pie_issue_bayar"></div>
                             </div>
                         </div>
                     </div>
@@ -95,12 +83,6 @@
                     renderer: 'svg'
                 });
 
-                var issue_bayar_element = document.getElementById('pie_issue_bayar');
-                var issue_bayar = echarts.init(issue_bayar_element, null, {
-                    renderer: 'svg'
-                });
-
-
                 // Kategori
                 kategori_debt.setOption({
                     // Colors
@@ -122,7 +104,7 @@
 
                     // Add title
                     title: {
-                        text: 'Alasan Berhenti Berlanggan',
+                        text: 'Alasan Telat Bayar',
                         left: 'center',
                         textStyle: {
                             fontSize: 18,
@@ -166,76 +148,6 @@
                         data: <?= json_encode($jumlah_kategori) ?>
                     }]
                 });
-
-                // Issue Bayar
-                issue_bayar.setOption({
-                    // Colors
-                    color: [
-                        '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
-                        '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
-                        '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
-                        '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
-                    ],
-
-                    // Global text styles
-                    textStyle: {
-                        fontFamily: 'var(--body-font-family)',
-                        color: 'var(--body-color)',
-                        fontSize: 14,
-                        lineHeight: 22,
-                        textBorderColor: 'transparent'
-                    },
-
-                    // Add title
-                    title: {
-                        text: 'Issue Bayar',
-                        left: 'center',
-                        textStyle: {
-                            fontSize: 18,
-                            fontWeight: 500,
-                            color: 'var(--body-color)'
-                        },
-                        subtextStyle: {
-                            fontSize: 12,
-                            color: 'rgba(var(--body-color-rgb), 0.5)'
-                        }
-                    },
-
-                    // Add tooltip
-                    tooltip: {
-                        trigger: 'item',
-                        className: 'shadow-sm rounded',
-                        backgroundColor: 'var(--white)',
-                        borderColor: 'var(--gray-400)',
-                        padding: 15,
-                        textStyle: {
-                            color: '#000'
-                        },
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-
-                    // Add legend
-
-
-                    // Add series
-                    series: [{
-                        name: 'Issue Bayar',
-                        type: 'pie',
-                        radius: '70%',
-                        center: ['50%', '57.5%'],
-                        itemStyle: {
-                            borderColor: 'var(--card-bg)'
-                        },
-                        label: {
-                            color: 'var(--body-color)'
-                        },
-                        data: <?= json_encode($jumlah_issue) ?>
-                    }]
-                });
-
-
-
-
 
                 // Resize function
                 var triggerChartResize = function() {
