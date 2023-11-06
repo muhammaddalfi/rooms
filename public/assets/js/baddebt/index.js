@@ -13,6 +13,10 @@ $(document).ready(function(){
                 $(".kategori_minat").addClass('d-none');
                 $(".kategori_bayar").addClass('d-none');
                 $(".kategori_tidak").removeClass('d-none');
+            }else if($(this).val() == 'no_call'){
+                $(".kategori_minat").addClass('d-none');
+                $(".kategori_bayar").addClass('d-none');
+                $(".kategori_tidak").removeClass('d-none');
             }
 
         });

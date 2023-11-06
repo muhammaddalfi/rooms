@@ -205,6 +205,13 @@
                                     </div>
 
                                 </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <label class="form-label">Keterangan</label>
+                                        <textarea rows="3" id="keterangan_ya" name="keterangan_ya" cols="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row kategori_tidak d-none">
@@ -231,6 +238,13 @@
                                             <option value="call">Outbound Call</option>
                                             <option value="visit">Site Visit</option>
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <label class="form-label">Keterangan</label>
+                                        <textarea rows="3" id="keterangan_ya" name="keterangan_ya" cols="3" class="form-control"></textarea>
                                     </div>
                                 </div>
                             </div>

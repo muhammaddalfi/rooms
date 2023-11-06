@@ -111,6 +111,8 @@ class BadDebController extends Controller
                     $ajax->issue_bayar = $request->input('issue_bayar_bayar');
                     $ajax->status_bayar = 'close';
                     $ajax->myicon = $request->input('my_icon');
+
+                    $ajax->keterangan = $request->input('keterangan_ya');
                 }
 
                 if ($request->input('is_minat') == 'tidak' ){
@@ -118,6 +120,8 @@ class BadDebController extends Controller
                     $ajax->kategori_debt = $request->input('kategori_debt_tidak');
                     $ajax->follow_up = $request->input('follow_up_tidak');
                     $ajax->status_bayar = 'lose';
+
+                    $ajax->keterangan = $request->input('keterangan_ya');
                 }
 
                  if ($request->input('is_minat') == 'no_call' ){
