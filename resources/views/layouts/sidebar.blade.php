@@ -121,7 +121,7 @@
                                 </li>
                             @endcan
 
-                            @can('sales perusaahn read')
+                            @can('sales perusahaan read')
                                 <li class="nav-item">
                                     <a href="{{ route('mpp.dashboard') }}" class="nav-link">
                                         <i class="ph-git-fork"></i>
@@ -233,7 +233,7 @@
                     </li>
                 @endcan
 
-                @can('user read')
+                @can('admin read')
                     <li class="nav-item">
                         <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
                             <i class="ph-user-plus"></i>
