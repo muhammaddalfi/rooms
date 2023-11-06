@@ -117,7 +117,7 @@ class DashboardPiutang extends Controller
             $no_call = Baddeb::where('is_minat', 'no_call')->where('user_id', auth()->user()->id);
             $data['total_no_call'] = $no_call->count();
 
-            $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_harian,
+            $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_harian
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
                                     WHERE DATE(b.created_at) = CURDATE()
