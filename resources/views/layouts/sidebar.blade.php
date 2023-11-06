@@ -148,6 +148,14 @@
                                 </li>
                             @endcan
 
+                            @can('pengguna read')
+                                <li class="nav-item">
+                                    <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
+                                        <i class="ph-user-plus"></i>
+                                        <span>Tambah Pengguna</span>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan
@@ -230,15 +238,6 @@
                                 </li>
                             @endcan
                         </ul>
-                    </li>
-                @endcan
-
-                @can('admin read')
-                    <li class="nav-item">
-                        <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
-                            <i class="ph-user-plus"></i>
-                            <span>Tambah Pengguna</span>
-                        </a>
                     </li>
                 @endcan
                 @can('super admin')
