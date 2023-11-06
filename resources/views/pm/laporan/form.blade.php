@@ -91,7 +91,7 @@
         </thead>
         <tbody>
             <tr>
-                <td class="tg-73oq" colspan="5">PT INDONESIA COMNETS PLUS<br>SBU REGIONAL SUMATERA BAGIAN UTARA<br>
+                <td class="tg-73oq" colspan="5">PT INDONESIA COMNETS PLUS<br>SBU REGIONAL JAWA BAGIAN BARAT<br>
                 </td>
             </tr>
             <tr>
