@@ -55,10 +55,10 @@ class DashboardPiutang extends Controller
             $data['total_no_call'] = $no_call->count();
 
             
-            $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_total,
-                                    (SELECT COUNT(id) FROM baddebs WHERE DATE(waktu_bayar) = CURDATE() GROUP BY name ORDER BY id) AS jumlah_harian                                    
+            $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_harian
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
+                                    WHERE DATE(b.waktu_bayar) = CURDATE()
                                     GROUP BY u.name ORDER BY u.id";
             $data['jumlah_user_fu'] = DB::select($query_jumlah_user_fu);
 
@@ -110,12 +110,11 @@ class DashboardPiutang extends Controller
             $no_call = Baddeb::where('is_minat', 'no_call')->where('user_id', auth()->user()->id);
             $data['total_no_call'] = $no_call->count();
 
-            $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_total,
-                                    (SELECT COUNT(id) FROM baddebs WHERE DATE(waktu_bayar) = CURDATE()  
-                                    AND b.user_id = '".Auth()->user()->id."' GROUP BY name ORDER BY id) AS jumlah_harian                                    
+            $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_harian,
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
-                                    WHERE b.user_id = '".Auth()->user()->id."'
+                                    WHERE DATE(b.waktu_bayar) = CURDATE()
+                                    AND b.user_id = '".Auth()->user()->id."'
                                     GROUP BY u.name ORDER BY u.id";
             $data['jumlah_user_fu'] = DB::select($query_jumlah_user_fu);
 
