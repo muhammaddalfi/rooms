@@ -121,6 +121,15 @@
                                 </li>
                             @endcan
 
+                            @can('sales perusaahn read')
+                                <li class="nav-item">
+                                    <a href="{{ route('mpp.dashboard') }}" class="nav-link">
+                                        <i class="ph-git-fork"></i>
+                                        <span>Sales Perusahaan</span>
+                                    </a>
+                                </li>
+                            @endcan
+
                             @can('perusahaan read')
                                 <li class="nav-item">
                                     <a href="{{ route('mpp.dashboard') }}" class="nav-link">
@@ -223,6 +232,7 @@
                         </ul>
                     </li>
                 @endcan
+
                 @can('user read')
                     <li class="nav-item">
                         <a href="{{ route('pengguna.dashboard') }}" class="nav-link">
@@ -231,25 +241,26 @@
                         </a>
                     </li>
                 @endcan
+                @can('super admin')
 
-                @can('role read')
-                    <li class="nav-item">
-                        <a href="{{ route('role.index') }}" class="nav-link">
-                            <i class="ph-lock"></i>
-                            <span>Tambah Role</span>
-                        </a>
-                    </li>
+                    @can('role read')
+                        <li class="nav-item">
+                            <a href="{{ route('role.index') }}" class="nav-link">
+                                <i class="ph-lock"></i>
+                                <span>Tambah Role</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('permission read')
+                        <li class="nav-item">
+                            <a href="{{ route('permission.index') }}" class="nav-link">
+                                <i class="ph-lock"></i>
+                                <span>Tambah Permission</span>
+                            </a>
+                        </li>
+                    @endcan
                 @endcan
-
-                @can('permission read')
-                    <li class="nav-item">
-                        <a href="{{ route('permission.index') }}" class="nav-link">
-                            <i class="ph-lock"></i>
-                            <span>Tambah Permission</span>
-                        </a>
-                    </li>
-                @endcan
-
 
             </ul>
         </div>

@@ -18,7 +18,7 @@
                             value="{{ $role->name }}">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="row mb-3">
                         @foreach ($permissions as $permission)
                             <div class="col-md-3 mb-1">
                                 <div class="form-check form-check-inline">

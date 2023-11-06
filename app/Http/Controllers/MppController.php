@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -18,7 +19,17 @@ class MppController extends Controller
 
     public function fetch()
     {
-        $user = User::where('jenis_pengguna','leader_perusahaan')->get();
+        if (Auth::user()->hasRole('admin')) {
+                $user = User::where('jenis_pengguna','leader_perusahaan')
+                ->get();
+        }
+        if (Auth::user()->hasRole('mitra')) {
+                $user = User::where('jenis_pengguna','leader_perusahaan')
+                ->where('id_leader',auth()->user()->id)
+                ->get();
+        }
+
+        // $user = User::where('jenis_pengguna','leader_perusahaan')->get();
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('anggota', function ($user) {
@@ -68,7 +79,7 @@ class MppController extends Controller
             $ajax->password = bcrypt($password);
 
             $ajax->save();
-            $ajax->assignRole('leader'); // hardcode assign role
+            $ajax->assignRole('mitra'); // hardcode assign role
             $user = User::where('id',$ajax->id);
             $user->update(['id_leader' => $ajax->id]);
             return response()->json([
@@ -81,7 +92,15 @@ class MppController extends Controller
 
     public function show_anggota()
     {
-        $anggota = User::where('jenis_pengguna','anggota_perusahaan')->get();
+        if (Auth::user()->hasRole('admin')) {
+                $anggota = User::where('jenis_pengguna','anggota_perusahaan')
+                ->get();
+        }
+        if (Auth::user()->hasRole('mitra')) {
+                $anggota = User::where('jenis_pengguna','anggota_perusahaan')
+                ->where('id_leader',auth()->user()->id)
+                ->get();
+        }
         return DataTables::of($anggota)
             ->addIndexColumn()
             ->addColumn('action', function ($anggota) {
@@ -129,7 +148,7 @@ class MppController extends Controller
             $ajax->password = bcrypt($password);
 
             $ajax->save();
-            $ajax->assignRole('user'); // hardcode assign role
+            $ajax->assignRole('mitra'); // hardcode assign role
             return response()->json([
                 'status' => 200,
                 'message' => 'Data tersimpan',
