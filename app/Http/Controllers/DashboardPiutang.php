@@ -58,13 +58,13 @@ class DashboardPiutang extends Controller
             $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_harian
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
-                                    WHERE DATE(b.waktu_bayar) = CURDATE()
+                                    WHERE DATE(b.created_at) = CURDATE()
                                     GROUP BY u.name ORDER BY u.id";
             $data['jumlah_user_fu'] = DB::select($query_jumlah_user_fu);
 
             $query_jumlah_total_fu = "SELECT COUNT(b.id) AS jumlah_total
                                         FROM baddebs b
-                                        WHERE DATE(b.waktu_bayar) = CURDATE()";
+                                        WHERE DATE(b.created_at) = CURDATE()";
             $data['jumlah_total'] = DB::select($query_jumlah_total_fu);
 
             // dd($data['jumlah_total']);
@@ -120,10 +120,16 @@ class DashboardPiutang extends Controller
             $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_harian,
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
-                                    WHERE DATE(b.waktu_bayar) = CURDATE()
+                                    WHERE DATE(b.created_at) = CURDATE()
                                     AND b.user_id = '".Auth()->user()->id."'
                                     GROUP BY u.name ORDER BY u.id";
             $data['jumlah_user_fu'] = DB::select($query_jumlah_user_fu);
+            
+            $query_jumlah_total_fu = "SELECT COUNT(b.id) AS jumlah_total
+                                        FROM baddebs b
+                                        WHERE DATE(b.created_at) = CURDATE()
+                                        AND b.user_id = '".Auth()->user()->id."'";
+            $data['jumlah_total'] = DB::select($query_jumlah_total_fu);
 
             return view('dashboard.piutang.index',$data);
         }
