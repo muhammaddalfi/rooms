@@ -56,7 +56,7 @@ class DashboardPiutang extends Controller
 
             
             $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_total,
-                                    (SELECT COUNT(id) FROM baddebs WHERE DATE(waktu_bayar) = CURDATE()) AS jumlah_harian                                    
+                                    (SELECT COUNT(id) FROM baddebs WHERE DATE(waktu_bayar) = CURDATE() GROUP BY name ORDER BY id) AS jumlah_harian                                    
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
                                     GROUP BY u.name ORDER BY u.id";
@@ -112,7 +112,7 @@ class DashboardPiutang extends Controller
 
             $query_jumlah_user_fu = "SELECT u.name AS nama_collection, COUNT(b.id) AS jumlah_total,
                                     (SELECT COUNT(id) FROM baddebs WHERE DATE(waktu_bayar) = CURDATE()  
-                                    AND b.user_id = '".Auth()->user()->id."') AS jumlah_harian                                    
+                                    AND b.user_id = '".Auth()->user()->id."' GROUP BY name ORDER BY id) AS jumlah_harian                                    
                                     FROM baddebs b
                                     LEFT JOIN users u ON u.id = b.user_id
                                     WHERE b.user_id = '".Auth()->user()->id."'
