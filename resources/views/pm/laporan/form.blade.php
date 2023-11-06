@@ -102,7 +102,7 @@
             <tr>
                 <td class="tg-qr5b">Tanggal Preventive<br></td>
                 <td class="tg-qr5b">{{ date('d M Y', strtotime($tgl_mulai)) }}<br></td>
-                <td class="tg-qr5b" colspan="3">Koordinat{{ $olt['lat'] }} ,{{ $olt['lng'] }}<br></td>
+                <td class="tg-qr5b" colspan="3">Koordinat : {{ $olt['lat'] }} ,{{ $olt['lng'] }}<br></td>
             </tr>
             <tr>
                 <td class="tg-m68c">No</td>
