@@ -62,6 +62,13 @@ class DashboardPiutang extends Controller
                                     GROUP BY u.name ORDER BY u.id";
             $data['jumlah_user_fu'] = DB::select($query_jumlah_user_fu);
 
+            $query_jumlah_total_fu = "SELECT COUNT(b.id) AS jumlah_total
+                                        FROM baddebs b
+                                        WHERE DATE(b.waktu_bayar) = CURDATE()";
+            $data['jumlah_total'] = DB::select($query_jumlah_total_fu);
+
+            // dd($data['jumlah_total']);
+
             return view('dashboard.piutang.index',$data);
         }
         else if(Auth::user()->hasRole('collection')){

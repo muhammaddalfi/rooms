@@ -62,7 +62,7 @@
                     <!-- Daily financials -->
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h5 class="mb-0">Total Follow Up</h5>
+                            <h5 class="mb-0">Hari Ini : {{ $jumlah_total[0]->jumlah_total }} Pelanggan</h5>
                         </div>
 
                         <div class="card-body">
