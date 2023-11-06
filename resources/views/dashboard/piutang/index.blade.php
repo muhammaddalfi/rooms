@@ -78,7 +78,8 @@
                                     </div>
                                     <div class="flex-fill">
                                         {{ $item->nama_collection }}
-                                        <div class="text-muted fs-sm">Total -> {{ $item->jumlah_fu }} Pelanggan</div>
+                                        <div class="text-muted fs-sm">Total Harian -> {{ $item->jumlah_harian }} Pelanggan</div>
+                                        <div class="text-muted fs-sm">Total Seluruh -> {{ $item->jumlah_total }} Pelanggan</div>
                                     </div>
                                 </div>
                             @endforeach
