@@ -283,7 +283,6 @@ $(document).ready(function () {
     });
 
     var lat, lng;
-
     $(document).ajaxComplete(function () {
         $("[name=latNow]").val(lat);
         $("[name=lngNow]").val(lng);
@@ -342,11 +341,8 @@ $(document).ready(function () {
 
     const MAX_WIDTH = 1080;
     const MAX_HEIGHT = 720;
-    // const MAX_WIDTH = 320;
-    // const MAX_HEIGHT = 180;
     const MIME_TYPE = "image/jpeg";
     const QUALITY = 80;
-    // const QUALITY = 1.0;
 
     const input = document.getElementById("gambar");
     input.onchange = function (ev) {

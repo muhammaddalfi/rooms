@@ -8,8 +8,33 @@
 
             <form id="form_pm_olt" class="form_input_olt" enctype="multipart/form-data" action="#" method="POST">
                 @csrf
-                <input type="hidden" id="id_pm">
                 <div class="modal-body">
+                    <div class="col-sm-6">
+                        <input type="hidden" id="id_pm">
+                        <input type="hidden" readonly class="form-control" id="latNow" name="latNow">
+                        <span id="error_lat" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <input type="hidden" readonly class="form-control" id="lngNow" name="lngNow">
+                        <span id="error_lng" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="border p-3 rounded">
+                            <div class="col-sm-12">
+                                <label class="form-label">Lokasi Cluster</label>
+                                <select class="form-control olt" name="olt" id="olt">
+                                    <option></option>
+
+                                </select>
+                                <span id="error_olt" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                     <div class="row mb-3">
                         <div class="border p-3 rounded">
                             <div class="row">
@@ -211,7 +236,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-sm-12" id="view-blob">
+                        <div class="col-sm-12" id="view-blob-olt">
                             <label class="form-label">Dokumentasi</label>
                             <input type="file" id="dokumentasi_olt" name="dokumentasi_olt" class="form-control"
                                 accept="image/*">

@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="content">
+        <div class="mb-3">
+            <div class="row">
+                <div id="map"></div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -44,6 +50,7 @@
     <script src="{{ asset('assets/js/vendor/notifications/sweetalert.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/ui/moment/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendor/leaflet/js/leaflet.js') }}"></script>
     <script src="{{ asset('assets/js/pm/index.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 @endpush

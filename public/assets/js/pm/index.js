@@ -110,23 +110,23 @@ $(document).ready(function(){
         })
     }); 
 
-    $(document).on("click",".olt", function(){
-        var id_pm = $(this).data('id');
-        $('#modal_pm_olt').modal('show');
-        $.ajax({
-            type: "GET",
-            url: "/montir/pm/olt/edit/" + id_pm,
-            success: function (response) {
-                if (response.status == 200) {
+    // $(document).on("click",".olt", function(){
+    //     var id_pm = $(this).data('id');
+    //     $('#modal_pm_olt').modal('show');
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/montir/pm/olt/edit/" + id_pm,
+    //         success: function (response) {
+    //             if (response.status == 200) {
 
-                    console.log(response.pm.id);
-                    $('#id_pm').val(response.pm.id);
-                } else {
+    //                 console.log(response.pm.id);
+    //                 $('#id_pm').val(response.pm.id);
+    //             } else {
 
-                }
-            }
-        })
-    });
+    //             }
+    //         }
+    //     })
+    // });
 
     var form_pm_olt = $('#form_pm_olt')[0];
     $(".form_input_olt").on("submit", function(e){
@@ -371,6 +371,47 @@ $(document).ready(function(){
     
     });
 
+     $(document).on('click', '.tombol_olt', function (e) {
+        var id_pm = $(this).data('id');
+        var form = {
+            'lat': $('#latNow').val(),
+            'lng': $('#lngNow').val()
+        };
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/dailys/reload/' + form.lat + '/' + form.lng,
+            method: 'GET',
+
+            success: function (response) {
+
+                if (response.status == 404) {
+                    console.log('Data Not Found');
+                } else {
+                    $('#modal_pm_olt').modal('show');
+                    $('#id_pm').val(id_pm);
+                    $('.olt').html('');
+                    $.each(response.olts, function (i, item) {
+                        $('.olt').append($('<option>', {
+                            value: item.id, text: item.nama_olt
+                        }));
+                    });
+                }
+            }, error: function (response) {
+                console.log();
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Lokasi Anda Diluar Jangkauan Radius CLuster',
+                    icon: 'error'
+                });
+            }
+        })
+    })
+
     const input_dokumentasi_olt = document.getElementById("dokumentasi_olt");
     input_dokumentasi_olt.onchange = function (ev) {
         const file = ev.target.files[0]; // get the file
@@ -519,7 +560,7 @@ $(document).ready(function(){
     function displayInfo(label, file) {
         const p = document.createElement('p');
         p.innerText = `${label} - ${readableBytes(file.size)}`;
-        document.getElementById('view-blob').append(p);
+        document.getElementById('view-blob-olt').append(p);
     }
 
     function readableBytes(bytes) {
@@ -527,6 +568,63 @@ $(document).ready(function(){
             sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
         return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];
+    }
+
+    var lat, lng;
+    $(document).ajaxComplete(function () {
+        $("[name=latNow]").val(lat);
+        $("[name=lngNow]").val(lng);
+    });
+    getLocation();
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert('Geolocation is not supported by this browser');
+        }
+    }
+
+    function showPosition(position) {
+        console.log('Posisi Sekarang', position.coords.latitude, position.coords.longitude);
+        var image = '/assets/images/map/pin.png';
+        var me = L.icon({
+            iconUrl: image,
+            iconSize: [38, 38], // size of the icon
+        });
+
+        var mymap = L.map("map").setView([position.coords.latitude, position.coords.longitude], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(mymap);
+
+        L.marker([position.coords.latitude, position.coords.longitude], { icon: me })
+            .addTo(mymap)
+            .bindPopup("<b>Hai!</b><br />Ini adalah lokasi mu");
+
+
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+
+        $.ajax({
+            type: "GET",
+            url: '/dailys/reload/' + lat + '/' + lng,
+            success: function (response) {
+
+                L.circle([lat, lng], response.setting_radius).addTo(mymap);
+
+                $.each(response.olts, function (index, value) {
+                    L.marker([value.lat, value.lng]).addTo(mymap).bindPopup(value.nama_olt);
+                });
+            }
+        });
+
+        $("[name=latNow]").val(position.coords.latitude);
+        $("[name=lngNow]").val(position.coords.longitude);
+
+
     }
 
 });

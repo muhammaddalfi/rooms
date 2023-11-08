@@ -75,7 +75,7 @@ class PMController extends Controller
             })
             ->addColumn('olt', function ($pm) {
                if($pm->is_olt == 0){
-                    return '<a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 olt" data-id="' . $pm->id . '">Belum</a>';
+                    return '<a href="javascript:void(0)" class="btn btn-outline-danger btn-icon ml-2 tombol_olt" data-id="' . $pm->id . '">Belum</a>';
                 }else if($pm->is_olt == 1){
                     return '<span class="badge bg-success">Selesai</span>';
                 }
@@ -176,6 +176,7 @@ class PMController extends Controller
     public function olt(Request $request, string $id_pm)
     {
          $rule = [
+            'olt' => 'required',
             'kondisi_modul_olt' => 'required',
             'kondisi_port_olt' => 'required',
             'kondisi_sfp_olt' => 'required',
@@ -187,6 +188,7 @@ class PMController extends Controller
         ];
 
         $message = [
+            'olt.required' => 'Tidak boleh kosong',
             'kondisi_modul_olt.required' => 'Tidak boleh kosong',
             'kondisi_port_olt.required' => 'Tidak boleh kosong',
             'kondisi_sfp_olt.required' => 'Tidak boleh kosong',
@@ -210,6 +212,8 @@ class PMController extends Controller
             if($ajax) {
                 $path = 'files/pm';
                 $ajax->is_olt = 1;
+
+                $ajax->id_lokasi = $request->input('olt');
                 $ajax->kondisi_modul_olt = $request->input('kondisi_modul_olt');
                 $ajax->catatan_modul_olt = $request->input('catatan_modul_olt');
                 
