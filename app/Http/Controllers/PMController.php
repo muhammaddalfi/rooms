@@ -184,7 +184,7 @@ class PMController extends Controller
             'kondisi_battery' => 'required',
             'battery_backup' => 'required',
             'kondisi_suhu_kabinet' => 'required',
-            'dokumentasi_olt' => 'required',
+            'dokumentasi_olt' => 'required|image|mimes:jpeg,png,jpg|max:5048'
         ];
 
         $message = [
