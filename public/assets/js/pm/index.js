@@ -443,98 +443,98 @@ $(document).ready(function(){
         };
     };
 
-    const input_dokumentasi_feeder = document.getElementById("dokumentasi_feeder");
-    input_dokumentasi_feeder.onchange = function (ev) {
-        const file = ev.target.files[0]; // get the file
-        const blobURL = URL.createObjectURL(file);
-        const img = new Image();
-        img.src = blobURL;
-        img.onerror = function () {
-            URL.revokeObjectURL(this.src);
-            // Handle the failure properly
-            console.log("Cannot load image");
-        };
-        img.onload = function () {
-            URL.revokeObjectURL(this.src);
-            const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
-            const canvas = document.createElement("canvas");
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-            canvas.toBlob(
-                (blob) => {
-                    // Handle the compressed image. es. upload or save in local state
-                    blob_dokumentasi_feeder = blob;
-                },
-                MIME_TYPE,
-                QUALITY
-            );
+    // const input_dokumentasi_feeder = document.getElementById("dokumentasi_feeder");
+    // input_dokumentasi_feeder.onchange = function (ev) {
+    //     const file = ev.target.files[0]; // get the file
+    //     const blobURL = URL.createObjectURL(file);
+    //     const img = new Image();
+    //     img.src = blobURL;
+    //     img.onerror = function () {
+    //         URL.revokeObjectURL(this.src);
+    //         // Handle the failure properly
+    //         console.log("Cannot load image");
+    //     };
+    //     img.onload = function () {
+    //         URL.revokeObjectURL(this.src);
+    //         const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
+    //         const canvas = document.createElement("canvas");
+    //         canvas.width = newWidth;
+    //         canvas.height = newHeight;
+    //         const ctx = canvas.getContext("2d");
+    //         ctx.drawImage(img, 0, 0, newWidth, newHeight);
+    //         canvas.toBlob(
+    //             (blob) => {
+    //                 // Handle the compressed image. es. upload or save in local state
+    //                 blob_dokumentasi_feeder = blob;
+    //             },
+    //             MIME_TYPE,
+    //             QUALITY
+    //         );
 
-        };
-    };
+    //     };
+    // };
 
-    const input_dokumentasi_fdt = document.getElementById("dokumentasi_fdt");
-    input_dokumentasi_fdt.onchange = function (ev) {
-        const file = ev.target.files[0]; // get the file
-        const blobURL = URL.createObjectURL(file);
-        const img = new Image();
-        img.src = blobURL;
-        img.onerror = function () {
-            URL.revokeObjectURL(this.src);
-            // Handle the failure properly
-            console.log("Cannot load image");
-        };
-        img.onload = function () {
-            URL.revokeObjectURL(this.src);
-            const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
-            const canvas = document.createElement("canvas");
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-            canvas.toBlob(
-                (blob) => {
-                    // Handle the compressed image. es. upload or save in local state
-                    blob_dokumentasi_fdt = blob;
-                },
-                MIME_TYPE,
-                QUALITY
-            );
+    // const input_dokumentasi_fdt = document.getElementById("dokumentasi_fdt");
+    // input_dokumentasi_fdt.onchange = function (ev) {
+    //     const file = ev.target.files[0]; // get the file
+    //     const blobURL = URL.createObjectURL(file);
+    //     const img = new Image();
+    //     img.src = blobURL;
+    //     img.onerror = function () {
+    //         URL.revokeObjectURL(this.src);
+    //         // Handle the failure properly
+    //         console.log("Cannot load image");
+    //     };
+    //     img.onload = function () {
+    //         URL.revokeObjectURL(this.src);
+    //         const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
+    //         const canvas = document.createElement("canvas");
+    //         canvas.width = newWidth;
+    //         canvas.height = newHeight;
+    //         const ctx = canvas.getContext("2d");
+    //         ctx.drawImage(img, 0, 0, newWidth, newHeight);
+    //         canvas.toBlob(
+    //             (blob) => {
+    //                 // Handle the compressed image. es. upload or save in local state
+    //                 blob_dokumentasi_fdt = blob;
+    //             },
+    //             MIME_TYPE,
+    //             QUALITY
+    //         );
 
-        };
-    };
+    //     };
+    // };
 
-    const input_dokumentasi_fat = document.getElementById("dokumentasi_fat");
-    input_dokumentasi_fat.onchange = function (ev) {
-        const file = ev.target.files[0]; // get the file
-        const blobURL = URL.createObjectURL(file);
-        const img = new Image();
-        img.src = blobURL;
-        img.onerror = function () {
-            URL.revokeObjectURL(this.src);
-            // Handle the failure properly
-            console.log("Cannot load image");
-        };
-        img.onload = function () {
-            URL.revokeObjectURL(this.src);
-            const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
-            const canvas = document.createElement("canvas");
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-            canvas.toBlob(
-                (blob) => {
-                    // Handle the compressed image. es. upload or save in local state
-                    blob_dokumentasi_fat = blob;
-                },
-                MIME_TYPE,
-                QUALITY
-            );
+    // const input_dokumentasi_fat = document.getElementById("dokumentasi_fat");
+    // input_dokumentasi_fat.onchange = function (ev) {
+    //     const file = ev.target.files[0]; // get the file
+    //     const blobURL = URL.createObjectURL(file);
+    //     const img = new Image();
+    //     img.src = blobURL;
+    //     img.onerror = function () {
+    //         URL.revokeObjectURL(this.src);
+    //         // Handle the failure properly
+    //         console.log("Cannot load image");
+    //     };
+    //     img.onload = function () {
+    //         URL.revokeObjectURL(this.src);
+    //         const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
+    //         const canvas = document.createElement("canvas");
+    //         canvas.width = newWidth;
+    //         canvas.height = newHeight;
+    //         const ctx = canvas.getContext("2d");
+    //         ctx.drawImage(img, 0, 0, newWidth, newHeight);
+    //         canvas.toBlob(
+    //             (blob) => {
+    //                 // Handle the compressed image. es. upload or save in local state
+    //                 blob_dokumentasi_fat = blob;
+    //             },
+    //             MIME_TYPE,
+    //             QUALITY
+    //         );
 
-        };
-    };
+    //     };
+    // };
 
     function calculateSize(img, maxWidth, maxHeight) {
         let width = img.width;
