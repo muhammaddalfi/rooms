@@ -236,7 +236,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-sm-12" id="view-blob-olt">
+                        <div class="col-sm-12" id="view_blob_olt">
                             <label class="form-label">Dokumentasi</label>
                             <input type="file" id="dokumentasi_olt" name="dokumentasi_olt" class="form-control"
                                 accept="image/*">

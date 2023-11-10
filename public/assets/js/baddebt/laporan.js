@@ -46,6 +46,16 @@ $(document).ready(function(){
             searchPlaceholder: 'Type to filter...',
             lengthMenu: '<span class="me-3">Show:</span> _MENU_',
             paginate: { 'first': 'First', 'last': 'Last', 'next': document.dir == "rtl" ? '&larr;' : '&rarr;', 'previous': document.dir == "rtl" ? '&rarr;' : '&larr;' }
+        },
+        buttons: {            
+            dom: {
+                button: {
+                    className: 'btn btn-light'
+                }
+            },
+            buttons: [
+                'excelHtml5'
+            ]
         }
     });
 

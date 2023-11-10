@@ -182,6 +182,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/montir/laporan/fetch', [LaporanPmController::class, 'fetch']);
     Route::get('/montir/laporan/search', [LaporanPmController::class, 'search'])->name('pm.search');
     Route::get('/montir/pm/laporan/download/{id}', [LaporanPmController::class, 'generate']);
+
+    Route::get('/laporan/raw',[LaporanDebt::class,'export'])->name('export.raw');
 });
 
 require __DIR__ . '/auth.php';

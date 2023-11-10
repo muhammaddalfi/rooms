@@ -128,10 +128,10 @@ $(document).ready(function(){
     //     })
     // });
 
+    var blob_dokumentasi_olt;
     var form_pm_olt = $('#form_pm_olt')[0];
     $(".form_input_olt").on("submit", function(e){
         e.preventDefault();
-        var blob_dokumentasi_olt;
         var id_pm = $('#id_pm').val();
         let data_form_olt =  new FormData(form_pm_olt);
         data_form_olt.append('dokumentasi_olt', blob_dokumentasi_olt);

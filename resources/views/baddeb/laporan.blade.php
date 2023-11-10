@@ -6,17 +6,29 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('report.search') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div id="daterange" class="input-group">
-                                        <span class="input-group-text"><i class="ph-calendar"></i></span>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <form action="{{ route('report.search') }}" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div id="daterange" class="input-group">
+                                                <span class="input-group-text"><i class="ph-calendar"></i></span>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                            <div class="col-lg-8">
+                                <a href='{{ route('export.raw') }}' class="btn btn-light"><i
+                                        class="ph-microsoft-excel-logo me-2"></i>Export
+                                    Data</a>
+                            </div>
+
+                        </div>
+
+
                     </div>
                     <table class="table datatable-laporan-baddeb">
                         <thead>
@@ -52,6 +64,7 @@
     <script src="{{ asset('assets/js/moment/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/baddebt/laporan.js') }}"></script>
+    <script src="{{ asset('assets/js/vendor/tables/datatables/extensions/buttons.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/baddebt/laporan.js') }}"></script>
 @endpush

@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\BaddebsDataTable;
+use App\Exports\BaddebExport;
 use App\Models\Baddeb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class LaporanDebt extends Controller
 {
     public function index(){
         return view('baddeb.laporan');
+        // return $dataTable->render('baddeb.laporan');
     }
 
     public function search(Request $request)
@@ -87,5 +91,10 @@ class LaporanDebt extends Controller
                 'message' => 'Daily not found',
             ]);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new BaddebExport, 'laporan.xlsx');
     }
 }

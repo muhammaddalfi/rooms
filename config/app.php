@@ -169,7 +169,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
     ])->toArray(),
 
     /*
