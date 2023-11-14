@@ -22,9 +22,7 @@ class BaddebImport implements ToModel, WithHeadingRow
             'telp'  => $row['telp'],
             'user_id'  => $row['user_id'],
             'keterangan'  => $row['keterangan'],
-            'created_at'  => $row['created_at'],
-            'is_minat'  => $row['is_minat'],
-            'status_bayar'  => $row['status_bayar']
+            'created_at'  => $row['created_at']
         ]);
     }
 }
