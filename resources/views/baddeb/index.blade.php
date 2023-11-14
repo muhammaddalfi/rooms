@@ -9,6 +9,9 @@
                         <div class="card-body">
                             <a href='#' class="btn btn-light add_beddeb" data-toggle="modal" data-target="#modal_beddeb"><i
                                     class="ph-plus-circle me-2"></i>Tambah Pelanggan</a>
+
+                            <a href='#' class="btn btn-outline-success import_data" data-toggle="modal"
+                                data-target="#modal_import_data"><i class="ph-microsoft-excel-logo me-2"></i>Import Data</a>
                         </div>
                     @endcan
                     <table class="table datatable-baddeb">
@@ -36,6 +39,7 @@
 
         <!-- /basic responsive configuration -->
     </div>
+    @include('baddeb.modals.import')
     @include('baddeb.modals.fu')
     @include('baddeb.modals.create')
     @include('baddeb.modals.edit')

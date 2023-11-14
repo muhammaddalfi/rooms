@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\BaddebImport;
 use App\Models\Baddeb;
 use App\Models\Debt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class BadDebController extends Controller
@@ -157,8 +158,8 @@ class BadDebController extends Controller
         // dd($baddebt);
         return DataTables::of($baddebt)
             ->addIndexColumn()
-            ->addColumn('updated_at', function ($baddebt) {
-                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $baddebt->updated_at)->format('d-m-Y');
+            ->addColumn('created_at', function ($baddebt) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $baddebt->created_at)->format('d-m-Y');
                 return $formatDate;
             })
 
@@ -185,5 +186,11 @@ class BadDebController extends Controller
             
             ->rawColumns(['action','keterangan','status'])
             ->make(true);
+    }
+
+    public function import_baddeb()
+    {
+        Excel::import(new BaddebImport, request()->file('file'));
+        return back();
     }
 }

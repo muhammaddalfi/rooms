@@ -184,6 +184,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/montir/pm/laporan/download/{id}', [LaporanPmController::class, 'generate']);
 
     Route::get('/laporan/raw',[LaporanDebt::class,'export'])->name('export.raw');
+
+    Route::post('/import/data', [BadDebController::class, 'import_baddeb']);
 });
 
 require __DIR__ . '/auth.php';

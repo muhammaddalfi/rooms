@@ -171,7 +171,7 @@ $(document).ready(function(){
             {data:'id_pln'},
             {data:'layanan'},
             {data:'status'},
-            {data:'updated_at'},
+            {data:'created_at'},
             {data:'keterangan'},
             {data: 'action', name: 'action', className: 'text-center',orderable: false, searchable: false, width: 220}
         ],
@@ -184,6 +184,51 @@ $(document).ready(function(){
                 paginate: { 'first': 'First', 'last': 'Last', 'next': document.dir == "rtl" ? '&larr;' : '&rarr;', 'previous': document.dir == "rtl" ? '&rarr;' : '&larr;' }
             }
     });
+
+
+     $(document).on('click','.import_data', function(e){
+        e.preventDefault();
+        $('#modal_import_data').modal('show');   
+
+    })
+
+    var excel = $('#form-import-baddeb')[0];
+    $('#import_excel').on('click',function(e){
+        e.preventDefault();
+        var import_excel  = new FormData(excel);
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: '/import/data',
+            method:'POST',
+            data: import_excel,
+            processData: false,
+            contentType: false,
+
+            success: function(response){
+                if(response.status == 400)
+                {
+                    console.log(response);
+                  
+                }else{
+                   console.log(response); 
+                    table.draw();
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data Berhasil Ditambahkan',
+                        icon: 'success'
+                    });
+
+                    $('#modal_import_data').modal('hide');
+                }
+            }
+        })
+
+    })
 
     //add jenis_keluhan
     $(document).on('click','.add_beddeb', function(e){
