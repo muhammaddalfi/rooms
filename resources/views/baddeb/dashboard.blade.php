@@ -88,7 +88,6 @@
                     renderer: 'svg'
                 });
 
-
                 // Kategori
                 kategori_debt.setOption({
                     // Colors
@@ -220,10 +219,6 @@
                         data: <?= json_encode($jumlah_issue) ?>
                     }]
                 });
-
-
-
-
 
                 // Resize function
                 var triggerChartResize = function() {

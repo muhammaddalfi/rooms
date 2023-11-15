@@ -44,6 +44,32 @@ class DashboardPiutang extends Controller
             $data['jumlah_issue'] = $count_issue;
             // Kategori Pie
 
+            // Jumlah FU date
+            $fu_daily_query ="SELECT DATE(b.created_at) AS tgl_fu, COUNT(b.id) AS jumlah_fu
+                            FROM baddebs b
+                            GROUP BY DATE(b.created_at) 
+                            ORDER BY id DESC
+                            LIMIT 7";
+
+            $fu_daily = DB::select($fu_daily_query);
+                $count_fu_daily = [];
+                foreach ($fu_daily as $value) {
+                    $count_fu_daily[] = [
+                        "value" => $value->jumlah_fu
+                    ];
+                }
+            $data['jumlah_fu_daily'] = $count_fu_daily;
+
+            $tgl_fu_daily = DB::select($fu_daily_query);
+            $tgl_fu = [];
+            foreach ($tgl_fu_daily as $value){
+                $tgl_fu[] = [
+                    "value" => $value->tgl_fu
+                ];
+            }
+            $data['tgl_fu'] = $tgl_fu;
+            // jumlah FU date
+
             $pending = Baddeb::where('status_bayar', 'pending');
             $data['total_pending'] = $pending->count();
 
@@ -107,6 +133,32 @@ class DashboardPiutang extends Controller
                 }
             $data['jumlah_issue'] = $count_issue;
             // Kategori Pie
+
+             // Jumlah FU date
+            $fu_daily_query ="SELECT DATE(b.created_at) AS tgl_fu, COUNT(b.id) AS jumlah_fu
+                            FROM baddebs b
+                            WHERE b.user_id = '".Auth()->user()->id."'
+                            GROUP BY DATE(b.created_at) 
+                            ORDER BY id DESC LIMIT 7";
+
+            $fu_daily = DB::select($fu_daily_query);
+                $count_fu_daily = [];
+                foreach ($fu_daily as $value) {
+                    $count_fu_daily[] = [
+                        "value" => $value->jumlah_fu
+                    ];
+                }
+            $data['jumlah_fu_daily'] = $count_fu_daily;
+
+            $tgl_fu_daily = DB::select($fu_daily_query);
+            $tgl_fu = [];
+            foreach ($tgl_fu_daily as $value){
+                $tgl_fu[] = [
+                    "value" => $value->tgl_fu
+                ];
+            }
+            $data['tgl_fu'] = $tgl_fu;
+            // jumlah FU date
 
             $pending = Baddeb::where('status_bayar', 'pending')->where('user_id', auth()->user()->id);
             $data['total_pending'] = $pending->count();
