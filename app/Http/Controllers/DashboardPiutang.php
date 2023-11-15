@@ -48,7 +48,7 @@ class DashboardPiutang extends Controller
             $fu_daily_query ="SELECT DATE(b.created_at) AS tgl_fu, COUNT(b.id) AS jumlah_fu
                             FROM baddebs b
                             GROUP BY DATE(b.created_at) 
-                            ORDER BY id DESC
+                            ORDER BY DATE(b.created_at) DESC
                             LIMIT 7";
 
             $fu_daily = DB::select($fu_daily_query);
@@ -139,7 +139,8 @@ class DashboardPiutang extends Controller
                             FROM baddebs b
                             WHERE b.user_id = '".Auth()->user()->id."'
                             GROUP BY DATE(b.created_at) 
-                            ORDER BY id DESC LIMIT 7";
+                            ORDER BY DATE(b.created_at) DESC
+                            LIMIT 7";
 
             $fu_daily = DB::select($fu_daily_query);
                 $count_fu_daily = [];
