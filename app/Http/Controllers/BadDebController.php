@@ -147,10 +147,15 @@ class BadDebController extends Controller
 
     public function fetch()
     {
+
+        $year = date('Y');
+        // $year = date('Y');
         if(Auth::user()->hasRole(['admin','management'])){
-             $baddebt = Baddeb::whereNotIn('status_bayar', ['close','lose'])->orderBy('id','DESC')->get();
+             $baddebt = Baddeb::whereYear('created_at',$year)
+             ->whereNotIn('status_bayar', ['close','lose'])->orderBy('id','DESC')->get();
         }else if(Auth::user()->hasRole(['sales','collection'])){
                 $baddebt = Baddeb::where('user_id', auth()->user()->id)
+                ->whereYear('created_at',$year)
             ->whereNotIn('status_bayar', ['close','lose'])->orderBy('id','DESC')->get();
         }
         // $baddebt = Baddeb::all();
