@@ -103,6 +103,7 @@ class DashboardPiutang extends Controller
                                 FROM debts d
                                 LEFT JOIN baddebs b ON b.kategori_debt = d.id
                                 WHERE b.user_id = '".Auth()->user()->id."'
+                                AND date(b.created_at) = curdate()
                                 GROUP BY d.name
                                 ORDER BY d.name";
             $kategori_count = DB::select($kategori_query);
