@@ -36,7 +36,7 @@ $(document).ready(function(){
             {data:'id_pln'},
             {data:'layanan'},
             {data:'status'},
-            {data:'nama_petugas'},
+            // {data:'nama_petugas'},
             // {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false, width: 220 }
         ],
         order: [[0, "desc"]],
