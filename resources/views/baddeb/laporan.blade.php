@@ -37,6 +37,7 @@
                                 <th>Nama</th>
                                 <th>ID Pelanggan</th>
                                 <th>Layanan</th>
+                                <th>Alasan Berhenti</th>
                                 <th>Petugas</th>
                                 <th>Tanggal</th>
                             </tr>
