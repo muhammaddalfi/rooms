@@ -39,6 +39,7 @@
                                 <th>Layanan</th>
                                 <th>Status</th>
                                 <th>Petugas</th>
+                                <th>Tanggal</th>
                             </tr>
                         </thead>
                         <tbody>

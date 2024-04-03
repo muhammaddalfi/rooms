@@ -66,6 +66,10 @@ class LaporanDebt extends Controller
                         return '<span class="badge bg-warning">Pending</span>';
                     }
                 })
+                 ->addColumn('created_at', function ($data) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y');
+                return $formatDate;
+                })
                 // ->addColumn('action', function ($data) {
                 // if(auth()->user()->can('piutang edit')){
                 //      return '<a href="javascript:void(0)" class="btn btn-outline-success btn-icon ml-2 view" data-id="' . $data->id . '"><i class="ph-eye"></i></a>';
@@ -73,7 +77,7 @@ class LaporanDebt extends Controller
                 //     return '';
                 // }
                 // })
-                ->rawColumns(['status'])
+                ->rawColumns(['status, tanggal'])
                 ->make(true);
                 
         }
