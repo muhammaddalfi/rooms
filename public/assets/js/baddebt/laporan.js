@@ -37,7 +37,7 @@ $(document).ready(function(){
             {data:'layanan'},
             {data:'status'},
             {data:'nama_petugas'},
-            {data:'tanggal'},
+            {data:'created_at'},
             // {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false, width: 220 }
         ],
         order: [[0, "desc"]],
