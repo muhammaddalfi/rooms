@@ -24,8 +24,8 @@ class LaporanDebt extends Controller
         if($request->ajax())
         {        
             if(Auth::user()->hasRole(['admin','management'])){
-                // $data = Baddeb::all();
-                $data = Baddeb::with(['user', 'kategori']);
+                $data = Baddeb::all();
+                // $data = 
                 if($request->filled('from_date') && $request->filled('end_date'))
                 {
                         $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at, b.kategori_debt,

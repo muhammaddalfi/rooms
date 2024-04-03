@@ -40,6 +40,6 @@ class BaddebExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        return Baddeb::all();
+        return Baddeb::with(['user', 'kategori']);
     }
 }
