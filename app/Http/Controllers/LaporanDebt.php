@@ -29,7 +29,7 @@ class LaporanDebt extends Controller
                 {
                         $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at, 
                                         (SELECT u.name FROM users u WHERE id = b.user_id) AS nama_petugas,
-                                        (SELECT kb.name from debts kb WHERE id = b.kategori_debt)
+                                        (SELECT kb.name from debts kb WHERE id = b.kategori_debt) AS kategori_debt
                                         FROM baddebs b
                                         WHERE status_bayar IN('close','pending')
                                         AND created_at BETWEEN ? AND ? 
@@ -45,7 +45,7 @@ class LaporanDebt extends Controller
                 {
                         $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at,
                                         (SELECT u.name FROM users u WHERE id = b.user_id) AS nama_petugas,
-                                        (SELECT kb.name from debts kb WHERE id = b.kategori_debt)
+                                        (SELECT kb.name from debts kb WHERE id = b.kategori_debt) AS kategori_debt
                                         FROM baddebs b
                                         WHERE status_bayar IN('close','pending')
                                         AND created_at BETWEEN ? AND ? 
