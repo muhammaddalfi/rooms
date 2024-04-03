@@ -27,8 +27,9 @@ class LaporanDebt extends Controller
                 $data = Baddeb::all();
                 if($request->filled('from_date') && $request->filled('end_date'))
                 {
-                        $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at, b.kategori_debt as kategori_baddeb,
-                                        (SELECT u.name FROM users u WHERE id = b.user_id) AS nama_petugas
+                        $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at, 
+                                        (SELECT u.name FROM users u WHERE id = b.user_id) AS nama_petugas,
+                                        (SELECT kb.name from debts kb WHERE id = b.kategori_debt)
                                         FROM baddebs b
                                         WHERE status_bayar IN('close','pending')
                                         AND created_at BETWEEN ? AND ? 
@@ -42,8 +43,9 @@ class LaporanDebt extends Controller
                 ->get();
                 if($request->filled('from_date') && $request->filled('end_date'))
                 {
-                        $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at,b.kategori_debt as kategori_baddeb,
-                                        (SELECT u.name FROM users u WHERE id = b.user_id) AS nama_petugas
+                        $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, b.created_at,
+                                        (SELECT u.name FROM users u WHERE id = b.user_id) AS nama_petugas,
+                                        (SELECT kb.name from debts kb WHERE id = b.kategori_debt)
                                         FROM baddebs b
                                         WHERE status_bayar IN('close','pending')
                                         AND created_at BETWEEN ? AND ? 
