@@ -28,14 +28,15 @@ class BaddebExport implements FromCollection, WithHeadings, WithMapping
 
     public function map($row): array
     {
-        return [
-            $row->nama_pelanggan,
-            $row->id_pln,
-            $row->layanan,
-            $row->user->name,
-            $row->kategori->name,
-            $row->created_at->format('d-m-Y')
-        ];
+        dd($row->kategori_debt);
+        // return [
+        //     $row->nama_pelanggan,
+        //     $row->id_pln,
+        //     $row->layanan,
+        //     $row->user->name,
+        //     $row->kategori->name,
+        //     $row->created_at->format('d-m-Y')
+        // ];
     }
 
     public function collection()
