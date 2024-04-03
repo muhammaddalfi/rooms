@@ -23,8 +23,12 @@ class LaporanDebt extends Controller
     {
         if($request->ajax())
         {        
+            $year = date('Y');
+            $month = date('m');
             if(Auth::user()->hasRole(['admin','management'])){
-                $data = Baddeb::whereIn('status_bayar', ['close','pending'])->get();
+                $data = Baddeb::whereIn('status_bayar', ['close','pending'])
+                ->whereYear('created_at',$year)
+                ->whereMonth('created_at', '=', $month)->get();
                 if($request->filled('from_date') && $request->filled('end_date'))
                 {
                         $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, 
@@ -39,7 +43,10 @@ class LaporanDebt extends Controller
 
             if(Auth::user()->hasRole(['collection'])){
                 $data = Baddeb::where('user_id', auth()->user()->id)
-                ->whereIn('status_bayar', ['close','pending'])->get();
+                ->whereIn('status_bayar', ['close','pending'])
+                ->whereYear('created_at',$year)
+                ->whereMonth('created_at', '=', $month)
+                ->get();
                 if($request->filled('from_date') && $request->filled('end_date'))
                 {
                         $data_raw = "SELECT b.id, b.nama_pelanggan,b.id_pln, b.layanan, b.status_bayar, 
@@ -77,12 +84,18 @@ class LaporanDebt extends Controller
         }
         else {
             if(Auth::user()->hasRole(['admin','management'])){
-            $data = Baddeb::whereIn('status_bayar', ['close','pending'])->get();
+            $data = Baddeb::whereIn('status_bayar', ['close','pending'])
+            ->whereYear('created_at',$year)
+                ->whereMonth('created_at', '=', $month)
+                ->get();
         }
 
         if(Auth::user()->hasRole(['collection'])){
             $data = Baddeb::where('user_id', auth()->user()->id)
-               ->whereIn('status_bayar', ['close','pending'])->get();
+               ->whereIn('status_bayar', ['close','pending'])
+               ->whereYear('created_at',$year)
+                ->whereMonth('created_at', '=', $month)
+               ->get();
         }
         }       
     }
