@@ -33,7 +33,7 @@ class BaddebExport implements FromCollection, WithHeadings, WithMapping
             $row->id_pln,
             $row->layanan,
             $row->user->name,
-            $row->kategori->id,
+            $row->user->id,
             $row->created_at->format('d-m-Y')
         ];
     }
