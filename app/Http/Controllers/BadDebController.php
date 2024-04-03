@@ -149,7 +149,7 @@ class BadDebController extends Controller
     {
 
         $year = date('Y');
-        $month = date('M');
+        $month = date('m');
         // $year = date('Y');
         if(Auth::user()->hasRole(['admin','management'])){
              $baddebt = Baddeb::whereYear('created_at',$year)
