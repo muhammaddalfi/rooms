@@ -77,7 +77,7 @@ class LaporanDebt extends Controller
                 //     return '';
                 // }
                 // })
-                ->rawColumns(['status, tanggal'])
+                ->rawColumns(['status, created_at'])
                 ->make(true);
                 
         }
