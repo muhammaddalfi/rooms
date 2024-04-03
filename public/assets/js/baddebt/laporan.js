@@ -35,7 +35,6 @@ $(document).ready(function(){
             {data:'nama_pelanggan'},
             {data:'id_pln'},
             {data:'layanan'},
-            {data:'status'},
             {data:'nama_petugas'},
             {data:'created_at'},
             // {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false, width: 220 }

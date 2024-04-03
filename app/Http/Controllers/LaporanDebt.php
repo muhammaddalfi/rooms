@@ -58,14 +58,6 @@ class LaporanDebt extends Controller
                 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('status', function ($data) {
-                if($data->status_bayar == 'close'){
-                        return '<span class="badge bg-success">Close</span>';
-                    }
-                    else if($data->status_bayar == 'pending'){
-                        return '<span class="badge bg-warning">Pending</span>';
-                    }
-                })
                  ->addColumn('created_at', function ($data) {
                 $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y');
                 return $formatDate;
@@ -77,7 +69,7 @@ class LaporanDebt extends Controller
                 //     return '';
                 // }
                 // })
-                ->rawColumns(['status, created_at'])
+                ->rawColumns(['created_at'])
                 ->make(true);
                 
         }
