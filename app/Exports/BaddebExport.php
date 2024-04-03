@@ -20,7 +20,6 @@ class BaddebExport implements FromCollection, WithHeadings, WithMapping
             'Nama Pelanggan',
             'ID Pelanggan',
             'Layanan',
-            'Status Follow Up',
             'Petugas Collection',
             'Alasan',
             'Tanggal Follow Up'
@@ -33,7 +32,8 @@ class BaddebExport implements FromCollection, WithHeadings, WithMapping
             $row->nama_pelanggan,
             $row->id_pln,
             $row->layanan,
-            $row->kategori_debt,
+            $row->user->name,
+            $row->kategori->name,
             $row->created_at->format('d-m-Y')
         ];
     }
