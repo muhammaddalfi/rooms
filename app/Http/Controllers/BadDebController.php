@@ -149,12 +149,15 @@ class BadDebController extends Controller
     {
 
         $year = date('Y');
+        $month = date('M');
         // $year = date('Y');
         if(Auth::user()->hasRole(['admin','management'])){
              $baddebt = Baddeb::whereYear('created_at',$year)
+             ->whereMonth('created_at', '=', $month)
              ->whereNotIn('status_bayar', ['close','lose'])->orderBy('id','DESC')->get();
         }else if(Auth::user()->hasRole(['sales','collection'])){
                 $baddebt = Baddeb::where('user_id', auth()->user()->id)
+                ->whereMonth('created_at', '=', $month)
                 ->whereYear('created_at',$year)
             ->whereNotIn('status_bayar', ['close','lose'])->orderBy('id','DESC')->get();
         }
